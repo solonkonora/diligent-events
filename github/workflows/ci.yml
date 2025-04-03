@@ -1,0 +1,39 @@
+name: CI Checks
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v4
+
+      # Set up Node.js environment
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Run linting
+      - name: Lint code
+        run: npm run lint
+
+      # Run formatting validation
+      - name: Format Check
+        run: npm run format-check
+
+      # Run TypeScript type checking
+      - name: Type Check
+        run: npm run type-check
+
+      # Optional): Run tests
+      - name: Run tests
+        run: npm test
