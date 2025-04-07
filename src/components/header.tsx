@@ -35,9 +35,6 @@ export default function Header() {
           <Link href="/contact" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Contact
           </Link>
-          <Button asChild className="bg-orange-500 hover:bg-orange-600 text-white">
-            <Link href="/contact">Get a Quote</Link>
-          </Button>
         </nav>
 
         {/* Mobile Navigation */}
