@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone } from "lucide-react"
+import { SiFacebook, SiInstagram, SiGitter, SiLinkedin, SiGmail, SiPhonepe } from "react-icons/si"
 
 export default function Footer() {
   return (
@@ -16,19 +16,27 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
-                <Facebook className="h-5 w-5" />
+                <SiFacebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </a>
               <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
-                <Instagram className="h-5 w-5" />
+                <SiInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
               <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
-                <Twitter className="h-5 w-5" />
+                <SiGitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </a>
               <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
-                <Linkedin className="h-5 w-5" />
+                <SiLinkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <SiGmail className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <SiPhonepe className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
             </div>
@@ -118,11 +126,11 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4">Contact Us</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <Phone className="h-5 w-5 mr-2 text-orange-500 flex-shrink-0 mt-0.5" />
+                <SiPhonepe className="h-5 w-5 mr-2 text-orange-500 flex-shrink-0 mt-0.5" />
                 <span className="text-blue-200">+237-652-123-567</span>
               </li>
               <li className="flex items-start">
-                <Mail className="h-5 w-5 mr-2 text-orange-500 flex-shrink-0 mt-0.5" />
+                <SiGmail className="h-5 w-5 mr-2 text-orange-500 flex-shrink-0 mt-0.5" />
                 <span className="text-blue-200">info@diligentservers.com</span>
               </li>
               <li className="text-blue-200">
