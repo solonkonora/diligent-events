@@ -1,43 +1,62 @@
-name: CI Checks
+name: CI
 
 on:
-  push:
-    branches:
-      - development
   pull_request:
     branches:
       - main
       - development
 
 jobs:
-  checks:
+  lint:
+    name: Run ESLint
     runs-on: ubuntu-latest
     steps:
-      # Checkout code
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      # Set up Node.js environment
-      - uses: actions/setup-node@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: 20
 
-      # Install dependencies
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
-      # Run linting
-      - name: Lint code
+      - name: Run ESLint
         run: npm run lint
 
-      # Run formatting validation
-      - name: Format Check
-        run: npm run format-check
+  prettier:
+    name: Run Prettier Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      # Run TypeScript type checking
-      - name: Type Check
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Prettier
+        run: npm run format:check
+
+  typecheck:
+    name: Run TypeScript Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run TypeScript Check
         run: npm run type-check
-
-      # Optional): Run tests
-      - name: Run tests
-        run: npm test
