@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import ContactButtons from "./contact-buttons";
 
 export default function LandingPage() {
   return (
@@ -47,6 +48,8 @@ export default function LandingPage() {
               />
             </div>
           </div>
+
+          <ContactButtons />
         </section>
       </main>
     </div>

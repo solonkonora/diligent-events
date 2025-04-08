@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
-import { useState } from "react"
-import ThemeSwitcher from "./theme-switcher"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { useState } from "react";
+import ThemeSwitcher from "./theme-switcher";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
@@ -21,23 +21,38 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link
+            href="/"
+            className="text-sm font-medium hover:text-blue-600 transition-colors"
+          >
             Home
           </Link>
-          <Link href="/about" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link
+            href="/about"
+            className="text-sm font-medium hover:text-blue-600 transition-colors"
+          >
             About Us
           </Link>
-          <Link href="/services" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link
+            href="/services"
+            className="text-sm font-medium hover:text-blue-600 transition-colors"
+          >
             Services
           </Link>
-          <Link href="/events" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link
+            href="/events"
+            className="text-sm font-medium hover:text-blue-600 transition-colors"
+          >
             Events
           </Link>
-          <Link href="/contact" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link
+            href="/contact"
+            className="text-sm font-medium hover:text-blue-600 transition-colors"
+          >
             Contact
           </Link>
 
-          < ThemeSwitcher />
+          <ThemeSwitcher />
         </nav>
 
         {/* Mobile Navigation */}
@@ -86,13 +101,11 @@ export default function Header() {
                 Contact
               </Link>
 
-              < ThemeSwitcher />
-
+              <ThemeSwitcher />
             </nav>
           </SheetContent>
         </Sheet>
       </div>
     </header>
-  )
+  );
 }
-
