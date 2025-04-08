@@ -38,7 +38,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 relative">
               <Image
-                src="/placeholder.svg?height=600&width=600"
+                src="https://images.pexels.com/photos/5778258/pexels-photo-5778258.jpeg?auto=compress&cs=tinysrgb&w=400?height=600&width=600"
                 alt="Professional hostesses"
                 width={600}
                 height={600}
