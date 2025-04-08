@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import { useState } from "react"
+import ThemeSwitcher from "./theme-switcher"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="font-bold text-xl text-blue-800">
@@ -35,6 +36,8 @@ export default function Header() {
           <Link href="/contact" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Contact
           </Link>
+
+          < ThemeSwitcher />
         </nav>
 
         {/* Mobile Navigation */}
@@ -82,6 +85,9 @@ export default function Header() {
               >
                 Contact
               </Link>
+
+              < ThemeSwitcher />
+
             </nav>
           </SheetContent>
         </Sheet>
