@@ -83,6 +83,41 @@ export default function LandingPage() {
           </div>
         </section>
 
+         {/* Testimonials */}
+         <section className="py-20 bg-gray-50">
+          <div className="container px-4 mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-800 mb-4">What Our Clients Say</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                We take pride in delivering exceptional service that exceeds expectations.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="bg-white p-8 rounded-lg shadow-md">
+                  <div className="flex items-center mb-4">
+                    <div className="mr-4">
+                      <Image
+                        src={testimonial.avatar || "/placeholder.svg"}
+                        alt={testimonial.name}
+                        width={60}
+                        height={60}
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-blue-800">{testimonial.name}</h4>
+                      <p className="text-gray-500 text-sm">{testimonial.position}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-600 italic">"{testimonial.quote}"</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </div>
   );
@@ -104,5 +139,29 @@ const services = [
       title: "Corporate Events",
       description: "Comprehensive staffing solutions for corporate events, conferences, and business meetings.",
       icon: <Image src="/placeholder.svg?height=40&width=40" alt="Corporate Events" width={40} height={40} />,
+    },
+  ]
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      position: "Event Manager, Global Corp",
+      quote:
+        "The hostesses provided for our annual conference were exceptional. Their professionalism and attention to detail made our event run smoothly.",
+      avatar: "/placeholder.svg?height=60&width=60",
+    },
+    {
+      name: "Michael Chen",
+      position: "CEO, Tech Innovations",
+      quote:
+        "Working with this agency has been a game-changer for our corporate events. Their protocol officers understand exactly what our high-profile guests expect.",
+      avatar: "/placeholder.svg?height=60&width=60",
+    },
+    {
+      name: "Emma Rodriguez",
+      position: "Wedding Planner",
+      quote:
+        "I've been recommending their services to all my clients. The hostesses are not only professional but also add that special touch to make events memorable.",
+      avatar: "/placeholder.svg?height=60&width=60",
     },
   ]
