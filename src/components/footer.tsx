@@ -1,5 +1,12 @@
-import Link from "next/link"
-import { SiFacebook, SiInstagram, SiGitter, SiLinkedin, SiGmail, SiPhonepe } from "react-icons/si"
+import Link from "next/link";
+import {
+  SiFacebook,
+  SiInstagram,
+  SiGitter,
+  SiLinkedin,
+  SiGmail,
+  SiPhonepe,
+} from "react-icons/si";
 
 export default function Footer() {
   return (
@@ -12,30 +19,49 @@ export default function Footer() {
               Hostess<span className="text-orange-500">Agency</span>
             </h3>
             <p className="text-blue-200 mb-4">
-              Elevating events with professional hostess and protocol services since 2010.
+              Elevating events with professional hostess and protocol services
+              since 2010.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+              <a
+                href="#"
+                className="text-blue-200 hover:text-orange-500 transition-colors"
+              >
                 <SiFacebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </a>
-              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+              <a
+                href="#"
+                className="text-blue-200 hover:text-orange-500 transition-colors"
+              >
                 <SiInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
-              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+              <a
+                href="#"
+                className="text-blue-200 hover:text-orange-500 transition-colors"
+              >
                 <SiGitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </a>
-              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+              <a
+                href="#"
+                className="text-blue-200 hover:text-orange-500 transition-colors"
+              >
                 <SiLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+              <a
+                href="#"
+                className="text-blue-200 hover:text-orange-500 transition-colors"
+              >
                 <SiGmail className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="#" className="text-blue-200 hover:text-orange-500 transition-colors">
+              <a
+                href="#"
+                className="text-blue-200 hover:text-orange-500 transition-colors"
+              >
                 <SiPhonepe className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
@@ -47,27 +73,42 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/about"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/events"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Events
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/contact"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -79,42 +120,66 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4">Our Services</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Event Hostesses/Protocol
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   General Cleaning (Office, Houses, Cite etc)
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Rentals (Chairs, Tables etc)
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Event Planning
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Service Traiteur
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   General Logistics
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Decoration
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-blue-200 hover:text-orange-500 transition-colors">
+                <Link
+                  href="/services"
+                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                >
                   Lots More...
                 </Link>
               </li>
@@ -145,7 +210,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-blue-800 mt-12 pt-8 text-center text-blue-300 text-sm">
-          <p>&copy; {new Date().getFullYear()} EventsManaAgency. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} EventsManaAgency. All rights
+            reserved.
+          </p>
           <div className="mt-2 space-x-4">
             <Link href="#" className="hover:text-orange-500 transition-colors">
               Privacy Policy
@@ -157,6 +225,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
