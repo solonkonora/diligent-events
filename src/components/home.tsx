@@ -9,7 +9,7 @@ export default function LandingPage() {
             <main className="flex-1">
                 {/* Hero Section */}
                 <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-                    <div className="container px-6 py-20 md:py-32 mx-auto flex flex-col md:flex-row items-center gap-12">
+                    <div className="container px-6 py-20 md:py-12 mx-auto flex flex-col md:flex-row items-center gap-12">
                         <div className="md:w-1/2 space-y-6 z-10">
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                                 Professional Hostess & Protocol Services
@@ -149,29 +149,40 @@ const services = [
         icon: <Image src="/placeholder.svg?height=40&width=40" alt="Protocol Officers" width={40} height={40} />,
     },
     {
-        title: "Corporate Events",
-        description: "Comprehensive staffing solutions for corporate events, conferences, and business meetings.",
+        title: "Service Traiteur",
+        description: "We offer customized menus tailored to dietary needs, impeccable presentation, and attentive service. Our commitment to quality, safety, and customer satisfaction sets us apart as a trusted partner for memorable events",
         icon: <Image src="/placeholder.svg?height=40&width=40" alt="Corporate Events" width={40} height={40} />,
     },
+    {
+        title: "General logistics",
+        description: " to the planning, coordination, and execution of all the resources, services, and processes required to ensure the event runs smoothly and successfully",
+        icon: <Image src="/placeholder.svg?height=40&width=40" alt="Corporate Events" width={40} height={40} />,
+    },
+    {
+        title: "General Cleaning",
+        description: "We provide thorough residential and commercial cleaning, tailored to meet individual client needs. ranging from offices to cites, for both temporal and permanent cleaning ",
+        icon: <Image src="/placeholder.svg?height=40&width=40" alt="Corporate Events" width={40} height={40} />,
+    },
+
 ]
 
 const testimonials = [
     {
-        name: "Sarah Johnson",
-        position: "Event Manager, Global Corp",
+        name: "Tayu Joynel",
+        position: "CEO, Joyful Events",
         quote:
-            "The hostesses provided for our annual conference were exceptional. Their professionalism and attention to detail made our event run smoothly.",
+            "The hostesses provided to serve on buffet tables for our past events were exceptional. Their professionalism and attention to detail made our event run smoothly.",
         avatar: "/placeholder.svg?height=60&width=60",
     },
     {
-        name: "Michael Chen",
-        position: "CEO, Tech Innovations",
+        name: "Kencho Desmond",
+        position: "Executive Director, Revobit Cameroon",
         quote:
             "Working with this agency has been a game-changer for our corporate events. Their protocol officers understand exactly what our high-profile guests expect.",
         avatar: "/placeholder.svg?height=60&width=60",
     },
     {
-        name: "Emma Rodriguez",
+        name: "Che Clarisse",
         position: "Wedding Planner",
         quote:
             "I've been recommending their services to all my clients. The hostesses are not only professional but also add that special touch to make events memorable.",
