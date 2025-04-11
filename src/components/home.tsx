@@ -50,8 +50,59 @@ export default function LandingPage() {
           </div>
 
           <ContactButtons />
+
         </section>
+           {/* Services Overview */}
+           <section className="py-20 bg-white">
+          <div className="container px-4 mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-800 mb-4">Our Premium Services</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                We offer a comprehensive range of hostess and protocol services tailored to meet the unique needs of
+                your events.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <div key={index} className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-blue-800 mb-3">{service.title}</h3>
+                  <p className="text-gray-600">{service.description}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-12">
+              <Button asChild className="bg-orange-500 hover:bg-orange-600 text-white">
+                <Link href="/services">View All Services</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
       </main>
     </div>
   );
 }
+
+// Sample data
+const services = [
+    {
+      title: "Event Hostesses",
+      description: "Professional hostesses to welcome and guide your guests, creating a memorable first impression.",
+      icon: <Image src="/placeholder.svg?height=40&width=40" alt="Event Hostesses" width={40} height={40} />,
+    },
+    {
+      title: "Protocol Officers",
+      description: "Expert protocol officers to ensure proper etiquette and procedures are followed at formal events.",
+      icon: <Image src="/placeholder.svg?height=40&width=40" alt="Protocol Officers" width={40} height={40} />,
+    },
+    {
+      title: "Corporate Events",
+      description: "Comprehensive staffing solutions for corporate events, conferences, and business meetings.",
+      icon: <Image src="/placeholder.svg?height=40&width=40" alt="Corporate Events" width={40} height={40} />,
+    },
+  ]
