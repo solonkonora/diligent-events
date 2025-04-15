@@ -11,56 +11,56 @@ import {
 export default function Footer() {
   return (
     <footer className="bg-blue-900 text-white">
-      <div className="container px-4 py-12 mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">
+            <h3 className="mb-4 text-xl font-bold">
               Hostess<span className="text-orange-500">Agency</span>
             </h3>
-            <p className="text-blue-200 mb-4">
+            <p className="mb-4 text-blue-200">
               Elevating events with professional hostess and protocol services
               since 2010.
             </p>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-blue-200 hover:text-orange-500 transition-colors"
+                className="text-blue-200 transition-colors hover:text-orange-500"
               >
                 <SiFacebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 hover:text-orange-500 transition-colors"
+                className="text-blue-200 transition-colors hover:text-orange-500"
               >
                 <SiInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 hover:text-orange-500 transition-colors"
+                className="text-blue-200 transition-colors hover:text-orange-500"
               >
                 <SiGitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 hover:text-orange-500 transition-colors"
+                className="text-blue-200 transition-colors hover:text-orange-500"
               >
                 <SiLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 hover:text-orange-500 transition-colors"
+                className="text-blue-200 transition-colors hover:text-orange-500"
               >
                 <SiGmail className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 hover:text-orange-500 transition-colors"
+                className="text-blue-200 transition-colors hover:text-orange-500"
               >
                 <SiPhonepe className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
@@ -70,12 +70,12 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+            <h3 className="mb-4 text-lg font-bold">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Home
                 </Link>
@@ -83,7 +83,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   About Us
                 </Link>
@@ -91,7 +91,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Services
                 </Link>
@@ -99,7 +99,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/events"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Events
                 </Link>
@@ -107,7 +107,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Contact
                 </Link>
@@ -117,12 +117,12 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Our Services</h3>
+            <h3 className="mb-4 text-lg font-bold">Our Services</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Event Hostesses/Protocol
                 </Link>
@@ -130,7 +130,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   General Cleaning (Office, Houses, Cite etc)
                 </Link>
@@ -138,7 +138,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Rentals (Chairs, Tables etc)
                 </Link>
@@ -146,7 +146,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Event Planning
                 </Link>
@@ -154,7 +154,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Service Traiteur
                 </Link>
@@ -162,7 +162,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   General Logistics
                 </Link>
@@ -170,7 +170,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Decoration
                 </Link>
@@ -178,7 +178,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 hover:text-orange-500 transition-colors"
+                  className="text-blue-200 transition-colors hover:text-orange-500"
                 >
                   Lots More...
                 </Link>
@@ -188,14 +188,14 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
+            <h3 className="mb-4 text-lg font-bold">Contact Us</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <SiPhonepe className="h-5 w-5 mr-2 text-orange-500 flex-shrink-0 mt-0.5" />
+                <SiPhonepe className="mt-0.5 mr-2 h-5 w-5 flex-shrink-0 text-orange-500" />
                 <span className="text-blue-200">+237-652-123-567</span>
               </li>
               <li className="flex items-start">
-                <SiGmail className="h-5 w-5 mr-2 text-orange-500 flex-shrink-0 mt-0.5" />
+                <SiGmail className="mt-0.5 mr-2 h-5 w-5 flex-shrink-0 text-orange-500" />
                 <span className="text-blue-200">info@diligentservers.com</span>
               </li>
               <li className="text-blue-200">
@@ -209,16 +209,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-blue-800 mt-12 pt-8 text-center text-blue-300 text-sm">
+        <div className="mt-12 border-t border-blue-800 pt-8 text-center text-sm text-blue-300">
           <p>
             &copy; {new Date().getFullYear()} EventsManaAgency. All rights
             reserved.
           </p>
           <div className="mt-2 space-x-4">
-            <Link href="#" className="hover:text-orange-500 transition-colors">
+            <Link href="#" className="transition-colors hover:text-orange-500">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-orange-500 transition-colors">
+            <Link href="#" className="transition-colors hover:text-orange-500">
               Terms of Service
             </Link>
           </div>

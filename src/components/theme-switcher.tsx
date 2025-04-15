@@ -7,7 +7,7 @@ const ThemeSwitcher = () => {
   return (
     <Button
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="p-2 border rounded bg-orange-500 text-sm text-white"
+      className="rounded border bg-orange-500 p-2 text-sm text-white"
     >
       Switch to {theme === "light" ? "Dark" : "Light"} Mode
     </Button>
