@@ -211,7 +211,7 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-blue-800 pt-8 text-center text-sm text-blue-300">
           <p>
-            &copy; {new Date().getFullYear()} EventsManaAgency. All rights
+            &copy; {new Date().getFullYear()} EventsManagementAgency. All rights
             reserved.
           </p>
           <div className="mt-2 space-x-4">
