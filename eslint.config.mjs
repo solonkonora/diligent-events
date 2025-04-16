@@ -50,9 +50,9 @@ export default [
       "coverage/**",
     ],
   },
-  // Apply configurations to specific file types
+
   {
-    files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"], // Include all relevant file extensions
+    files: ["**/*.{js,jsx,cjs,ts,tsx}"],
     plugins: {
       "@typescript-eslint": tsPlugin,
       prettier: prettier,
@@ -66,7 +66,8 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
-        project: true, // Automatically detects tsconfig.json
+        project: "./tsconfig.json",
+        // project: true, // Automatically detects tsconfig.json
         tsconfigRootDir: import.meta.dirname, // Root directory for TypeScript config
       },
       globals: {
