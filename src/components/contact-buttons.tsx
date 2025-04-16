@@ -3,10 +3,10 @@ import { Phone, MessageCircle } from "lucide-react";
 
 export default function ContactButtons() {
   return (
-    <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-4">
+    <div className="fixed right-8 bottom-8 z-50 flex flex-col gap-4">
       <Link
         href="tel:+15551234567"
-        className="bg-blue-700 hover:bg-blue-500 text-white p-3 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110"
+        className="flex items-center justify-center rounded-full bg-blue-700 p-3 text-white shadow-lg transition-transform hover:scale-110 hover:bg-blue-500"
         aria-label="Call us"
       >
         <Phone className="h-6 w-6" />
@@ -14,7 +14,7 @@ export default function ContactButtons() {
 
       <Link
         href="https://wa.me/15551234567"
-        className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110"
+        className="flex items-center justify-center rounded-full bg-green-500 p-3 text-white shadow-lg transition-transform hover:scale-110 hover:bg-green-600"
         aria-label="Contact us on WhatsApp"
       >
         <MessageCircle className="h-6 w-6" />
