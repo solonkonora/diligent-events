@@ -168,11 +168,6 @@ export default function ContactPage() {
                                 We're conveniently located in the heart of the city. Feel free to visit us during business hours.
                             </p>
                         </div>
-
-                        <div className="rounded-lg overflow-hidden shadow-lg h-[400px] bg-gray-200 flex items-center justify-center">
-                            {/* This would be replaced with an actual map component */}
-                            <p className="text-gray-600">Interactive Map Would Be Displayed Here</p>
-                        </div>
                     </div>
                 </section>
             </main>
