@@ -59,7 +59,7 @@ export default [
       next: nextPlugin,
     },
     languageOptions: {
-      parser: typescript, // Use TypeScript parser
+      parser: typescript,
       parserOptions: {
         ecmaVersion: 2022,
         sourceType: "module",
@@ -67,7 +67,6 @@ export default [
           jsx: true,
         },
         project: "./tsconfig.json",
-        // project: true, // Automatically detects tsconfig.json
         tsconfigRootDir: import.meta.dirname, // Root directory for TypeScript config
       },
       globals: {
@@ -80,7 +79,7 @@ export default [
     },
     settings: {
       next: {
-        rootDir: ".", // Next.js root directory
+        rootDir: ".",
       },
     },
     rules: {

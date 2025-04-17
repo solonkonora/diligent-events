@@ -40,7 +40,7 @@ export default function Header() {
             Services
           </Link>
           <Link
-            href="/events"
+            href="/gallery"
             className="text-sm font-medium transition-colors hover:text-blue-600"
           >
             Events
@@ -55,7 +55,6 @@ export default function Header() {
           <ThemeSwitcher />
         </nav>
 
-        {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="outline" size="icon">
