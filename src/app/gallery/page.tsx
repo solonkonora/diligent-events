@@ -1,4 +1,4 @@
-import EventsPage from "../gallery"
+import EventsPage from "@/components/gallery"
 
 const Gallery = () => {
     return (
@@ -7,3 +7,4 @@ const Gallery = () => {
         </div>
     )
 }
+export default Gallery;
