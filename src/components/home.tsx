@@ -8,49 +8,54 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <div className="container mx-auto flex flex-col items-center gap-12 px-6 py-20 md:flex-row md:py-12">
-            <div className="z-10 space-y-6 md:w-1/2">
-              <h1 className="text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
-                Professional Hostess & Protocol Services
-              </h1>
-              <p className="text-lg text-blue-100 md:text-xl">
-                Elevate your events with our professional hostesses and protocol
-                officers. We ensure your guests receive the highest level of
-                service and attention.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-orange-500 text-white hover:bg-orange-600"
-                >
-                  <Link href="/services">Our Services</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-white bg-white/10 text-white hover:bg-white/20"
-                >
-                  <Link href="/contact">Contact Us</Link>
-                </Button>
+        <section className="relative flex min-h-screen items-center overflow-hidden bg-sky-200">
+          <div className="flex h-full w-full flex-col md:flex-row">
+            {/* Text Content */}
+            <div className="relative z-10 flex items-center py-12 md:w-1/2">
+              <div className="mx-auto w-full max-w-[90%] space-y-8 px-4 sm:px-6">
+                <h1 className="bg-gradient-to-r from-blue-800 to-orange-600 bg-clip-text text-3xl leading-tight font-bold text-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)] md:text-4xl lg:text-5xl">
+                  Hostess/Protocol Services & Event Planning
+                </h1>
+
+                <p className="max-w-prose rounded-lg border border-blue-300/30 bg-white/50 px-5 py-4 text-base leading-relaxed text-blue-900 backdrop-blur-sm md:text-lg">
+                  Elevate your events with our professional hostesses and
+                  protocol officers. We ensure your guests receive the highest
+                  level of service and attention.
+                </p>
+
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-600 to-blue-500 text-sm text-white shadow-lg transition-all hover:from-blue-700 hover:to-blue-600 hover:shadow-blue-500/30 md:text-base"
+                  >
+                    <Link href="/services">Our Services</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="border-2 border-blue-900 bg-orange-600 text-sm text-white backdrop-blur-sm transition-all hover:border-orange-400 hover:bg-blue-600/20 md:text-base"
+                  >
+                    <Link href="/contact">Contact Us</Link>
+                  </Button>
+                </div>
               </div>
             </div>
-            <div className="relative md:w-1/2">
+
+            {/* Image Section */}
+            <div className="relative h-[50vh] w-full md:h-screen md:w-1/2">
               <Image
-                src="https://images.pexels.com/photos/5778258/pexels-photo-5778258.jpeg?auto=compress&cs=tinysrgb&w=400?height=600&width=600"
+                src="https://images.pexels.com/photos/5778258/pexels-photo-5778258.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1800"
                 alt="Professional hostesses"
-                width={600}
-                height={600}
-                className="rounded-lg shadow-xl"
+                fill
+                className="object-cover"
                 priority
               />
             </div>
           </div>
-
           <ContactButtons />
         </section>
+
         {/* Services Overview */}
         <section className="bg-white py-20">
           <div className="container mx-auto px-4">

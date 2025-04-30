@@ -37,7 +37,6 @@ export default function AboutPage() {
                   events to new heights. What started as a small team of
                   dedicated professionals has grown into a leading agency
                   trusted by corporations, event planners, and individuals
-                  alike.
                 </p>
                 <p className="text-lg text-gray-600">
                   Over the years, we've had the privilege of serving at
@@ -45,7 +44,6 @@ export default function AboutPage() {
                   corporate gatherings to exclusive private functions. Our
                   commitment to excellence and attention to detail has earned us
                   a reputation as the go-to agency for those who demand the very
-                  best.
                 </p>
                 <p className="text-lg text-gray-600">
                   Today, we continue to uphold the values that have guided us
