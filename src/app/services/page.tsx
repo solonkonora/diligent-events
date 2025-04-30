@@ -1,10 +1,10 @@
-import ServicesPage from "@/components/services"
+import ServicesPage from "@/components/services";
 
 const Services = () => {
-    return (
-        <div>
-            <ServicesPage />
-        </div>
-    )
-}
+  return (
+    <div>
+      <ServicesPage />
+    </div>
+  );
+};
 export default Services;
