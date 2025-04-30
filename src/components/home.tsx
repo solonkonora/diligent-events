@@ -7,50 +7,51 @@ export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <div className="container mx-auto flex flex-col items-center gap-12 px-6 py-20 md:flex-row md:py-12">
-            <div className="z-10 space-y-6 md:w-1/2">
-              <h1 className="text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
-                Professional Hostess & Protocol Services
-              </h1>
-              <p className="text-lg text-blue-100 md:text-xl">
-                Elevate your events with our professional hostesses and protocol
-                officers. We ensure your guests receive the highest level of
-                service and attention.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-orange-500 text-white hover:bg-orange-600"
-                >
-                  <Link href="/services">Our Services</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-white bg-white/10 text-white hover:bg-white/20"
-                >
-                  <Link href="/contact">Contact Us</Link>
-                </Button>
-              </div>
-            </div>
-            <div className="relative md:w-1/2">
-              <Image
-                src="https://images.pexels.com/photos/5778258/pexels-photo-5778258.jpeg?auto=compress&cs=tinysrgb&w=400?height=600&width=600"
-                alt="Professional hostesses"
-                width={600}
-                height={600}
-                className="rounded-lg shadow-xl"
-                priority
-              />
-            </div>
-          </div>
+    {/* Hero Section */}
+    <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white min-h-screen flex items-center">
+  <div className="flex w-full h-full flex-col md:flex-row items-center">
+    {/* Text Content */}
+    <div className="z-10 space-y-6 md:w-1/2 px-6 py-12">
+      <h1 className="text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
+        Professional Hostess & Protocol Services
+      </h1>
+      <p className="text-lg text-blue-100 md:text-xl max-w-lg">
+        Elevate your events with our professional hostesses and protocol officers. We ensure your guests receive the highest level of service and attention.
+      </p>
+      <div className="flex flex-wrap gap-4">
+        <Button
+          asChild
+          size="lg"
+          className="bg-orange-500 text-white hover:bg-orange-600"
+        >
+          <Link href="/services">Our Services</Link>
+        </Button>
+        <Button
+          asChild
+          size="lg"
+          variant="outline"
+          className="border-white bg-white/10 text-white hover:bg-white/20"
+        >
+          <Link href="/contact">Contact Us</Link>
+        </Button>
+      </div>
+    </div>
+    {/* Image - No padding/margin */}
+    <div className="relative md:w-1/2 w-full h-[60vh] md:h-screen m-0 p-0">
+      <Image
+        src="https://images.pexels.com/photos/5778258/pexels-photo-5778258.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1800"
+        alt="Professional hostesses"
+        fill
+        className="rounded-none shadow-none object-cover w-full h-full m-0 p-0"
+        priority
+      />
+    </div>
+  </div>
+  <ContactButtons />
+</section>
 
-          <ContactButtons />
-        </section>
+
+
         {/* Services Overview */}
         <section className="bg-white py-20">
           <div className="container mx-auto px-4">
