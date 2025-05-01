@@ -22,7 +22,7 @@ export default function AboutPage() {
             <div className="flex flex-col items-center gap-12 md:flex-row">
               <div className="md:w-1/2">
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  src="../../../ds-images/ds5.jpeg"
                   alt="Our story"
                   width={600}
                   height={600}

@@ -46,9 +46,10 @@ export default function LandingPage() {
             <div className="relative h-[50vh] w-full md:h-screen md:w-1/2">
               <Image
                 src="https://images.pexels.com/photos/5778258/pexels-photo-5778258.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1800"
+                // src="../../../assets/images/two.jpeg"
                 alt="Professional hostesses"
                 fill
-                className="object-cover"
+                className="object-cover object-top"
                 priority
               />
             </div>
@@ -171,10 +172,11 @@ const services = [
       "Professional hostesses to welcome and guide your guests, creating a memorable first impression.",
     icon: (
       <Image
-        src="/placeholder.svg?height=40&width=40"
+        src="../../../assets/images/two.jpeg"
         alt="Event Hostesses"
-        width={40}
+        width={50}
         height={40}
+        className="rounded-full"
       />
     ),
   },
@@ -184,10 +186,11 @@ const services = [
       "Expert protocol officers to ensure proper etiquette and procedures are followed at formal events.",
     icon: (
       <Image
-        src="/placeholder.svg?height=40&width=40"
+        src="../../../assets/images/three.jpeg"
         alt="Protocol Officers"
-        width={40}
+        width={50}
         height={40}
+        className="rounded-full"
       />
     ),
   },
@@ -197,10 +200,11 @@ const services = [
       "We offer customized menus tailored to dietary needs, impeccable presentation, and attentive service. Our commitment to quality, safety, and customer satisfaction sets us apart as a trusted partner for memorable events",
     icon: (
       <Image
-        src="/placeholder.svg?height=40&width=40"
+        src="../../../assets/images/five.jpeg"
         alt="Corporate Events"
-        width={40}
+        width={50}
         height={40}
+        className="rounded-full"
       />
     ),
   },
@@ -210,10 +214,11 @@ const services = [
       " to the planning, coordination, and execution of all the resources, services, and processes required to ensure the event runs smoothly and successfully",
     icon: (
       <Image
-        src="/placeholder.svg?height=40&width=40"
-        alt="Corporate Events"
-        width={40}
+      src="../../../assets/images/WhatsApp Image 2025-05-01 at 08.39.03.jpeg"
+      alt="Corporate Events"
+        width={50}
         height={40}
+        className="rounded-full"
       />
     ),
   },
@@ -223,10 +228,11 @@ const services = [
       "We provide thorough residential and commercial cleaning, tailored to meet individual client needs. ranging from offices to cites, for both temporal and permanent cleaning ",
     icon: (
       <Image
-        src="/placeholder.svg?height=40&width=40"
-        alt="Corporate Events"
-        width={40}
+      src="../../../assets/images/five.jpeg"
+      alt="Corporate Events"
+        width={50}
         height={40}
+        className="rounded-full"
       />
     ),
   },
@@ -238,20 +244,20 @@ const testimonials = [
     position: "CEO, Joyful Events",
     quote:
       "The hostesses provided to serve on buffet tables for our past events were exceptional. Their professionalism and attention to detail made our event run smoothly.",
-    avatar: "/placeholder.svg?height=60&width=60",
+    avatar: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.39.03 (1).jpeg",
   },
   {
     name: "Kencho Desmond",
     position: "Executive Director, Revobit Cameroon",
     quote:
       "Working with this agency has been a game-changer for our corporate events. Their protocol officers understand exactly what our high-profile guests expect.",
-    avatar: "/placeholder.svg?height=60&width=60",
+    avatar: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39 (2).jpeg",
   },
   {
     name: "Che Clarisse",
     position: "Wedding Planner",
     quote:
       "I've been recommending their services to all my clients. The hostesses are not only professional but also add that special touch to make events memorable.",
-    avatar: "/placeholder.svg?height=60&width=60",
+    avatar: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39.jpeg",
   },
 ];
