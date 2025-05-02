@@ -214,8 +214,8 @@ const services = [
       " to the planning, coordination, and execution of all the resources, services, and processes required to ensure the event runs smoothly and successfully",
     icon: (
       <Image
-      src="../../../assets/images/WhatsApp Image 2025-05-01 at 08.39.03.jpeg"
-      alt="Corporate Events"
+        src="../../../assets/images/WhatsApp Image 2025-05-01 at 08.39.03.jpeg"
+        alt="Corporate Events"
         width={50}
         height={40}
         className="rounded-full"
@@ -228,8 +228,8 @@ const services = [
       "We provide thorough residential and commercial cleaning, tailored to meet individual client needs. ranging from offices to cites, for both temporal and permanent cleaning ",
     icon: (
       <Image
-      src="../../../assets/images/five.jpeg"
-      alt="Corporate Events"
+        src="../../../assets/images/five.jpeg"
+        alt="Corporate Events"
         width={50}
         height={40}
         className="rounded-full"
@@ -244,14 +244,16 @@ const testimonials = [
     position: "CEO, Joyful Events",
     quote:
       "The hostesses provided to serve on buffet tables for our past events were exceptional. Their professionalism and attention to detail made our event run smoothly.",
-    avatar: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.39.03 (1).jpeg",
+    avatar:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.39.03 (1).jpeg",
   },
   {
     name: "Kencho Desmond",
     position: "Executive Director, Revobit Cameroon",
     quote:
       "Working with this agency has been a game-changer for our corporate events. Their protocol officers understand exactly what our high-profile guests expect.",
-    avatar: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39 (2).jpeg",
+    avatar:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39 (2).jpeg",
   },
   {
     name: "Che Clarisse",
