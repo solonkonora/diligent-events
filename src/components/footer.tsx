@@ -20,7 +20,7 @@ export default function Footer() {
             </h3>
             <p className="mb-4 text-blue-200">
               Elevating events with professional hostess and protocol services
-              since 2010.
+              since 2022.
             </p>
             <div className="flex space-x-4">
               <a
@@ -192,7 +192,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <SiPhonepe className="mt-0.5 mr-2 h-5 w-5 flex-shrink-0 text-orange-500" />
-                <span className="text-blue-200">+237-652-123-567</span>
+                <span className="text-blue-200">+237-676-717-626</span>
               </li>
               <li className="flex items-start">
                 <SiGmail className="mt-0.5 mr-2 h-5 w-5 flex-shrink-0 text-orange-500" />

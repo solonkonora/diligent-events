@@ -2,10 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import ContactButtons from "./contact-buttons";
+import Header from "./header";
+import Footer from "./footer";
 
 export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <Header />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative flex min-h-screen items-center overflow-hidden bg-sky-200">
@@ -36,7 +39,7 @@ export default function LandingPage() {
                     size="lg"
                     className="border-2 border-blue-900 bg-orange-600 text-sm text-white backdrop-blur-sm transition-all hover:border-orange-400 hover:bg-blue-600/20 md:text-base"
                   >
-                    <Link href="/contact">Contact Us</Link>
+                    <Link href="/auth/login?redirect=/booking">Contact Us</Link>
                   </Button>
                 </div>
               </div>
@@ -155,11 +158,12 @@ export default function LandingPage() {
               size="lg"
               className="bg-orange-500 text-white hover:bg-orange-600"
             >
-              <Link href="/contact">Get in Touch</Link>
+              <Link href="/auth/login?redirect=/booking">Get in Touch</Link>
             </Button>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -1,9 +1,12 @@
 import Image from "next/image";
 import ContactButtons from "@/components/contact-buttons";
+import Header from "./header";
+import Footer from "./footer";
 
 export default function AboutPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <Header />
       <main className="flex-1">
         <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
@@ -116,6 +119,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

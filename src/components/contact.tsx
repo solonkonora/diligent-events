@@ -10,10 +10,13 @@ import {
 } from "@/components/ui/select";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import ContactButtons from "@/components/contact-buttons";
+import Header from "./header";
+import Footer from "./footer";
 
 export default function ContactPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <Header />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
@@ -239,6 +242,7 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
