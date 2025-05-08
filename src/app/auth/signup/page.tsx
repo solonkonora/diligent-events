@@ -50,7 +50,7 @@ export default function SignupPage() {
         className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-md"
       >
         <h2 className="mb-6 text-center text-3xl font-bold text-blue-600">
-          SignUp
+          Create Account
         </h2>
         {error && (
           <p className="mb-4 text-center text-sm text-red-500">{error}</p>
