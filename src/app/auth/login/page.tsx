@@ -3,11 +3,14 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loginSchema } from "@/lib/zod";
+// import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/bookings";
+
+  // const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,14 +46,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100 px-4">
+    <div className="flex h-screen items-center justify-center bg-gray-200 px-4">
       <form
         onSubmit={handleLogin}
         className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-md"
       >
-        <h2 className="mb-6 text-center text-3xl font-bold text-blue-600">
+        <h2 className="mb-4 text-center text-3xl font-bold text-blue-600">
           Login
         </h2>
+        <p className="mb-4 cursor-pointer text-center text-gray-400">
+          login to your account
+        </p>
+
         {error && (
           <p className="mb-4 text-center text-sm text-red-500">{error}</p>
         )}
@@ -72,6 +79,13 @@ export default function LoginPage() {
           required
           className="mb-6 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
         />
+
+        <p
+          onClick={() => router.push("/auth/reset-password")}
+          className="mb-6 cursor-pointer text-gray-400"
+        >
+          Forgot password?
+        </p>
 
         <button
           type="submit"

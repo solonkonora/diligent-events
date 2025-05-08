@@ -44,17 +44,20 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100 px-4">
+    <div className="flex h-screen items-center justify-center bg-gray-200 px-4">
       <form
         onSubmit={handleSignup}
         className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-md"
       >
-        <h2 className="mb-6 text-center text-3xl font-bold text-blue-600">
+        <h2 className="mb-4 text-center text-3xl font-bold text-blue-600">
           Create Account
         </h2>
         {error && (
           <p className="mb-4 text-center text-sm text-red-500">{error}</p>
         )}
+        <p className="mb-4 cursor-pointer text-center text-gray-400">
+          create your account
+        </p>
 
         <input
           type="text"
