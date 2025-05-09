@@ -9,7 +9,7 @@ type AppContextType = {
 };
 
 export const AppContent = createContext<AppContextType>({
-  backendUrl: "http://localhost:3000",
+  backendUrl: "http://localhost:4000",
   isLoggedin: false,
   setIsLoggedin: () => {},
 });
@@ -21,7 +21,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/auth/check", {
+        const res = await fetch("http://localhost:4000/api/auth/check", {
           credentials: "include",
         });
         const data = await res.json();
@@ -38,7 +38,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContent.Provider
       value={{
-        backendUrl: "http://localhost:3000",
+        backendUrl: "http://localhost:4000",
         isLoggedin,
         setIsLoggedin,
       }}

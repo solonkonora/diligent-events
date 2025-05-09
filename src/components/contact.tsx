@@ -154,7 +154,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h3 className="font-medium text-gray-900">Phone</h3>
-                        <p className="text-gray-600">+237 652-161-749</p>
+                        <p className="text-gray-600">+237-676-717-626</p>
                         <p className="text-gray-600">Mon-Fri, 9am-6pm</p>
                       </div>
                     </div>

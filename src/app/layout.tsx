@@ -1,6 +1,7 @@
 import type React from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppProvider } from "@/lib/context";
 import { Toaster } from "react-hot-toast";
@@ -9,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Professional Hostess & Protocol Agency",
   description:
     "Elevate your events with our professional hostesses and protocol officers. We ensure your guests receive the highest level of service and attention.",
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html lang="en">
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"

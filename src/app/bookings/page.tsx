@@ -1,9 +1,10 @@
+import BookUs from "@/components/booking-form";
 import React from "react";
 
 const Bookings = () => {
   return (
     <div>
-      <h1>page</h1>
+      <BookUs />
     </div>
   );
 };
