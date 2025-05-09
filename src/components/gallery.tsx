@@ -2,10 +2,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ContactButtons from "@/components/contact-buttons";
+import Header from "./header";
+import Footer from "./footer";
 
 export default function EventsPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <Header />
       <main className="flex-1">
         <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
@@ -177,6 +180,7 @@ export default function EventsPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

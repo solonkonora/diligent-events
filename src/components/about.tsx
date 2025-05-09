@@ -1,9 +1,12 @@
 import Image from "next/image";
 import ContactButtons from "@/components/contact-buttons";
+import Header from "./header";
+import Footer from "./footer";
 
 export default function AboutPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <Header />
       <main className="flex-1">
         <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
@@ -22,7 +25,8 @@ export default function AboutPage() {
             <div className="flex flex-col items-center gap-12 md:flex-row">
               <div className="md:w-1/2">
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  // src="../../../assets/images/ds5.jpeg"
+                  src="../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.39 (1).jpeg"
                   alt="Our story"
                   width={600}
                   height={600}
@@ -72,14 +76,6 @@ export default function AboutPage() {
                   key={index}
                   className="rounded-lg bg-white p-8 shadow-md transition-shadow hover:shadow-lg"
                 >
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-100 text-orange-500">
-                    <Image
-                      src="/placeholder.svg?height=40&width=40"
-                      alt={value.title}
-                      width={40}
-                      height={40}
-                    />
-                  </div>
                   <h3 className="mb-3 text-xl font-bold text-blue-800">
                     {value.title}
                   </h3>
@@ -123,6 +119,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
@@ -162,27 +159,30 @@ const values = [
 
 const team = [
   {
-    name: "Alexandra Reynolds",
+    name: "Rene Buinda",
     position: "Founder & CEO",
     bio: "With over 15 years of experience in the events industry, Alexandra founded the agency with a vision to redefine hostess and protocol services.",
-    photo: "/placeholder.svg?height=200&width=200",
+    photo:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.39 (1).jpeg",
   },
   {
-    name: "David Chen",
+    name: "Ngemi Botam",
     position: "Operations Director",
     bio: "David ensures that every event runs smoothly, overseeing logistics and coordinating our team of professionals.",
-    photo: "/placeholder.svg?height=200&width=200",
+    photo: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.41.jpeg",
   },
   {
-    name: "Sophia Martinez",
+    name: "Makane Mary",
     position: "Training Manager",
-    bio: "Sophia is responsible for the rigorous training program that ensures all our hostesses and protocol officers meet our high standards.",
-    photo: "/placeholder.svg?height=200&width=200",
+    bio: "Mary is responsible for the rigorous training program that ensures all our hostesses and protocol officers meet our high standards.",
+    photo:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.41 (1).jpeg",
   },
   {
-    name: "James Wilson",
+    name: "Nformi Gracious",
     position: "Client Relations",
-    bio: "James works closely with our clients to understand their needs and ensure that our services exceed their expectations.",
-    photo: "/placeholder.svg?height=200&width=200",
+    bio: "Gracious works closely with our clients to understand their needs and ensure that our services exceed their expectations.",
+    photo:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.39 (1).jpeg",
   },
 ];

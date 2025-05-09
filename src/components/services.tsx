@@ -1,11 +1,13 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ContactButtons from "@/components/contact-buttons";
+import Footer from "./footer";
+import Header from "./header";
 
 export default function ServicesPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <Header />
       <main className="flex-1">
         <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
@@ -39,7 +41,7 @@ export default function ServicesPage() {
                   key={index}
                   className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
                 >
-                  <div className="md:w-1/2">
+                  {/* <div className="md:w-1/2">
                     <Image
                       src={service.image || "/placeholder.svg"}
                       alt={service.title}
@@ -47,7 +49,7 @@ export default function ServicesPage() {
                       height={400}
                       className="rounded-lg shadow-lg"
                     />
-                  </div>
+                  </div> */}
                   <div className="space-y-4 md:w-1/2">
                     <h3 className="text-2xl font-bold text-blue-800">
                       {service.title}
@@ -87,14 +89,6 @@ export default function ServicesPage() {
                   key={index}
                   className="rounded-lg bg-white p-8 shadow-md transition-shadow hover:shadow-lg"
                 >
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                    <Image
-                      src="/placeholder.svg?height=40&width=40"
-                      alt={service.title}
-                      width={40}
-                      height={40}
-                    />
-                  </div>
                   <h3 className="mb-3 text-xl font-bold text-blue-800">
                     {service.title}
                   </h3>
@@ -203,6 +197,7 @@ export default function ServicesPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
@@ -212,7 +207,7 @@ const services = [
     title: "Event Hostesses",
     description:
       "Our professional hostesses are trained to provide exceptional service, ensuring your guests feel welcomed and attended to throughout your event.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "../../../assets/images/ds10.jpeg",
     features: [
       "Guest reception and registration",
       "Information and assistance",
@@ -226,7 +221,7 @@ const services = [
     title: "Protocol Officers",
     description:
       "Our protocol officers ensure that proper etiquette and procedures are followed at formal events, creating a sophisticated and respectful atmosphere.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "../../../assets/images/ds6.jpeg",
     features: [
       "Diplomatic protocol expertise",
       "Seating arrangement management",
@@ -240,7 +235,7 @@ const services = [
     title: "Corporate Events",
     description:
       "From conferences to product launches, our team provides comprehensive staffing solutions for corporate events of all sizes.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "../../../assets/images/ds5.jpeg",
     features: [
       "Conference and exhibition staffing",
       "Product demonstration assistants",
@@ -254,7 +249,8 @@ const services = [
     title: "Private Functions",
     description:
       "Elevate your private celebrations with our discreet and professional hostess services, ensuring your special occasions are memorable.",
-    image: "/placeholder.svg?height=400&width=600",
+    image:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.42 (1).jpeg",
     features: [
       "Wedding reception assistance",
       "Gala dinner coordination",

@@ -10,18 +10,16 @@ import {
 } from "@/components/ui/select";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import ContactButtons from "@/components/contact-buttons";
-import Header from "./header";
-import Footer from "./footer";
 
-export default function ContactPage() {
+export default function BookUs() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
+      {/* <Header /> */}
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Contact Us</h1>
+            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Book Us Now</h1>
             <p className="mx-auto max-w-3xl text-xl text-blue-100">
               Get in touch with our team to discuss your event needs and how we
               can help make your event exceptional.
@@ -205,67 +203,12 @@ export default function ContactPage() {
                       </div>
                     </div>
                   </div>
-
-                  <div>
-                    <h2 className="mb-6 text-2xl font-bold text-blue-800">
-                      Frequently Asked Questions
-                    </h2>
-                    <div className="space-y-6">
-                      {faqs.map((faq, index) => (
-                        <div key={index}>
-                          <h3 className="mb-2 font-medium text-gray-900">
-                            {faq.question}
-                          </h3>
-                          <p className="text-gray-600">{faq.answer}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Map Section */}
-        <section className="bg-gray-50 py-20">
-          <div className="container mx-auto px-4">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800">
-                Visit Our Office
-              </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
-                We're conveniently located in the heart of the city. Feel free
-                to visit us during business hours.
-              </p>
-            </div>
-          </div>
-        </section>
       </main>
-      <Footer />
     </div>
   );
 }
-
-const faqs = [
-  {
-    question: "How far in advance should I book your services?",
-    answer:
-      "We recommend booking at least 4-6 weeks in advance for standard events, and 2-3 months for large-scale or complex events to ensure availability and proper planning.",
-  },
-  {
-    question: "Do your hostesses speak multiple languages?",
-    answer:
-      "Yes, many of our hostesses are multilingual. We can provide staff fluent in various languages including English, Spanish, French, Mandarin, Arabic, and more upon request.",
-  },
-  {
-    question: "What is your cancellation policy?",
-    answer:
-      "Our standard cancellation policy requires notice 14 days prior to the event for a full refund. Cancellations within 7-14 days receive a 50% refund, and less than 7 days may not be eligible for a refund. Custom terms may apply for larger events.",
-  },
-  {
-    question: "Can your hostesses wear branded or custom uniforms?",
-    answer:
-      "We can accommodate branded attire or custom uniforms to match your event theme or corporate identity. This can be arranged with advance notice and may incur additional costs.",
-  },
-];
