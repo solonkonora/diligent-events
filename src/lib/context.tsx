@@ -1,21 +1,49 @@
-// React context for storing user info;
-import { createContext, useState } from "react";
+"use client";
 
-export const AppContext = createContext();
+import React, { createContext, useState, ReactNode, useEffect } from "react";
 
-export const AppContextProvider = (props)=>{
-  const backendUrl = import.meta.env.BACKEND_URL;
+type AppContextType = {
+  backendUrl: string;
+  isLoggedin: boolean;
+  setIsLoggedin: (loggedIn: boolean) => void;
+};
+
+export const AppContent = createContext<AppContextType>({
+  backendUrl: "http://localhost:3000",
+  isLoggedin: false,
+  setIsLoggedin: () => {},
+});
+
+export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedin, setIsLoggedin] = useState(false);
-  const [userData, setuserData] = useState(false);
 
-  const value = {
-    backendUrl,
-    isLoggedin,
-    setIsLoggedin,
-    userData,
-  };
+  // Optional: check if logged in on initial load
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/check", {
+          credentials: "include",
+        });
+        const data = await res.json();
+        setIsLoggedin(data.loggedIn || false);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (err) {
+        setIsLoggedin(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   return (
-    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+    <AppContent.Provider
+      value={{
+        backendUrl: "http://localhost:3000",
+        isLoggedin,
+        setIsLoggedin,
+      }}
+    >
+      {children}
+    </AppContent.Provider>
   );
 };

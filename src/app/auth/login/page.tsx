@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loginSchema } from "@/lib/zod";
-// import { useNavigate } from "react-router-dom";
+import { AppContent } from "@/lib/context";
 
 export default function LoginPage() {
+  const { backendUrl, setIsLoggedin } = useContext(AppContent);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/bookings";
-
-  // const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
