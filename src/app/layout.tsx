@@ -2,6 +2,7 @@ import type React from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AppContextProvider } from "@/lib/context";
 // import Header from "@/components/header";
 // import Footer from "@/components/footer";
 
@@ -27,9 +28,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <Header /> */}
-          {children}
-          {/* <Footer /> */}
+          <AppContextProvider>
+            {/* <Header /> */}
+            {children}
+            {/* <Footer /> */}
+          </AppContextProvider>
         </ThemeProvider>
       </body>
     </html>
