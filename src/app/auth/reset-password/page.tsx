@@ -34,6 +34,7 @@ export default function ResetPasswordPage() {
       } else {
         setError(data.message || "Something went wrong. Please try again.");
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Failed to send reset email. Please try again later.");
     }

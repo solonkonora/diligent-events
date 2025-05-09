@@ -7,6 +7,7 @@ import { AppContent } from "@/lib/context";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { backendUrl, setIsLoggedin } = useContext(AppContent);
 
   const router = useRouter();
@@ -49,6 +50,7 @@ export default function LoginPage() {
         setError(data.message);
         toast.error(data.message, { id: "login" });
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       toast.error("An error occurred. Please try again.", { id: "login" });
     }
