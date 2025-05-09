@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppProvider } from "@/lib/context";
+import { Toaster } from "react-hot-toast";
 // import Header from "@/components/header";
 // import Footer from "@/components/footer";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
           <AppProvider>
             {/* <Header /> */}
             {children}
+            <Toaster position="top-center" />
             {/* <Footer /> */}
           </AppProvider>
         </ThemeProvider>

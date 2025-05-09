@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loginSchema } from "@/lib/zod";
 import { AppContent } from "@/lib/context";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const { backendUrl, setIsLoggedin } = useContext(AppContent);
@@ -22,22 +23,34 @@ export default function LoginPage() {
 
     const result = loginSchema.safeParse({ email, password });
     if (!result.success) {
-      setError(result.error.errors[0].message);
+      const message = result.error.errors[0].message;
+      setError(message);
+      toast.error(message);
       return;
     }
 
-    const res = await fetch("http://localhost:3000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
-    });
+    toast.loading("Logging in...", { id: "login" });
 
-    const data = await res.json();
-    if (data.success) {
-      router.push(redirect);
-    } else {
-      setError(data.message);
+    try {
+      const res = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        toast.success("Login successful!", { id: "login" });
+        setIsLoggedin(true);
+        router.push(redirect);
+      } else {
+        setError(data.message);
+        toast.error(data.message, { id: "login" });
+      }
+    } catch (err) {
+      toast.error("An error occurred. Please try again.", { id: "login" });
     }
   };
 
