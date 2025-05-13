@@ -39,7 +39,7 @@ export default function LandingPage() {
                     size="lg"
                     className="border-2 border-blue-900 bg-orange-600 text-sm text-white backdrop-blur-sm transition-all hover:border-orange-400 hover:bg-blue-600/20 md:text-base"
                   >
-                    <Link href="/auth/login?redirect=/booking">Contact Us</Link>
+                    <Link href="/contact">Contact Us</Link>
                   </Button>
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function LandingPage() {
               size="lg"
               className="bg-orange-500 text-white hover:bg-orange-600"
             >
-              <Link href="/auth/login?redirect=/booking">Get in Touch</Link>
+              <Link href="/auth/login?redirect=/bookings">Get in Touch</Link>
             </Button>
           </div>
         </section>

@@ -8,27 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import ContactButtons from "@/components/contact-buttons";
 
-export default function BookUs() {
+export default function BookingPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      {/* <Header /> */}
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Book Us Now</h1>
-            <p className="mx-auto max-w-3xl text-xl text-blue-100">
-              Get in touch with our team to discuss your event needs and how we
-              can help make your event exceptional.
-            </p>
-          </div>
-
-          <ContactButtons />
-        </section>
-
         <section className="bg-white py-20">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -132,78 +116,6 @@ export default function BookUs() {
                     Send Message
                   </Button>
                 </form>
-              </div>
-
-              <div className="space-y-8">
-                <div>
-                  <h2 className="mb-6 text-2xl font-bold text-blue-800">
-                    Contact Information
-                  </h2>
-                  <p className="mb-8 text-gray-600">
-                    We'd love to hear from you. Contact us using the form or the
-                    information below and our team will get back to you as soon
-                    as possible.
-                  </p>
-
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <div className="mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
-                        <Phone className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900">Phone</h3>
-                        <p className="text-gray-600">+237-676-717-626</p>
-                        <p className="text-gray-600">Mon-Fri, 9am-6pm</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start">
-                      <div className="mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
-                        <Mail className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900">Email</h3>
-                        <p className="text-gray-600">
-                          info@diligentservers.com
-                        </p>
-                        <p className="text-gray-600">
-                          We respond within 24 hours
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start">
-                      <div className="mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
-                        <MapPin className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900">
-                          Office: Buea
-                        </h3>
-                        <p className="text-gray-600">Ndongo Carrefour</p>
-                        <p className="text-gray-600">Molyko, Buea</p>
-                      </div>
-
-                      <div className="flex items-start">
-                        <div className="mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
-                          <Clock className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-gray-900">
-                            Business Hours
-                          </h3>
-                          <p className="text-gray-600">
-                            Monday-Friday: 9am-6pm
-                          </p>
-                          <p className="text-gray-600">
-                            Saturday: 10am-2pm (by appointment)
-                          </p>
-                          <p className="text-gray-600">Sunday: Closed</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

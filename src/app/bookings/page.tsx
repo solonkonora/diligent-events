@@ -1,10 +1,10 @@
-import BookUs from "@/components/booking-form";
+import BookingPage from "@/components/booking-form";
 import React from "react";
 
 const Bookings = () => {
   return (
     <div>
-      <BookUs />
+      <BookingPage />
     </div>
   );
 };
