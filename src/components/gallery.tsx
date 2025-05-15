@@ -198,7 +198,7 @@ const featuredEvents = [
   {
     title: "Funeral Celebration",
     date: "October 15, 2023",
-    location: "St. Mary’s Church",
+    location: "Bokwai, Dr Tabah's Resident",
     description:
       "We provided compassionate support and protocol services during this solemn funeral celebration, ensuring that the family received the utmost respect and care during their time of mourning. Our team managed the logistics and coordinated with clergy and attendees to create a dignified atmosphere.",
     image: "/placeholder.svg?height=400&width=600",
@@ -226,17 +226,47 @@ const featuredEvents = [
 
 const galleryImages = [
   {
-    src: "/placeholder.svg?height=300&width=400",
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.39 (1).jpeg",
     alt: "Corporate conference with hostesses",
   },
-  { src: "/placeholder.svg?height=300&width=400", alt: "Diplomatic reception" },
-  { src: "/placeholder.svg?height=300&width=400", alt: "Fashion show event" },
-  { src: "/placeholder.svg?height=300&width=400", alt: "Award ceremony" },
-  { src: "/placeholder.svg?height=300&width=400", alt: "Product launch event" },
-  { src: "/placeholder.svg?height=300&width=400", alt: "Gala dinner" },
-  { src: "/placeholder.svg?height=300&width=400", alt: "Trade show hostesses" },
-  { src: "/placeholder.svg?height=300&width=400", alt: "VIP event management" },
-  { src: "/placeholder.svg?height=300&width=400", alt: "Red carpet event" },
+  {
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.41 (2).jpeg",
+    alt: "Diplomatic reception",
+  },
+  { src: "/assets/images/ds7.jpeg", alt: "Fashion show event" },
+  {
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.39.jpeg",
+    alt: "Award ceremony",
+  },
+  {
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.40 (1).jpeg",
+    alt: "Product launch event",
+  },
+  {
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.43.42.jpeg",
+    alt: "Gala dinner",
+  },
+  {
+    src: "/assets/images/ds10.jpeg",
+    alt: "Trade show hostesses",
+  },
+  {
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.39.jpeg",
+    alt: "VIP event management",
+  },
+  { src: "/assets/images/ds11.jpeg", alt: "Red carpet event" },
+  {
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.41.jpeg",
+    alt: "Gala dinner",
+  },
+  {
+    src: "/assets/images/five.jpeg",
+    alt: "Trade show hostesses",
+  },
+  {
+    src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.42.jpeg",
+    alt: "Gala dinner",
+  },
 ];
 
 const testimonials = [
