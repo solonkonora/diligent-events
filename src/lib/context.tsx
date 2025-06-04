@@ -8,8 +8,10 @@ type AppContextType = {
   setIsLoggedin: (loggedIn: boolean) => void;
 };
 
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+
 export const AppContent = createContext<AppContextType>({
-  backendUrl: "http://localhost:4000",
+  backendUrl,
   isLoggedin: false,
   setIsLoggedin: () => {},
 });
@@ -17,16 +19,14 @@ export const AppContent = createContext<AppContextType>({
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedin, setIsLoggedin] = useState(false);
 
-  // Optional: check if logged in on initial load
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/auth/check", {
+        const res = await fetch(`${backendUrl}/api/auth/check`, {
           credentials: "include",
         });
         const data = await res.json();
         setIsLoggedin(data.loggedIn || false);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setIsLoggedin(false);
       }
@@ -38,7 +38,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContent.Provider
       value={{
-        backendUrl: "http://localhost:4000",
+        backendUrl,
         isLoggedin,
         setIsLoggedin,
       }}
