@@ -217,10 +217,10 @@ const testimonials = [
       "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39 (2).jpeg",
   },
   {
-    name: "Che Clarisse",
+    name: "Che Claris",
     position: "Wedding Planner",
     quote:
-      "I've been recommending their services to all my clients. The hostesses are not only professional but also add that special touch to make events memorable.",
+      "I have been recommending their services to all my clients. The hostesses are not only professional but also add that special touch to make events memorable.",
     avatar: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39.jpeg",
   },
 ];
