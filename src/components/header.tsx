@@ -19,7 +19,7 @@ export default function Header() {
             <img
               src="/assets/images/logo.png"
               alt="HostessAgency Logo"
-              className="h-8 w-auto"
+              className="h-16 w-auto"
             />
           </Link>
         </div>
