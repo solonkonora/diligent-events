@@ -7,74 +7,74 @@ import Footer from "./footer";
 
 export default function LandingPage() {
   return (
-<div className="flex min-h-screen flex-col">
-  <main className="flex-1">
-    <Header />
+    <div className="flex min-h-screen flex-col">
+      <main className="flex-1">
+        <Header />
 
-    {/* Hero Section */}
-    <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 pt-2 md:pt-10">
-      <div className="flex h-[85vh] w-full flex-col md:flex-row md:h-[90vh]">
-        <div className="relative z-20 flex items-center py-4 md:w-1/2 md:py-8 flex-1">
-          <div className="mx-auto w-full max-w-[90%] space-y-3 px-4 sm:px-6 md:space-y-8">
-            <h1 className="bg-gradient-to-r from-orange-400 via-orange-500 to-blue-300 bg-clip-text font-serif text-2xl leading-[1.1] font-black tracking-tight text-transparent drop-shadow-[0_3px_6px_rgba(0,0,0,0.7)] md:text-4xl lg:text-5xl xl:text-6xl">
-              Hostess/Protocol Services & Event Planning
-            </h1>
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 pt-2 md:pt-10">
+          <div className="flex h-[85vh] w-full flex-col md:h-[90vh] md:flex-row">
+            <div className="relative z-20 flex flex-1 items-center py-4 md:w-1/2 md:py-8">
+              <div className="mx-auto w-full max-w-[90%] space-y-3 px-4 sm:px-6 md:space-y-8">
+                <h1 className="bg-gradient-to-r from-orange-400 via-orange-500 to-blue-300 bg-clip-text font-serif text-2xl leading-[1.1] font-black tracking-tight text-transparent drop-shadow-[0_3px_6px_rgba(0,0,0,0.7)] md:text-4xl lg:text-5xl xl:text-6xl">
+                  Hostess/Protocol Services & Event Planning
+                </h1>
 
-            <p className="max-w-2xl rounded-2xl border border-white/20 bg-gradient-to-r from-blue-800/70 to-orange-600/70 px-6 py-4 font-sans text-base leading-relaxed font-medium text-white/95 shadow-2xl backdrop-blur-lg md:px-8 md:py-6 md:text-lg lg:text-xl">
-              Elevate your events with our professional hostesses and
-              protocol officers. We ensure your guests receive the highest
-              level of service and attention.
-            </p>
-
-            <div className="flex flex-wrap gap-3 md:gap-4">
-              <Button
-                asChild
-                size="lg"
-                className="border-2 border-orange-400 bg-gradient-to-r from-orange-500 to-orange-600 text-sm text-white shadow-xl transition-all hover:scale-105 hover:from-orange-600 hover:to-orange-700 hover:shadow-orange-500/40 md:text-base"
-              >
-                <Link href="/services">Our Services</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-blue-700 text-sm text-white shadow-xl transition-all hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-blue-500/40 md:text-base"
-              >
-                <Link href="/contact">Contact Us</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Image Section with Overlay and Styling */}
-        <div className="relative flex w-full items-center justify-center p-4 md:w-1/2 md:p-6 pb-8 flex-1">
-          <div className="relative h-[320px] w-[280px] overflow-hidden rounded-3xl shadow-2xl md:h-[400px] md:w-[320px] lg:h-[480px] lg:w-[380px]">
-            <Image
-              src="../../../assets/images/two.jpeg"
-              alt="Professional hostesses"
-              fill
-              className="object-cover object-top"
-              priority
-            />
-
-            {/* Color Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-blue-800/30 to-orange-500/25"></div>
-
-            <div className="absolute right-4 bottom-4 left-4 z-10 md:right-6 md:bottom-6 md:left-6">
-              <div className="rounded-xl border border-white/20 bg-gradient-to-r from-orange-600/85 to-blue-700/85 p-3 shadow-xl backdrop-blur-md md:rounded-2xl md:p-6">
-                <h3 className="mb-1 font-sans text-base font-bold tracking-wide text-white md:mb-3 md:text-xl">
-                  Professional Excellence
-                </h3>
-                <p className="font-sans text-xs leading-relaxed text-white/90 md:text-base">
-                  Experienced staff dedicated to making your events memorable and seamless
+                <p className="max-w-2xl rounded-2xl border border-white/20 bg-gradient-to-r from-blue-800/70 to-orange-600/70 px-6 py-4 font-sans text-base leading-relaxed font-medium text-white/95 shadow-2xl backdrop-blur-lg md:px-8 md:py-6 md:text-lg lg:text-xl">
+                  Elevate your events with our professional hostesses and
+                  protocol officers. We ensure your guests receive the highest
+                  level of service and attention.
                 </p>
+
+                <div className="flex flex-wrap gap-3 md:gap-4">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="border-2 border-orange-400 bg-gradient-to-r from-orange-500 to-orange-600 text-sm text-white shadow-xl transition-all hover:scale-105 hover:from-orange-600 hover:to-orange-700 hover:shadow-orange-500/40 md:text-base"
+                  >
+                    <Link href="/services">Our Services</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-blue-700 text-sm text-white shadow-xl transition-all hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-blue-500/40 md:text-base"
+                  >
+                    <Link href="/contact">Contact Us</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Image Section with Overlay and Styling */}
+            <div className="relative flex w-full flex-1 items-center justify-center p-4 pb-8 md:w-1/2 md:p-6">
+              <div className="relative h-[320px] w-[280px] overflow-hidden rounded-3xl shadow-2xl md:h-[400px] md:w-[320px] lg:h-[480px] lg:w-[380px]">
+                <Image
+                  src="../../../assets/images/two.jpeg"
+                  alt="Professional hostesses"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
+
+                {/* Color Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-blue-800/30 to-orange-500/25"></div>
+
+                <div className="absolute right-4 bottom-4 left-4 z-10 md:right-6 md:bottom-6 md:left-6">
+                  <div className="rounded-xl border border-white/20 bg-gradient-to-r from-orange-600/85 to-blue-700/85 p-3 shadow-xl backdrop-blur-md md:rounded-2xl md:p-6">
+                    <h3 className="mb-1 font-sans text-base font-bold tracking-wide text-white md:mb-3 md:text-xl">
+                      Professional Excellence
+                    </h3>
+                    <p className="font-sans text-xs leading-relaxed text-white/90 md:text-base">
+                      Experienced staff dedicated to making your events
+                      memorable and seamless
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <ContactButtons />
-    </section>
-
+          <ContactButtons />
+        </section>
 
         {/* Services Overview */}
         <section className="bg-white py-10">
