@@ -13,9 +13,11 @@ export default function LandingPage() {
 
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 pt-2 md:pt-10">
-          <div className="flex h-[85vh] w-full flex-col md:h-[90vh] md:flex-row">
-            <div className="relative z-20 flex flex-1 items-center py-4 md:w-1/2 md:py-8">
-              <div className="mx-auto w-full max-w-[90%] space-y-3 px-4 sm:px-6 md:space-y-8">
+          {/* Main Hero Content */}
+          <div className="flex min-h-[85vh] w-full flex-col md:min-h-[90vh] md:flex-row">
+            {/* Text Content */}
+            <div className="relative z-20 flex flex-1 items-center py-6 md:w-1/2 md:py-12">
+              <div className="mx-auto w-full max-w-[90%] space-y-4 px-4 sm:px-6 md:space-y-8">
                 <h1 className="bg-gradient-to-r from-orange-400 via-orange-500 to-blue-300 bg-clip-text font-serif text-2xl leading-[1.1] font-black tracking-tight text-transparent drop-shadow-[0_3px_6px_rgba(0,0,0,0.7)] md:text-4xl lg:text-5xl xl:text-6xl">
                   Hostess/Protocol Services & Event Planning
                 </h1>
@@ -45,9 +47,9 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Image Section with Overlay and Styling */}
-            <div className="relative flex w-full flex-1 items-center justify-center p-4 pb-8 md:w-1/2 md:p-6">
-              <div className="relative h-[320px] w-[280px] overflow-hidden rounded-3xl shadow-2xl md:h-[400px] md:w-[320px] lg:h-[480px] lg:w-[380px]">
+            {/* Image Section */}
+            <div className="relative flex flex-1 items-center justify-center p-4 pb-6 md:w-1/2 md:p-6 md:pb-8">
+              <div className="relative h-[300px] w-[260px] overflow-hidden rounded-3xl shadow-2xl md:h-[400px] md:w-[320px] lg:h-[480px] lg:w-[380px]">
                 <Image
                   src="../../../assets/images/two.jpeg"
                   alt="Professional hostesses"
@@ -73,11 +75,15 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-          <ContactButtons />
+
+          {/* ContactButtons - Properly positioned within hero section */}
+          <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
+            <ContactButtons />
+          </div>
         </section>
 
-        {/* Services Overview */}
-        <section className="bg-white py-10">
+        {/* Services Overview - Proper spacing from hero */}
+        <section className="bg-white py-16 md:py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
               <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">

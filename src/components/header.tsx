@@ -91,7 +91,7 @@ export default function Header() {
                 Services
               </Link>
               <Link
-                href="/events"
+                href="/gallery"
                 className="text-lg font-medium transition-colors hover:text-blue-600"
                 onClick={() => setIsOpen(false)}
               >
