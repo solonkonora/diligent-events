@@ -76,13 +76,12 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* ContactButtons - Properly positioned within hero section */}
           <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
             <ContactButtons />
           </div>
         </section>
 
-        {/* Services Overview - Proper spacing from hero */}
+        {/* Services Overview */}
         <section className="bg-white py-16 md:py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
@@ -162,7 +161,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Call to Action */}
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">
