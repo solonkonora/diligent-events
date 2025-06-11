@@ -90,6 +90,9 @@ export default function BookingPage() {
                         <SelectItem value="exhibition">
                           Traditional Event
                         </SelectItem>
+                        <SelectItem value="exhibition">
+                          Normal/Casual Event
+                        </SelectItem>
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>

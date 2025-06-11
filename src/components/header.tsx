@@ -11,11 +11,16 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b px-6 backdrop-blur">
+    // <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b px-6 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b bg-blue-800 px-6 text-white backdrop-blur">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
-          <Link href="/" className="text-xl font-bold text-blue-800">
-            Hostess<span className="text-orange-500">Agency</span>
+          <Link href="/" className="flex items-center">
+            <img
+              src="/assets/images/logo.png"
+              alt="HostessAgency Logo"
+              className="h-16 w-auto"
+            />
           </Link>
         </div>
 
@@ -58,7 +63,7 @@ export default function Header() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="outline" size="icon">
-              <Menu className="h-5 w-5" />
+              <Menu className="h-5 w-5 text-black" />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
@@ -86,7 +91,7 @@ export default function Header() {
                 Services
               </Link>
               <Link
-                href="/events"
+                href="/gallery"
                 className="text-lg font-medium transition-colors hover:text-blue-600"
                 onClick={() => setIsOpen(false)}
               >
