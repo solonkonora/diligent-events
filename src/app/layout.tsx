@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Professional Hostess & Protocol Agency",
+  title: "Professional Events Management Services",
   description:
     "Elevate your events with our professional hostesses and protocol officers. We ensure your guests receive the highest level of service and attention.",
 };
