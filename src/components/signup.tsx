@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signupSchema } from "@/lib/zod";
+import { supabase } from "@/lib/supabaseClient";
+import toast from "react-hot-toast";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -21,21 +23,29 @@ export default function SignupPage() {
     const result = signupSchema.safeParse({ email, password });
     if (!result.success) {
       setError(result.error.errors[0].message);
+      toast.error(result.error.errors[0].message);
       return;
     }
 
-    const res = await fetch("http://localhost:4000/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ name, email, password }),
+    toast.loading("Signing up...", { id: "signup" });
+
+    // Use Supabase Auth for signup
+    const { error: supabaseError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name }, // Store name in user metadata
+      },
     });
 
-    const data = await res.json();
-    if (data.success) {
+    if (!supabaseError) {
+      toast.success("Signup successful! Check your email to confirm.", {
+        id: "signup",
+      });
       router.push(redirect);
     } else {
-      setError(data.message);
+      setError(supabaseError.message);
+      toast.error(supabaseError.message, { id: "signup" });
     }
   };
 

@@ -3,7 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-// import { AppProvider } from "@/lib/context";
+import { AppProvider } from "@/lib/context";
 import { Toaster } from "react-hot-toast";
 // import Header from "@/components/header";
 // import Footer from "@/components/footer";
@@ -30,12 +30,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <AppProvider> */}
-          {/* <Header /> */}
-          {children}
-          <Toaster position="top-center" />
-          {/* <Footer /> */}
-          {/* </AppProvider> */}
+          <AppProvider>
+            {/* <Header /> */}
+            {children}
+            <Toaster position="top-center" />
+            {/* <Footer /> */}
+          </AppProvider>
         </ThemeProvider>
       </body>
     </html>
