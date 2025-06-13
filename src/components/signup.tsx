@@ -15,12 +15,13 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    const result = signupSchema.safeParse({ email, password });
+    const result = signupSchema.safeParse({ name, email, password });
     if (!result.success) {
       setError(result.error.errors[0].message);
       toast.error(result.error.errors[0].message);
@@ -29,12 +30,11 @@ export default function SignupPage() {
 
     toast.loading("Signing up...", { id: "signup" });
 
-    // Use Supabase Auth for signup
     const { error: supabaseError } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: { name }, // Store name in user metadata
+        data: { name, role: "user" }, // Add any additional user metadata here
       },
     });
 
@@ -42,7 +42,7 @@ export default function SignupPage() {
       toast.success("Signup successful! Check your email to confirm.", {
         id: "signup",
       });
-      router.push(redirect);
+      setEmailSent(true);
     } else {
       setError(supabaseError.message);
       toast.error(supabaseError.message, { id: "signup" });
@@ -65,44 +65,54 @@ export default function SignupPage() {
         {error && (
           <p className="mb-4 text-center text-sm text-red-500">{error}</p>
         )}
-        <p className="mb-4 cursor-pointer text-center text-gray-400">
-          create your account
-        </p>
+        {emailSent ? (
+          <p className="mb-4 text-center text-green-600">
+            Signup successful! Please check your email to confirm your account
+            before logging in.
+          </p>
+        ) : (
+          <>
+            <p className="mb-4 cursor-pointer text-center text-gray-400">
+              create your account
+            </p>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="mb-4 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
+            />
 
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="mb-4 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
-        />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="mb-4 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
+            />
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="mb-4 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
-        />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="mb-6 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
+            />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="mb-6 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
-        />
-
-        <button
-          type="submit"
-          className="w-full rounded-xl bg-green-600 py-3 text-white hover:bg-green-700"
-        >
-          Sign Up
-        </button>
-
+            <button
+              type="submit"
+              className="w-full rounded-xl bg-green-600 py-3 text-white hover:bg-green-700"
+            >
+              Sign Up
+            </button>
+          </>
+        )}
         <div className="mt-6 text-center text-sm text-gray-600">
           Already have an account?{" "}
           <button
