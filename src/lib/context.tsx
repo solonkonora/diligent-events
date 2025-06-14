@@ -1,7 +1,9 @@
+// Listen for Auth State Changes in Context
+
 "use client";
 
-import React, { createContext, useState, ReactNode, useEffect } from "react";
-import { supabase } from "./supabaseClient";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 type AppContextType = {
   isLoggedin: boolean;
@@ -17,17 +19,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedin, setIsLoggedin] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const { data } = await supabase.auth.getUser();
-      setIsLoggedin(!!data.user);
-    };
+    // Check initial session
+    supabase.auth.getSession().then(({ data }) => {
+      setIsLoggedin(!!data.session);
+    });
 
-    checkAuth();
-
-    // Listen for auth state changes
+    // Listen for login/logout
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        setIsLoggedin(!!session?.user);
+        setIsLoggedin(!!session);
       }
     );
 
@@ -37,12 +37,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AppContent.Provider
-      value={{
-        isLoggedin,
-        setIsLoggedin,
-      }}
-    >
+    <AppContent.Provider value={{ isLoggedin, setIsLoggedin }}>
       {children}
     </AppContent.Provider>
   );
