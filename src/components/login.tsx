@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/bookings";
+  const redirect = searchParams.get("redirect") || "/client";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,19 +40,30 @@ export default function LoginPage() {
         });
 
       if (!supabaseError) {
-        // Fetch user metadata
-        const { data: userData } = await supabase.auth.getUser();
-        const role = userData?.user?.user_metadata?.role;
+        // Fetch user profile from profiles table
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
 
-        setIsLoggedin(true);
+          setIsLoggedin(true);
 
-        if (role === "admin") {
-          router.push("/admin"); // or your admin dashboard route
+          if (profile?.role === "admin") {
+            router.push("/admin");
+          } else {
+            router.push("/client");
+          }
+
+          toast.success("Login successful!", { id: "login" });
         } else {
-          router.push("/bookings"); // or your normal user route
+          setError("User not found after login.");
+          toast.error("User not found after login.", { id: "login" });
         }
-
-        toast.success("Login successful!", { id: "login" });
       } else {
         setError(supabaseError.message);
         toast.error(supabaseError.message, { id: "login" });
@@ -124,13 +135,18 @@ export default function LoginPage() {
           >
             Sign up
           </button>
+          <div className="my-4 flex items-center">
+            <hr className="flex-grow border-gray-300" />
+            <span className="mx-2 text-sm text-gray-400">OR</span>
+            <hr className="flex-grow border-gray-300" />
+          </div>
           <button
             type="button"
             onClick={async () => {
               const { error } = await supabase.auth.signInWithOAuth({
                 provider: "google",
                 options: {
-                  redirectTo: window.location.origin + "/bookings",
+                  redirectTo: window.location.origin + "/client",
                 },
               });
               if (error) {

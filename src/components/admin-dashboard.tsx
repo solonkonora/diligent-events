@@ -1,8 +1,3 @@
-// Protect Admin Dashboard
-// -check if the user is logged in (using your context).
-// -check the user's role (from user_metadata or your profiles table).
-// -redirect if not authorized.
-
 "use client";
 
 import { useContext, useEffect, useState } from "react";
@@ -15,30 +10,50 @@ export function AdminDashboard() {
   const { isLoggedin } = useContext(AppContent);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  type Profile = {
+    id: string;
+    full_name: string;
+    role: string;
+  };
+
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    const checkRole = async () => {
+    const checkRoleAndFetchProfile = async () => {
       if (!isLoggedin) {
         router.push("/auth/login");
         return;
       }
-      const { data } = await supabase.auth.getUser();
-      const role = data.user?.user_metadata?.role;
-      if (role !== "admin") {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/auth/login");
+        return;
+      }
+      // Fetch profile from profiles table
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (!profile || profile.role !== "admin") {
         toast.error("Unauthorized");
-        router.push("/bookings"); // or another safe route
+        router.push("/client"); // Redirect to client dashboard if not admin
       } else {
+        setProfile(profile);
         setLoading(false);
       }
     };
-    checkRole();
+    checkRoleAndFetchProfile();
   }, [isLoggedin, router]);
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4">
-      <div>admin dashboard...</div>
+      <div>Welcome, {profile?.full_name} (Admin)</div>
       {/* ...rest of your admin dashboard... */}
     </div>
   );
