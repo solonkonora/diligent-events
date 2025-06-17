@@ -1,13 +1,11 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AppContent } from "@/lib/context";
 import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
 
 export function AdminDashboard() {
-  const { isLoggedin } = useContext(AppContent);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   type Profile = {
@@ -20,10 +18,6 @@ export function AdminDashboard() {
 
   useEffect(() => {
     const checkRoleAndFetchProfile = async () => {
-      if (!isLoggedin) {
-        router.push("/auth/login");
-        return;
-      }
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -47,7 +41,7 @@ export function AdminDashboard() {
       }
     };
     checkRoleAndFetchProfile();
-  }, [isLoggedin, router]);
+  }, [router]);
 
   if (loading) return <div>Loading...</div>;
 
