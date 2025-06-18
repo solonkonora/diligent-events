@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
 
-export function ClientDashboard() {
+export default function ClientDashboard() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   type Profile = {
@@ -16,15 +16,17 @@ export function ClientDashboard() {
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    const checkRoleAndFetchProfile = async () => {
+    const checkSessionAndProfile = async () => {
+      // Wait for Supabase to initialize session
       const {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        router.push("/auth/login");
+        // Wait a bit and try again (handles OAuth session propagation delay)
+        setTimeout(checkSessionAndProfile, 500);
         return;
       }
-      // Fetch profile from profiles table
+      // Fetch profile
       const { data: profile } = await supabase
         .from("profiles")
         .select("*")
@@ -33,21 +35,21 @@ export function ClientDashboard() {
 
       if (!profile || (profile.role !== "user" && profile.role !== "client")) {
         toast.error("Unauthorized");
-        router.push("/auth/login");
+        router.replace("/auth/login");
       } else {
         setProfile(profile);
         setLoading(false);
       }
     };
-    checkRoleAndFetchProfile();
+    checkSessionAndProfile();
   }, [router]);
 
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-4">
-      <div>Welcome, {profile?.full_name} (Client)</div>
-      {/* ...rest of your client dashboard... */}
+    <div>
+      Welcome, {profile?.full_name} (Client)
+      {/* ...rest of your dashboard... */}
     </div>
   );
 }

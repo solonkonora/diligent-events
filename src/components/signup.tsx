@@ -34,7 +34,7 @@ export default function SignupPage() {
       email,
       password,
       options: {
-        data: { name, role: "client" }, // or "client"
+        data: { name, role: "admin" }, // or "client"
       },
     });
 
