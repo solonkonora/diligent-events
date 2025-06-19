@@ -5,14 +5,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { loginSchema } from "@/lib/zod";
 import { AppContent } from "@/lib/context";
 import toast from "react-hot-toast";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function LoginPage() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { backendUrl, setIsLoggedin } = useContext(AppContent);
+  const { setIsLoggedin } = useContext(AppContent);
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/bookings";
+  const redirect = searchParams.get("redirect") || "/client";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,25 +33,42 @@ export default function LoginPage() {
     toast.loading("Logging in...", { id: "login" });
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      });
+      const { data, error: supabaseError } =
+        await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
-      const data = await res.json();
+      if (!supabaseError) {
+        // Fetch user profile from profiles table
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
 
-      if (data.success) {
-        toast.success("Login successful!", { id: "login" });
-        setIsLoggedin(true);
-        router.push(redirect);
+          setIsLoggedin(true);
+
+          if (profile?.role === "admin") {
+            router.push("/admin");
+          } else {
+            router.push("/client");
+          }
+
+          toast.success("Login successful!", { id: "login" });
+        } else {
+          setError("User not found after login.");
+          toast.error("User not found after login.", { id: "login" });
+        }
       } else {
-        setError(data.message);
-        toast.error(data.message, { id: "login" });
+        setError(supabaseError.message);
+        toast.error(supabaseError.message, { id: "login" });
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
+    } catch {
       toast.error("An error occurred. Please try again.", { id: "login" });
     }
   };

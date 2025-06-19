@@ -32,9 +32,7 @@ export default function ContactPage() {
                     type="submit"
                     className="w-64 bg-orange-500 text-2xl text-white hover:bg-orange-600"
                   >
-                    <Link href="/auth/login?redirect=/bookings">
-                      Book Us Now
-                    </Link>
+                    <Link href="/auth/login?redirect=/client">Book Us Now</Link>
                   </Button>
                 </div>
 

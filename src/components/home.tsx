@@ -175,7 +175,7 @@ export default function LandingPage() {
               size="lg"
               className="bg-orange-500 text-white hover:bg-orange-600"
             >
-              <Link href="/auth/login?redirect=/bookings">Get in Touch</Link>
+              <Link href="/auth/login?redirect=/client">Get in Touch</Link>
             </Button>
           </div>
         </section>
