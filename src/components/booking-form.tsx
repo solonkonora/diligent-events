@@ -196,7 +196,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           htmlFor="guests"
           className="block text-sm font-medium text-gray-700"
         >
-          Number of Guests
+          Approximate Number of Expected Guests
         </label>
         <input
           type="number"

@@ -60,6 +60,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
+import BookingForm from "./booking-form";
 
 type Profile = {
   id: string;
@@ -537,116 +538,17 @@ export default function ClientDashboard() {
               </h2>
 
               <div className="rounded-xl bg-white p-6 shadow-md">
-                <form
-                  className="grid grid-cols-1 gap-6 md:grid-cols-2"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    createBooking();
-                  }}
-                >
-                  {/* Service Type */}
-                  <div className="col-span-1">
-                    <label
-                      htmlFor="serviceType"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Select Service
-                    </label>
-                    <select
-                      id="serviceType"
-                      name="serviceType"
-                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
-                    >
-                      <option value="">Choose a Service</option>
-                      <option value="hostesses">
-                        Hostesses & Protocol Services
-                      </option>
-                      <option value="hostesses">
-                        People to clean event venue before & after event
-                      </option>
-                      <option value="rentals">
-                        Event Rentals (Chairs, Tents, etc.)
-                      </option>
-                      <option value="planning">
-                        Event Planning & Execution
-                      </option>
-                      <option value="private">
-                        Private Functions (e.g., Cleaning, Errands)
-                      </option>
-                      <option value="other">Other Custom Services</option>
-                    </select>
-                  </div>
-
-                  <div className="col-span-1">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Event Type
-                    </label>
-                    <select className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
-                      <option>select event type</option>
-                      <option>Corporate Event</option>
-                      <option>Wedding</option>
-                      <option>Birthday Party</option>
-                      <option>Conference</option>
-                      <option>Anniversaries</option>
-                      <option>Graduation Celebrations</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Date
-                    </label>
-                    <input
-                      type="date"
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Number of Guests
-                    </label>
-                    <input
-                      type="number"
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-                      placeholder="0"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Budget Range
-                    </label>
-                    <select className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none">
-                      <option>select you amount range</option>
-                      <option>Under 100,000FCFA</option>
-                      <option>100,000FCFA - 200,000FCFA</option>
-                      <option>300,000FCFA - 500,000FCFA</option>
-                      <option>Over 800,000FCFA</option>
-                    </select>
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Event Details
-                    </label>
-                    <textarea
-                      rows={4}
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-                      placeholder="Tell us about your event..."
-                    ></textarea>
-                  </div>
-
-                  <div className="flex justify-end md:col-span-2">
-                    <button
-                      type="submit"
-                      className="rounded-md bg-blue-500 px-6 py-2 text-white hover:bg-blue-600"
-                    >
-                      Submit Request
-                    </button>
-                  </div>
-                </form>
+                {profile && (
+                  <BookingForm
+                    userId={profile.id}
+                    onSuccess={() => {
+                      // Refresh events after successful booking
+                      fetchEvents();
+                      // Optionally redirect to bookings tab
+                      // setActiveTab("bookings");
+                    }}
+                  />
+                )}
               </div>
             </section>
           )}
@@ -764,9 +666,59 @@ export default function ClientDashboard() {
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
-                    <span>+237-676 717 626</span>
-                    <span>+237-675 591 505</span>
-                    <span>+237-676 326 908</span>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-blue-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                        <span>+237-676 717 626</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="invisible h-6 w-6 text-blue-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                        <span>+237-675 591 505</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="invisible h-6 w-6 text-blue-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                        <span>+237-676 326 908</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
