@@ -1,13 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabaseClient";
+import error from "next/error";
 
 interface BookingFormProps {
   userId: string;
   onSuccess?: () => void;
 }
+
+type Service = {
+  id: string;
+  name: string;
+};
 
 export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
   // Form state with validation
@@ -20,8 +26,21 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     details: "",
   });
 
+  const [services, setServices] = useState<Service[]>([]);
+  const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Fetch available services
+  useEffect(() => {
+    supabase
+      .from("service")
+      .select("id, name")
+      .then(({ data, error }) => {
+        if (error) toast.error("Failed to load services");
+        else setServices(data || []);
+      });
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -35,6 +54,14 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
+  };
+
+  // Handle service selection
+  const handleServiceChange = (serviceId: string, checked: boolean) => {
+    setSelectedServiceIds((prev) =>
+      checked ? [...prev, serviceId] : prev.filter((id) => id !== serviceId)
+    );
+    if (errors["services"]) setErrors((prev) => ({ ...prev, services: "" }));
   };
 
   const validateForm = () => {
@@ -51,35 +78,62 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     return Object.keys(newErrors).length === 0;
   };
 
+  // submit handler
   const createBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) {
       toast.error("Please fill in all required fields");
       return;
     }
-
+    if (selectedServiceIds.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        services: "Please select at least one service",
+      }));
+      toast.error("Please select at least one service");
+      return;
+    }
     setIsSubmitting(true);
 
     try {
       // Insert booking into Supabase
-      const { error } = await supabase.from("bookings").insert([
-        {
-          user_id: userId,
-          service_type: formData.serviceType,
-          event_type: formData.eventType,
-          event_date: formData.date,
-          guests: parseInt(formData.guests) || 0,
-          budget_range: formData.budget,
-          details: formData.details,
-          status: "pending",
-          created_at: new Date().toISOString(),
-        },
-      ]);
+      const { data: bookingData, error: bookingError } = await supabase
+        .from("bookings")
+        .insert([
+          {
+            user_id: userId,
+            service_type: formData.serviceType,
+            event_type: formData.eventType,
+            event_date: formData.date,
+            guests: parseInt(formData.guests) || 0,
+            budget_range: formData.budget,
+            details: formData.details,
+            status: "pending",
+            created_at: new Date().toISOString(),
+          },
+        ])
+        .select("id")
+        .single();
 
-      if (error) {
+      if (bookingError || !bookingData) {
         console.error("Booking error:", error);
-        toast.error("Failed to create booking: " + error.message);
+        toast.error(
+          "Failed to create booking: " + bookingError?.message ||
+            "Unknown error"
+        );
+        return;
+      }
+
+      // Insert into bookings_services
+      const rows = selectedServiceIds.map((service_id) => ({
+        booking_id: bookingData.id,
+        service_id,
+      }));
+      const { error: bsError } = await supabase
+        .from("bookings_services")
+        .insert(rows);
+      if (bsError) {
+        toast.error("Failed to link services to booking");
         return;
       }
 
@@ -94,7 +148,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         budget: "",
         details: "",
       });
-
+      setSelectedServiceIds([]);
       // Call success callback if provided
       if (onSuccess) onSuccess();
     } catch (err) {
@@ -110,35 +164,27 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
       className="grid grid-cols-1 gap-6 md:grid-cols-2"
       onSubmit={createBooking}
     >
-      {/* Service Type */}
-      <div className="col-span-1">
-        <label
-          htmlFor="serviceType"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Select Service <span className="text-red-500">*</span>
+      <div className="col-span-1 md:col-span-2">
+        <label className="block text-sm font-medium text-gray-700">
+          Select Services <span className="text-red-500">*</span>
         </label>
-        <select
-          id="serviceType"
-          name="serviceType"
-          value={formData.serviceType}
-          onChange={handleChange}
-          className={`mt-1 block w-full rounded-lg border ${errors.serviceType ? "border-red-500" : "border-gray-300"} px-4 py-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none`}
-        >
-          <option value="">Choose a Service</option>
-          <option value="hostesses">Hostesses & Protocol Services</option>
-          <option value="cleaning">
-            People to clean event venue before & after event
-          </option>
-          <option value="rentals">Event Rentals (Chairs, Tents, etc.)</option>
-          <option value="planning">Event Planning & Execution</option>
-          <option value="private">
-            Private Functions (e.g., Cleaning, Errands)
-          </option>
-          <option value="other">Other Custom Services</option>
-        </select>
-        {errors.serviceType && (
-          <p className="mt-1 text-sm text-red-500">{errors.serviceType}</p>
+        <div className="mt-2 flex flex-wrap gap-4">
+          {services.map((service) => (
+            <label key={service.id} className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={selectedServiceIds.includes(service.id)}
+                onChange={(e) =>
+                  handleServiceChange(service.id, e.target.checked)
+                }
+                className="rounded border-gray-300"
+              />
+              {service.name}
+            </label>
+          ))}
+        </div>
+        {errors.services && (
+          <p className="mt-1 text-sm text-red-500">{errors.services}</p>
         )}
       </div>
 
@@ -191,6 +237,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         )}
       </div>
 
+      {/* Guests */}
       <div>
         <label
           htmlFor="guests"

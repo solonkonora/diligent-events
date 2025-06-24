@@ -61,6 +61,8 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
 import BookingForm from "./booking-form";
+import ProfileSection from "./profile";
+import HelpSupportSection from "./help-section";
 
 type Profile = {
   id: string;
@@ -375,7 +377,6 @@ export default function ClientDashboard() {
 
       {/* Main content */}
       <div className="flex flex-1 flex-col">
-        {/* Top navbar */}
         <header className="flex h-20 items-center justify-between bg-white px-6 shadow">
           <div>
             <h1 className="text-xl font-semibold text-gray-800">
@@ -586,211 +587,14 @@ export default function ClientDashboard() {
             </section>
           )}
 
-          {activeTab === "profile" && (
-            <section>
-              <h2 className="mb-6 text-xl font-semibold text-gray-700">
-                My Profile
-              </h2>
-              <div className="rounded-lg bg-white p-6 shadow-md">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-                      defaultValue={profile?.full_name || ""}
-                      onChange={(e) =>
-                        setProfile((p) =>
-                          p ? { ...p, full_name: e.target.value } : p
-                        )
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-                      defaultValue={profile?.phone || ""}
-                      onChange={(e) =>
-                        setProfile((p) =>
-                          p ? { ...p, phone: e.target.value } : p
-                        )
-                      }
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <button
-                      onClick={() =>
-                        profile &&
-                        updateProfile({
-                          full_name: profile.full_name,
-                          phone: profile.phone,
-                        })
-                      }
-                      className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                    >
-                      Update Profile
-                    </button>
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <h3 className="text-lg font-medium text-gray-700">
-                    Password
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">
-                    For security reasons, you can't view your current password.
-                  </p>
-                  <button
-                    onClick={() => toast.success("Password reset email sent!")}
-                    className="mt-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-50"
-                  >
-                    Reset Password
-                  </button>
-                </div>
-              </div>
-            </section>
+          {activeTab === "profile" && profile && (
+            <ProfileSection
+              profile={profile}
+              onProfileUpdate={(updatedProfile) => setProfile(updatedProfile)}
+            />
           )}
 
-          {activeTab === "help" && (
-            <section>
-              <h2 className="mb-6 text-xl font-semibold text-gray-700">
-                Help & Support
-              </h2>
-              <div className="rounded-lg bg-white p-6 shadow-md">
-                <div className="mb-8">
-                  <h3 className="mb-4 text-lg font-medium text-gray-700">
-                    Contact Us
-                  </h3>
-                  <div className="mb-4 flex items-center gap-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <span>support@diligent-events.com</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-blue-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                          />
-                        </svg>
-                        <span>+237-676 717 626</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="invisible h-6 w-6 text-blue-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                          />
-                        </svg>
-                        <span>+237-675 591 505</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="invisible h-6 w-6 text-blue-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                          />
-                        </svg>
-                        <span>+237-676 326 908</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="mb-4 text-lg font-medium text-gray-700">
-                    Send a Message
-                  </h3>
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-                      placeholder="How can we help?"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Message
-                    </label>
-                    <textarea
-                      rows={4}
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-                      placeholder="Type your message here..."
-                    ></textarea>
-                  </div>
-                  <button
-                    onClick={() =>
-                      toast.success("Message sent! We'll respond shortly.")
-                    }
-                    className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                  >
-                    Send Message
-                  </button>
-                </div>
-              </div>
-            </section>
-          )}
+          {activeTab === "help" && <HelpSupportSection />}
         </main>
       </div>
     </div>
