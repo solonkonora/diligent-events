@@ -162,7 +162,7 @@ export default function SignupPage() {
                 />
               </g>
             </svg>
-            Sign up with Google
+            Login with Google
           </button>
         </div>
       </form>

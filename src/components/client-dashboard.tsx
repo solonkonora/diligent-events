@@ -86,30 +86,63 @@ export default function ClientDashboard() {
   const [events, setEvents] = useState<Event[]>([]);
   const [eventsLoading, setEventsLoading] = useState(false);
 
-  // Placeholder events - will replace with real data from your database
-  const mockEvents = [
-    {
-      id: "1",
-      title: "Company Conference",
-      date: "2025-07-15",
-      status: "confirmed",
-    },
-    { id: "2", title: "Team Building", date: "2025-07-22", status: "pending" },
-    {
-      id: "3",
-      title: "Product Launch",
-      date: "2025-08-05",
-      status: "confirmed",
-    },
-  ];
-
+  // Update fetchEvents in client-dashboard.tsx
   const fetchEvents = async () => {
     setEventsLoading(true);
-    // will fetch from your database
-    setTimeout(() => {
-      setEvents(mockEvents);
+
+    try {
+      const { data, error } = await supabase
+        .from("bookings")
+        .select("id, service_type, event_type, event_date, status, created_at")
+        .eq("user_id", profile?.id)
+        .order("event_date", { ascending: true });
+
+      if (error) {
+        toast.error("Failed to load events");
+        console.error("Error fetching events:", error);
+        return;
+      }
+
+      // Transform the data to match your events state structure
+      const formattedEvents = data.map((booking: any) => ({
+        id: booking.id,
+        title: getEventTitle(booking.service_type, booking.event_type),
+        date: booking.event_date,
+        status: booking.status,
+        created: booking.created_at,
+      }));
+
+      setEvents(formattedEvents);
+    } catch (err) {
+      console.error("Exception:", err);
+      toast.error("Something went wrong loading your events");
+    } finally {
       setEventsLoading(false);
-    }, 500);
+    }
+  };
+
+  // Helper function to generate a title from service and event types
+  const getEventTitle = (serviceType: string, eventType: string) => {
+    const services: Record<string, string> = {
+      hostesses: "Hostesses & Protocol",
+      cleaning: "Cleaning Service",
+      rentals: "Equipment Rental",
+      planning: "Event Planning",
+      private: "Private Function",
+      other: "Custom Service",
+    };
+
+    const eventTypes: Record<string, string> = {
+      corporate: "Corporate Event",
+      wedding: "Wedding",
+      birthday: "Birthday Party",
+      conference: "Conference",
+      anniversary: "Anniversary",
+      graduation: "Graduation",
+      other: "Other Event",
+    };
+
+    return `${services[serviceType] || serviceType} - ${eventTypes[eventType] || eventType}`;
   };
 
   useEffect(() => {
