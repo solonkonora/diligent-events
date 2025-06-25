@@ -10,13 +10,13 @@ interface BookingFormProps {
   onSuccess?: () => void;
 }
 
-type Service = {
+type Services = {
   id: string;
   name: string;
 };
 
 export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
-  // Form state with validation
+  // form state with validation
   const [formData, setFormData] = useState({
     serviceType: "",
     eventType: "",
@@ -26,15 +26,15 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     details: "",
   });
 
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<Services[]>([]);
   const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Fetch available services
+  // fetch available services
   useEffect(() => {
     supabase
-      .from("service")
+      .from("services")
       .select("id, name")
       .then(({ data, error }) => {
         if (error) toast.error("Failed to load services");
@@ -56,7 +56,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     }
   };
 
-  // Handle service selection
+  // handle service selection
   const handleServiceChange = (serviceId: string, checked: boolean) => {
     setSelectedServiceIds((prev) =>
       checked ? [...prev, serviceId] : prev.filter((id) => id !== serviceId)
@@ -66,9 +66,6 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-
-    if (!formData.serviceType)
-      newErrors.serviceType = "Please select a service";
     if (!formData.eventType)
       newErrors.eventType = "Please select an event type";
     if (!formData.date) newErrors.date = "Please select a date";
@@ -96,7 +93,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     setIsSubmitting(true);
 
     try {
-      // Insert booking into Supabase
+      // insert booking into Supabase
       const { data: bookingData, error: bookingError } = await supabase
         .from("bookings")
         .insert([
@@ -124,7 +121,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         return;
       }
 
-      // Insert into bookings_services
+      // insert data into bookings_services table
       const rows = selectedServiceIds.map((service_id) => ({
         booking_id: bookingData.id,
         service_id,
@@ -169,17 +166,20 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           Select Services <span className="text-red-500">*</span>
         </label>
         <div className="mt-2 flex flex-wrap gap-4">
-          {services.map((service) => (
-            <label key={service.id} className="flex items-center gap-2">
+          {services.length === 0 && (
+            <span className="text-gray-500">No services available.</span>
+          )}
+          {services.map((services) => (
+            <label key={services.id} className="flex items-center gap-2">
               <input
                 type="checkbox"
-                checked={selectedServiceIds.includes(service.id)}
+                checked={selectedServiceIds.includes(services.id)}
                 onChange={(e) =>
-                  handleServiceChange(service.id, e.target.checked)
+                  handleServiceChange(services.id, e.target.checked)
                 }
                 className="rounded border-gray-300"
               />
-              {service.name}
+              {services.name}
             </label>
           ))}
         </div>
@@ -237,7 +237,6 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         )}
       </div>
 
-      {/* Guests */}
       <div>
         <label
           htmlFor="guests"

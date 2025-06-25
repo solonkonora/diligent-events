@@ -1,59 +1,3 @@
-// "use client";
-
-// import { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation";
-// import { supabase } from "@/lib/supabaseClient";
-// import toast from "react-hot-toast";
-
-// export default function ClientDashboard() {
-//   const router = useRouter();
-//   const [loading, setLoading] = useState(true);
-//   type Profile = {
-//     id: string;
-//     full_name: string;
-//     role: string;
-//   };
-//   const [profile, setProfile] = useState<Profile | null>(null);
-
-//   useEffect(() => {
-//     const checkSessionAndProfile = async () => {
-//       // Wait for Supabase to initialize session
-//       const {
-//         data: { user },
-//       } = await supabase.auth.getUser();
-//       if (!user) {
-//         // Wait a bit and try again (handles OAuth session propagation delay)
-//         setTimeout(checkSessionAndProfile, 500);
-//         return;
-//       }
-//       // Fetch profile
-//       const { data: profile } = await supabase
-//         .from("profiles")
-//         .select("*")
-//         .eq("id", user.id)
-//         .single();
-
-//       if (!profile || (profile.role !== "user" && profile.role !== "client")) {
-//         toast.error("Unauthorized");
-//         router.replace("/auth/login");
-//       } else {
-//         setProfile(profile);
-//         setLoading(false);
-//       }
-//     };
-//     checkSessionAndProfile();
-//   }, [router]);
-
-//   if (loading) return <div>Loading...</div>;
-
-//   return (
-//     <div>
-//       Welcome, {profile?.full_name} (Client)
-//       {/* ...rest of your dashboard... */}
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -63,6 +7,9 @@ import toast from "react-hot-toast";
 import BookingForm from "./booking-form";
 import ProfileSection from "./profile";
 import HelpSupportSection from "./help-section";
+import UpcomingEvents from "./upcoming-events";
+import EventsTable from "./event-table";
+import SidebarNav from "./client-sidebar";
 
 type Profile = {
   id: string;
@@ -73,6 +20,8 @@ type Profile = {
 };
 
 type Event = {
+  event_type: string;
+  services: string;
   id: string;
   title: string;
   date: string;
@@ -95,7 +44,16 @@ export default function ClientDashboard() {
     try {
       const { data, error } = await supabase
         .from("bookings")
-        .select("id, service_type, event_type, event_date, status, created_at")
+        .select(
+          `id, event_type, event_date, status, created_at, 
+          bookings_services ( 
+            service_id, services 
+          (
+            name
+          )
+        )
+      `
+        )
         .eq("user_id", profile?.id)
         .order("event_date", { ascending: true });
 
@@ -105,13 +63,17 @@ export default function ClientDashboard() {
         return;
       }
 
-      // Transform the data to match your events state structure
-      const formattedEvents = data.map((booking: any) => ({
+      // Format events to include services as a comma-separated string
+      const formattedEvents = (data || []).map((booking: any) => ({
         id: booking.id,
-        title: getEventTitle(booking.service_type, booking.event_type),
+        event_type: booking.event_type,
         date: booking.event_date,
         status: booking.status,
         created: booking.created_at,
+        services: (booking.bookings_services || [])
+          .map((bs: any) => bs.services?.name)
+          .filter(Boolean)
+          .join(", "),
       }));
 
       setEvents(formattedEvents);
@@ -154,7 +116,6 @@ export default function ClientDashboard() {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        // Wait a bit and try again (handles OAuth session propagation delay)
         setTimeout(checkSessionAndProfile, 500);
         return;
       }
@@ -198,11 +159,6 @@ export default function ClientDashboard() {
     }
   };
 
-  const createBooking = async () => {
-    toast.success("Booking request sent! We'll be in touch soon.");
-    // In a real app, you would insert into your bookings table
-  };
-
   if (loading)
     return (
       <div className="flex h-screen items-center justify-center">
@@ -212,168 +168,13 @@ export default function ClientDashboard() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div
-        className={`${sidebarOpen ? "w-64" : "w-20"} bg-blue-800 text-white transition-all duration-300 ease-in-out`}
-      >
-        <div className="flex h-20 items-center justify-between px-4">
-          <h1
-            className={`${sidebarOpen ? "block" : "hidden"} text-xl font-bold`}
-          >
-            Diligent Events
-          </h1>
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="rounded-full p-2 hover:bg-blue-700"
-          >
-            {sidebarOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 5l7 7-7 7M5 5l7 7-7 7"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-        <nav className="mt-8">
-          <ul>
-            <li>
-              <button
-                onClick={() => setActiveTab("dashboard")}
-                className={`flex w-full items-center px-6 py-3 ${activeTab === "dashboard" ? "bg-blue-900" : "hover:bg-blue-700"}`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm0 10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10-10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zm0 10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                  />
-                </svg>
-                {sidebarOpen && <span className="ml-3">Dashboard</span>}
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setActiveTab("bookings")}
-                className={`flex w-full items-center px-6 py-3 ${activeTab === "bookings" ? "bg-blue-900" : "hover:bg-blue-700"}`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                {sidebarOpen && <span className="ml-3">My Events</span>}
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setActiveTab("newBooking")}
-                className={`flex w-full items-center px-6 py-3 ${activeTab === "newBooking" ? "bg-blue-900" : "hover:bg-blue-700"}`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-                {sidebarOpen && <span className="ml-3">New Booking</span>}
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setActiveTab("profile")}
-                className={`flex w-full items-center px-6 py-3 ${activeTab === "profile" ? "bg-blue-900" : "hover:bg-blue-700"}`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-                {sidebarOpen && <span className="ml-3">My Profile</span>}
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setActiveTab("help")}
-                className={`flex w-full items-center px-6 py-3 ${activeTab === "help" ? "bg-blue-900" : "hover:bg-blue-700"}`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                {sidebarOpen && <span className="ml-3">Help & Support</span>}
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      {/* sidebar  */}
+      <SidebarNav
+        sidebarOpen={sidebarOpen}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        setSidebarOpen={setSidebarOpen}
+      />
 
       {/* Main content */}
       <div className="flex flex-1 flex-col">
@@ -394,11 +195,9 @@ export default function ClientDashboard() {
           </div>
         </header>
 
-        {/* Content area */}
         <main className="flex-1 overflow-y-auto p-6">
           {activeTab === "dashboard" && (
             <>
-              {/* Welcome Card */}
               <section className="mb-8">
                 <div className="rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 p-6 text-white shadow-lg">
                   <h2 className="text-2xl font-bold">
@@ -412,38 +211,7 @@ export default function ClientDashboard() {
               </section>
 
               {/* Upcoming Events */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-xl font-semibold text-gray-700">
-                  Your Upcoming Events
-                </h2>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {events.map((event) => (
-                    <div
-                      key={event.id}
-                      className="rounded-lg bg-white p-4 shadow"
-                    >
-                      <h3 className="font-semibold">{event.title}</h3>
-                      <p className="text-sm text-gray-600">
-                        {new Date(event.date).toLocaleDateString()}
-                      </p>
-                      <span
-                        className={`mt-2 inline-block rounded-full px-3 py-1 text-xs ${
-                          event.status === "confirmed"
-                            ? "bg-blue-100 text-blue-800"
-                            : "bg-yellow-100 text-yellow-800"
-                        }`}
-                      >
-                        {event.status === "confirmed" ? "Confirmed" : "Pending"}
-                      </span>
-                    </div>
-                  ))}
-                  {events.length === 0 && (
-                    <p className="col-span-full text-center text-gray-500">
-                      No upcoming events. Book your first event now!
-                    </p>
-                  )}
-                </div>
-              </section>
+              <UpcomingEvents events={events} />
 
               {/* Quick Actions */}
               <section>
@@ -480,89 +248,11 @@ export default function ClientDashboard() {
           )}
 
           {activeTab === "bookings" && (
-            <section>
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-gray-700">
-                  My Events
-                </h2>
-                <button
-                  className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                  onClick={fetchEvents}
-                >
-                  Refresh
-                </button>
-              </div>
-              <div className="overflow-x-auto rounded bg-white shadow">
-                {eventsLoading ? (
-                  <div className="p-4">Loading events...</div>
-                ) : (
-                  <table className="min-w-full table-auto">
-                    <thead>
-                      <tr className="bg-gray-100">
-                        <th className="px-4 py-2 text-left">Event</th>
-                        <th className="px-4 py-2 text-left">Date</th>
-                        <th className="px-4 py-2 text-left">Status</th>
-                        <th className="px-4 py-2 text-left">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {events.map((event) => (
-                        <tr
-                          key={event.id}
-                          className="border-b hover:bg-gray-50"
-                        >
-                          <td className="px-4 py-2">{event.title}</td>
-                          <td className="px-4 py-2">
-                            {new Date(event.date).toLocaleDateString()}
-                          </td>
-                          <td className="px-4 py-2">
-                            <span
-                              className={`rounded-full px-3 py-1 text-xs ${
-                                event.status === "confirmed"
-                                  ? "bg-blue-100 text-blue-800"
-                                  : "bg-yellow-100 text-yellow-800"
-                              }`}
-                            >
-                              {event.status === "confirmed"
-                                ? "Confirmed"
-                                : "Pending"}
-                            </span>
-                          </td>
-                          <td className="px-4 py-2">
-                            <button
-                              className="mr-2 rounded bg-blue-500 px-2 py-1 text-white hover:bg-blue-600"
-                              onClick={() =>
-                                toast.success("Event details coming soon!")
-                              }
-                            >
-                              View
-                            </button>
-                            <button
-                              className="rounded bg-red-500 px-2 py-1 text-white hover:bg-red-600"
-                              onClick={() =>
-                                toast.success("Cancel request sent!")
-                              }
-                            >
-                              Cancel
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                      {events.length === 0 && (
-                        <tr>
-                          <td
-                            colSpan={4}
-                            className="p-4 text-center text-gray-500"
-                          >
-                            No events found. Book your first event!
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                )}
-              </div>
-            </section>
+            <EventsTable
+              events={events}
+              loading={eventsLoading}
+              onRefresh={fetchEvents}
+            />
           )}
 
           {activeTab === "newBooking" && (
@@ -576,10 +266,7 @@ export default function ClientDashboard() {
                   <BookingForm
                     userId={profile.id}
                     onSuccess={() => {
-                      // Refresh events after successful booking
                       fetchEvents();
-                      // Optionally redirect to bookings tab
-                      // setActiveTab("bookings");
                     }}
                   />
                 )}
