@@ -5,53 +5,52 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
 
-export default function ResetPasswordPage() {
-  const [email, setEmail] = useState("");
+export default function UpdatePasswordPage() {
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [sent, setSent] = useState(false);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
 
-  const handleReset = async (e: React.FormEvent) => {
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    toast.loading("Sending reset email...", { id: "reset" });
+    toast.loading("Updating password...", { id: "update" });
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/update-password`,
-    });
+    const { error } = await supabase.auth.updateUser({ password });
 
     if (!error) {
-      setSent(true);
-      toast.success("Password reset email sent!", { id: "reset" });
+      setSuccess(true);
+      toast.success("Password updated! You can now log in.", { id: "update" });
+      setTimeout(() => router.push("/auth/login"), 2000);
     } else {
       setError(error.message);
-      toast.error(error.message, { id: "reset" });
+      toast.error(error.message, { id: "update" });
     }
   };
 
   return (
     <div className="flex h-screen items-center justify-center bg-gray-200 px-4">
       <form
-        onSubmit={handleReset}
+        onSubmit={handleUpdate}
         className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-md"
       >
         <h2 className="mb-4 text-center text-2xl font-bold text-blue-600">
-          Reset Password
+          Set New Password
         </h2>
         {error && (
           <p className="mb-4 text-center text-sm text-red-500">{error}</p>
         )}
-        {sent ? (
+        {success ? (
           <p className="mb-4 text-center text-green-600">
-            Check your email for a reset link.
+            Password updated! Redirecting to login...
           </p>
         ) : (
           <>
             <input
-              type="email"
-              placeholder="Your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="password"
+              placeholder="New password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className="mb-4 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
             />
@@ -59,19 +58,10 @@ export default function ResetPasswordPage() {
               type="submit"
               className="w-full rounded-xl bg-blue-600 py-3 text-white hover:bg-blue-700"
             >
-              Send Reset Link
+              Update Password
             </button>
           </>
         )}
-        <div className="mt-6 text-center text-sm text-gray-600">
-          <button
-            type="button"
-            onClick={() => router.push("/auth/login")}
-            className="text-blue-600 underline hover:text-blue-800"
-          >
-            Back to Login
-          </button>
-        </div>
       </form>
     </div>
   );

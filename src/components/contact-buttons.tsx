@@ -14,7 +14,7 @@ export default function ContactButtons() {
       </Link>
 
       <Link
-        href="/auth/login?redirect=/bookings"
+        href="/auth/login?redirect=/client"
         className="flex items-center justify-center rounded-full bg-green-500 p-3 text-white shadow-lg transition-transform hover:scale-110 hover:bg-green-600"
         aria-label="Book now"
       >
