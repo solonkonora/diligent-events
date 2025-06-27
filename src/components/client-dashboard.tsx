@@ -392,17 +392,27 @@ export default function ClientDashboard() {
       } else {
         setProfile(profile);
         setLoading(false);
-        fetchEvents();
+        // fetchEvents();
       }
     };
     checkSessionAndProfile();
   }, [router]);
+
+  useEffect(() => {
+    if (profile?.id) {
+      fetchEvents();
+    }
+  }, [profile]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push("/auth/login");
   };
 
+  // Todo: Update profile function
+  // This function updates the profile in the database and updates the local state
+  // It should handle partial updates and show success/error messages
+  // It should also validate the input data before sending the update request
   const updateProfile = async (updates: Partial<Profile>) => {
     if (!profile?.id) return;
     const { error } = await supabase
