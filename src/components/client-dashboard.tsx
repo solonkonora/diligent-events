@@ -396,7 +396,6 @@ export default function ClientDashboard() {
       }
     };
     checkSessionAndProfile();
-    // eslint-disable-next-line
   }, [router]);
 
   const handleLogout = async () => {
