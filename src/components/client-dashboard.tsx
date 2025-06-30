@@ -47,7 +47,7 @@ export default function ClientDashboard() {
           `
           id, event_type, event_date, status, created_at,
           bookings_services (
-            service_id, service ( name )
+            service_id, services ( name )
           )
         `
         )
@@ -69,7 +69,7 @@ export default function ClientDashboard() {
         status: booking.status,
         created: booking.created_at,
         services: (booking.bookings_services || [])
-          .map((bs: any) => bs.service?.name)
+          .map((bs: any) => bs.services?.name)
           .filter(Boolean)
           .join(", "),
       }));
