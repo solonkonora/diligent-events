@@ -238,7 +238,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
                       Edit
                     </button>
                     <button
-                      className="rounded bg-red-500 px-2 py-1 text-white hover:bg-red-600 disabled:opacity-50"
+                      className="rounded bg-gray-500 px-2 py-1 text-white hover:bg-red-600 disabled:opacity-50"
                       onClick={() => handleCancel(event)}
                       disabled={
                         cancelling === event.id || event.status === "cancelled"
@@ -320,7 +320,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
                       name="status"
                       value={editForm.status}
                       onChange={handleEditChange}
-                      className="mt-1 w-full rounded border px-3 py-2"
+                      className="mt-1 w-full rounded border px-3 py-3"
                       required
                     >
                       <option value="confirmed">Confirmed</option>
