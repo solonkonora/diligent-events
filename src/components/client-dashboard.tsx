@@ -116,6 +116,57 @@ export default function ClientDashboard() {
     }
   }, [profile]);
 
+  // Subscribe to Supabase Realtime for bookings changes
+  useEffect(() => {
+    if (!profile?.id) return;
+
+    // Subscribe to realtime changes in bookings for this user
+    const channel = supabase
+      .channel("realtime:bookings")
+      .on(
+        "postgres_changes",
+        {
+          event: "*", // listen to all events
+          schema: "public",
+          table: "bookings",
+          filter: `user_id=eq.${profile.id}`,
+        },
+        (payload) => {
+          fetchEvents(); // Refresh bookings on any change
+        }
+      )
+      .subscribe();
+
+    // Cleanup on unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [profile]);
+
+  // subscribing to supabase realtime for bookings_services changes
+  useEffect(() => {
+    if (!profile?.id) return;
+
+    const channel = supabase
+      .channel("realtime:bookings_services")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "bookings_services",
+        },
+        (payload) => {
+          fetchEvents(); // refresh bookings on any change in bookings_services
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [profile]);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push("/auth/login");
