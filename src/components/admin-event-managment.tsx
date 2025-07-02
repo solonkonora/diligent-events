@@ -21,6 +21,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
   const [editMode, setEditMode] = useState(false);
   const [cancellingId, setCancellingId] = useState<string | null>(null);
   const [updating, setUpdating] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   // State for services
   const [services, setServices] = useState<any[]>([]);
@@ -263,6 +264,35 @@ export function EventManagement({ profileId }: EventManagementProps) {
     }
   };
 
+  // delete cancelled bookings
+  const handleDeleteBooking = async (id: string) => {
+    if (
+      !confirm(
+        "Are you sure you want to permanently delete this booking? This action cannot be undone."
+      )
+    )
+      return;
+
+    try {
+      // First delete related bookings_services records
+      await supabase.from("bookings_services").delete().eq("booking_id", id);
+
+      // Then delete the booking itself
+      const { error } = await supabase.from("bookings").delete().eq("id", id);
+
+      if (error) {
+        toast.error("Failed to delete booking");
+        console.error(error);
+      } else {
+        toast.success("Booking permanently deleted");
+        fetchBookings(); // Refresh the list
+      }
+    } catch (err) {
+      console.error("Error deleting booking:", err);
+      toast.error("Something went wrong");
+    }
+  };
+
   // Filtered bookings based on search and status
   const filteredBookings = useMemo(() => {
     return bookings.filter((booking) => {
@@ -407,13 +437,25 @@ export function EventManagement({ profileId }: EventManagementProps) {
                     >
                       Edit
                     </button>
-                    {booking.status !== "cancelled" && (
+
+                    {booking.status !== "cancelled" ? (
                       <button
                         className="rounded bg-red-500 px-2 py-1 text-xs text-white hover:bg-red-600"
                         onClick={() => handleCancelBooking(booking.id)}
                         disabled={cancellingId === booking.id}
                       >
                         {cancellingId === booking.id ? "..." : "Cancel"}
+                      </button>
+                    ) : (
+                      <button
+                        className="rounded bg-red-700 px-2 py-1 text-xs text-white hover:bg-red-800"
+                        onClick={() => {
+                          setDeletingId(booking.id);
+                          handleDeleteBooking(booking.id);
+                        }}
+                        disabled={deletingId === booking.id}
+                      >
+                        {deletingId === booking.id ? "..." : "Delete"}
                       </button>
                     )}
                   </td>
@@ -636,6 +678,23 @@ export function EventManagement({ profileId }: EventManagementProps) {
                   >
                     Edit
                   </button>
+                  {selectedBooking.status === "cancelled" && (
+                    <button
+                      className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+                      onClick={() => {
+                        if (
+                          confirm(
+                            "Are you sure you want to permanently delete this booking?"
+                          )
+                        ) {
+                          handleDeleteBooking(selectedBooking.id);
+                          setModalOpen(false);
+                        }
+                      }}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
             )}
