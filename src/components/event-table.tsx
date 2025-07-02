@@ -225,20 +225,20 @@ const EventsTable: React.FC<EventsTableProps> = ({
                   </td>
                   <td className="px-4 py-2">
                     <button
-                      className="mr-2 rounded bg-blue-500 px-2 py-1 text-white hover:bg-blue-600"
+                      className="mr-2 rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
                       onClick={() => handleView(event)}
                     >
                       View
                     </button>
                     <button
-                      className="mr-2 rounded bg-green-500 px-2 py-1 text-white hover:bg-green-600"
+                      className="mr-2 rounded bg-green-500 px-2 py-1 text-xs text-white hover:bg-green-600"
                       onClick={() => openEditModal(event)}
                       disabled={event.status === "cancelled"}
                     >
                       Edit
                     </button>
                     <button
-                      className="rounded bg-gray-500 px-2 py-1 text-white hover:bg-red-600 disabled:opacity-50"
+                      className="rounded bg-gray-500 px-2 py-1 text-xs text-white hover:bg-red-600 disabled:opacity-50"
                       onClick={() => handleCancel(event)}
                       disabled={
                         cancelling === event.id || event.status === "cancelled"

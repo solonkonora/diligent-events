@@ -116,11 +116,11 @@ export default function ClientDashboard() {
     }
   }, [profile]);
 
-  // Subscribe to Supabase Realtime for bookings changes
+  // subscribe to Supabase Realtime for bookings changes
   useEffect(() => {
     if (!profile?.id) return;
 
-    // Subscribe to realtime changes in bookings for this user
+    // subscribe to realtime changes in bookings for this user
     const channel = supabase
       .channel("realtime:bookings")
       .on(
@@ -242,15 +242,12 @@ export default function ClientDashboard() {
                 </div>
               </section>
 
-              {/* Upcoming Events */}
-              <UpcomingEvents events={events} />
-
               {/* Quick Actions */}
               <section>
                 <h2 className="mb-4 text-xl font-semibold text-gray-700">
                   Quick Actions
                 </h2>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <button
                     onClick={() => setActiveTab("newBooking")}
                     className="rounded bg-blue-500 p-4 text-left text-white hover:bg-blue-600"
@@ -276,6 +273,9 @@ export default function ClientDashboard() {
                   </button>
                 </div>
               </section>
+
+              {/* Upcoming Events */}
+              <UpcomingEvents events={events} />
             </>
           )}
 

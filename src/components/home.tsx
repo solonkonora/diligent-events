@@ -89,8 +89,7 @@ export default function LandingPage() {
                 Our Premium Services
               </h2>
               <p className="mx-auto max-w-3xl text-lg text-gray-600">
-                We offer a comprehensive range of hostess and protocol services
-                tailored to meet the unique needs of your events.
+                Comprehensive event solutions tailored to your needs
               </p>
             </div>
 
@@ -98,12 +97,24 @@ export default function LandingPage() {
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className="rounded-lg bg-gray-50 p-8 shadow-md transition-shadow hover:shadow-lg"
+                  className="flex flex-col overflow-hidden rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg"
                 >
-                  <h3 className="mb-3 text-xl font-bold text-blue-800">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600">{service.description}</p>
+                  <div className="relative h-58 w-full">
+                    <Image
+                      src={
+                        service.image || `/services/service-${index + 1}.jpg`
+                      }
+                      alt={service.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-3 text-xl font-bold text-blue-800">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600">{service.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -186,36 +197,49 @@ export default function LandingPage() {
 }
 
 // Sample data
-const services = [
+type Service = {
+  title: string;
+  description: string;
+  image?: string;
+};
+
+const services: Service[] = [
   {
     title: "Event Hostesses",
     description:
       "Professional hostesses to welcome and guide your guests, creating a memorable first impression.",
+    image: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.43.jpeg",
   },
   {
     title: "Protocol Officers",
     description:
       "Expert protocol officers to ensure proper etiquette and procedures are followed at formal events.",
+    image: "../../../assets/images/planning13.png",
   },
   {
     title: "Service Traiteur",
     description:
       "We offer customized menus tailored to dietary needs, impeccable presentation, and attentive service. Our commitment to quality, safety, and customer satisfaction sets us apart as a trusted partner for memorable events",
+    image:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.40 (1).jpeg",
   },
   {
     title: "General logistics",
     description:
       " to the planning, coordination, and execution of all the resources, services, and processes required to ensure the event runs smoothly and successfully",
+    image: "../../../assets/images/planning14.png",
   },
   {
     title: "General Cleaning",
     description:
       "We provide thorough residential and commercial cleaning, tailored to meet individual client needs. ranging from offices to cites, for both temporal and permanent cleaning ",
+    image: "../../../assets/images/planning16.png",
   },
   {
     title: "Chair and Equipment Rentals",
     description:
       "We offer reliable rentals of chairs and other event essentials, customized to suit your specific needs. Ideal for both small gatherings and large events, available for short-term or long-term use.",
+    image: "../../../assets/images/planning18.png",
   },
 ];
 
