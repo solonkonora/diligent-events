@@ -24,11 +24,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   // State for services
-  const [services, setServices] = useState<any[]>([]);
   const [availableServices, setAvailableServices] = useState<any[]>([]);
-  const [newServiceName, setNewServiceName] = useState("");
-  const [addingService, setAddingService] = useState(false);
-  const [deletingService, setDeletingService] = useState<string | null>(null);
 
   // Edit form state
   const [editForm, setEditForm] = useState({
@@ -90,58 +86,10 @@ export function EventManagement({ profileId }: EventManagementProps) {
         .order("name");
 
       if (!error && data) {
-        setServices(data);
         setAvailableServices(data);
       }
     } catch (err) {
       console.error("Error fetching services:", err);
-    }
-  };
-
-  // Add a new service
-  const handleAddService = async () => {
-    if (!newServiceName.trim()) return;
-
-    setAddingService(true);
-    try {
-      const { error } = await supabase
-        .from("services")
-        .insert([{ name: newServiceName.trim() }]);
-
-      if (error) {
-        toast.error("Failed to add service");
-      } else {
-        toast.success("Service added");
-        setNewServiceName("");
-        fetchServices();
-      }
-    } catch (err) {
-      console.error("Error adding service:", err);
-      toast.error("Something went wrong");
-    } finally {
-      setAddingService(false);
-    }
-  };
-
-  // Delete a service
-  const handleDeleteService = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this service?")) return;
-
-    setDeletingService(id);
-    try {
-      const { error } = await supabase.from("services").delete().eq("id", id);
-
-      if (error) {
-        toast.error("Failed to delete service");
-      } else {
-        toast.success("Service deleted");
-        fetchServices();
-      }
-    } catch (err) {
-      console.error("Error deleting service:", err);
-      toast.error("Something went wrong");
-    } finally {
-      setDeletingService(null);
     }
   };
 
@@ -273,16 +221,32 @@ export function EventManagement({ profileId }: EventManagementProps) {
     )
       return;
 
+    setDeletingId(id); // Set the deleting state
+
     try {
+      console.log("Deleting booking services for booking ID:", id);
       // First delete related bookings_services records
-      await supabase.from("bookings_services").delete().eq("booking_id", id);
+      const { error: servicesError } = await supabase
+        .from("bookings_services")
+        .delete()
+        .eq("booking_id", id);
 
+      if (servicesError) {
+        console.error("Error deleting booking services:", servicesError);
+        toast.error("Failed to delete related services");
+        return;
+      }
+
+      console.log("Deleting booking with ID:", id);
       // Then delete the booking itself
-      const { error } = await supabase.from("bookings").delete().eq("id", id);
+      const { error: bookingError } = await supabase
+        .from("bookings")
+        .delete()
+        .eq("id", id);
 
-      if (error) {
+      if (bookingError) {
         toast.error("Failed to delete booking");
-        console.error(error);
+        console.error(bookingError);
       } else {
         toast.success("Booking permanently deleted");
         fetchBookings(); // Refresh the list
@@ -290,6 +254,8 @@ export function EventManagement({ profileId }: EventManagementProps) {
     } catch (err) {
       console.error("Error deleting booking:", err);
       toast.error("Something went wrong");
+    } finally {
+      setDeletingId(null); // clear the deleting state in all cases
     }
   };
 
@@ -440,7 +406,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
 
                     {booking.status !== "cancelled" ? (
                       <button
-                        className="rounded bg-red-500 px-2 py-1 text-xs text-white hover:bg-red-600"
+                        className="rounded bg-gray-500 px-2 py-1 text-xs text-white hover:bg-red-600"
                         onClick={() => handleCancelBooking(booking.id)}
                         disabled={cancellingId === booking.id}
                       >
@@ -450,12 +416,11 @@ export function EventManagement({ profileId }: EventManagementProps) {
                       <button
                         className="rounded bg-red-700 px-2 py-1 text-xs text-white hover:bg-red-800"
                         onClick={() => {
-                          setDeletingId(booking.id);
                           handleDeleteBooking(booking.id);
                         }}
                         disabled={deletingId === booking.id}
                       >
-                        {deletingId === booking.id ? "..." : "Delete"}
+                        {deletingId === booking.id ? "Deleting..." : "Delete"}
                       </button>
                     )}
                   </td>
@@ -464,49 +429,6 @@ export function EventManagement({ profileId }: EventManagementProps) {
             </tbody>
           </table>
         )}
-      </div>
-
-      {/* Service Management Section */}
-      <div className="mt-8">
-        <h3 className="mb-4 text-lg font-semibold text-gray-700">
-          Service Management
-        </h3>
-        <div className="rounded bg-white p-4 shadow">
-          <div className="mb-4 flex items-center gap-2">
-            <input
-              type="text"
-              placeholder="New service name"
-              className="flex-1 rounded border px-3 py-2"
-              value={newServiceName}
-              onChange={(e) => setNewServiceName(e.target.value)}
-            />
-            <button
-              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-              onClick={handleAddService}
-              disabled={!newServiceName.trim() || addingService}
-            >
-              {addingService ? "Adding..." : "Add Service"}
-            </button>
-          </div>
-
-          <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="flex items-center justify-between rounded border p-2"
-              >
-                <span>{service.name}</span>
-                <button
-                  className="text-red-500 hover:text-red-700"
-                  onClick={() => handleDeleteService(service.id)}
-                  disabled={deletingService === service.id}
-                >
-                  {deletingService === service.id ? "..." : "×"}
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* View/Edit Modal */}

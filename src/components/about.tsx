@@ -163,7 +163,7 @@ const team = [
     position: "Founder & CEO",
     bio: "With over 15 years of experience in the events industry, Alexandra founded the agency with a vision to redefine hostess and protocol services.",
     photo:
-      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.39 (1).jpeg",
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39 (2).jpeg",
   },
   {
     name: "Ngemi Botam",
@@ -182,7 +182,6 @@ const team = [
     name: "Nformi Gracious",
     position: "Client Relations",
     bio: "Gracious works closely with our clients to understand their needs and ensure that our services exceed their expectations.",
-    photo:
-      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.39 (1).jpeg",
+    photo: "../../../assets/images/gra.jpeg",
   },
 ];
