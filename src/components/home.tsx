@@ -18,9 +18,9 @@ export default function LandingPage() {
             {/* text content */}
             <div className="relative z-20 flex flex-1 items-center py-6 md:w-1/2 md:py-12">
               <div className="mx-auto w-full max-w-[90%] space-y-4 px-4 sm:px-6 md:space-y-8">
-                <h1 className="bg-gradient-to-r from-orange-400 via-orange-500 to-blue-300 bg-clip-text font-serif text-2xl leading-[1.1] font-black tracking-tight text-transparent drop-shadow-[0_3px_6px_rgba(0,0,0,0.7)] md:text-4xl lg:text-5xl xl:text-6xl">
-                  Proffessional Event Services
-                </h1>
+                <h2 className="font-inter mb-6 text-8xl font-bold text-orange-500 md:text-6xl">
+                  Professional Event Services
+                </h2>
 
                 <p className="max-w-2xl rounded-2xl border border-white/20 bg-gradient-to-r from-blue-800/70 to-orange-600/70 px-6 py-4 font-sans text-base leading-relaxed font-medium text-white/95 shadow-2xl backdrop-blur-lg md:px-8 md:py-6 md:text-lg lg:text-xl">
                   From planning to execution, we deliver exceptional events that
