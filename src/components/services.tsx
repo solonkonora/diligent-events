@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 import ContactButtons from "@/components/contact-buttons";
 import Footer from "./footer";
 import Header from "./header";
@@ -41,7 +42,7 @@ export default function ServicesPage() {
                   key={index}
                   className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
                 >
-                  {/* <div className="md:w-1/2">
+                  <div className="md:w-1/2">
                     <Image
                       src={service.image || "/placeholder.svg"}
                       alt={service.title}
@@ -49,7 +50,7 @@ export default function ServicesPage() {
                       height={400}
                       className="rounded-lg shadow-lg"
                     />
-                  </div> */}
+                  </div>
                   <div className="space-y-4 md:w-1/2">
                     <h3 className="text-2xl font-bold text-blue-800">
                       {service.title}

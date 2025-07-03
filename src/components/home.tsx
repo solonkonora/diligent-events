@@ -11,21 +11,20 @@ export default function LandingPage() {
       <main className="flex-1">
         <Header />
 
-        {/* Hero Section */}
+        {/* hero Section */}
         <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 pt-2 md:pt-10">
-          {/* Main Hero Content */}
+          {/* main Hero Content */}
           <div className="flex min-h-[85vh] w-full flex-col md:min-h-[90vh] md:flex-row">
-            {/* Text Content */}
+            {/* text content */}
             <div className="relative z-20 flex flex-1 items-center py-6 md:w-1/2 md:py-12">
               <div className="mx-auto w-full max-w-[90%] space-y-4 px-4 sm:px-6 md:space-y-8">
-                <h1 className="bg-gradient-to-r from-orange-400 via-orange-500 to-blue-300 bg-clip-text font-serif text-2xl leading-[1.1] font-black tracking-tight text-transparent drop-shadow-[0_3px_6px_rgba(0,0,0,0.7)] md:text-4xl lg:text-5xl xl:text-6xl">
-                  Hostess/Protocol Services & Event Planning
-                </h1>
+                <h2 className="font-inter mb-6 text-8xl font-bold text-orange-500 md:text-6xl">
+                  Professional Event Services
+                </h2>
 
                 <p className="max-w-2xl rounded-2xl border border-white/20 bg-gradient-to-r from-blue-800/70 to-orange-600/70 px-6 py-4 font-sans text-base leading-relaxed font-medium text-white/95 shadow-2xl backdrop-blur-lg md:px-8 md:py-6 md:text-lg lg:text-xl">
-                  Elevate your events with our professional hostesses and
-                  protocol officers. We ensure your guests receive the highest
-                  level of service and attention.
+                  From planning to execution, we deliver exceptional events that
+                  exceed expectations
                 </p>
 
                 <div className="flex flex-wrap gap-3 md:gap-4">
@@ -47,7 +46,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Image Section */}
+            {/* image section */}
             <div className="relative flex flex-1 items-center justify-center p-4 pb-6 md:w-1/2 md:p-6 md:pb-8">
               <div className="relative h-[300px] w-[260px] overflow-hidden rounded-3xl shadow-2xl md:h-[400px] md:w-[320px] lg:h-[480px] lg:w-[380px]">
                 <Image
@@ -81,6 +80,21 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* <section className="bg-gradient-to-r from-blue-600 to-orange-500 py-20 text-white">
+          <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+            <h2 className="font-inter mb-6 text-4xl font-bold md:text-6xl">
+              Professional Event Services
+            </h2>
+            <p className="font-roboto mx-auto mb-8 max-w-3xl text-xl md:text-2xl">
+              From planning to execution, we deliver exceptional events that
+              exceed expectations
+            </p>
+            <button className="rounded-lg bg-white px-8 py-3 text-lg font-semibold text-blue-600 transition-colors hover:bg-gray-100">
+              Get Started
+            </button>
+          </div>
+        </section> */}
+
         {/* Services Overview */}
         <section className="bg-white py-16 md:py-20">
           <div className="container mx-auto px-4">
@@ -89,8 +103,7 @@ export default function LandingPage() {
                 Our Premium Services
               </h2>
               <p className="mx-auto max-w-3xl text-lg text-gray-600">
-                We offer a comprehensive range of hostess and protocol services
-                tailored to meet the unique needs of your events.
+                Comprehensive event solutions tailored to your needs
               </p>
             </div>
 
@@ -98,12 +111,24 @@ export default function LandingPage() {
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className="rounded-lg bg-gray-50 p-8 shadow-md transition-shadow hover:shadow-lg"
+                  className="flex flex-col overflow-hidden rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg"
                 >
-                  <h3 className="mb-3 text-xl font-bold text-blue-800">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600">{service.description}</p>
+                  <div className="relative h-58 w-full">
+                    <Image
+                      src={
+                        service.image || `/services/service-${index + 1}.jpg`
+                      }
+                      alt={service.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-3 text-xl font-bold text-blue-800">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600">{service.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -186,36 +211,49 @@ export default function LandingPage() {
 }
 
 // Sample data
-const services = [
+type Service = {
+  title: string;
+  description: string;
+  image?: string;
+};
+
+const services: Service[] = [
   {
     title: "Event Hostesses",
     description:
       "Professional hostesses to welcome and guide your guests, creating a memorable first impression.",
+    image: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.43.jpeg",
   },
   {
     title: "Protocol Officers",
     description:
       "Expert protocol officers to ensure proper etiquette and procedures are followed at formal events.",
+    image: "../../../assets/images/planning13.png",
   },
   {
     title: "Service Traiteur",
     description:
       "We offer customized menus tailored to dietary needs, impeccable presentation, and attentive service. Our commitment to quality, safety, and customer satisfaction sets us apart as a trusted partner for memorable events",
+    image:
+      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.40 (1).jpeg",
   },
   {
     title: "General logistics",
     description:
       " to the planning, coordination, and execution of all the resources, services, and processes required to ensure the event runs smoothly and successfully",
+    image: "../../../assets/images/planning14.png",
   },
   {
     title: "General Cleaning",
     description:
       "We provide thorough residential and commercial cleaning, tailored to meet individual client needs. ranging from offices to cites, for both temporal and permanent cleaning ",
+    image: "../../../assets/images/planning16.png",
   },
   {
     title: "Chair and Equipment Rentals",
     description:
       "We offer reliable rentals of chairs and other event essentials, customized to suit your specific needs. Ideal for both small gatherings and large events, available for short-term or long-term use.",
+    image: "../../../assets/images/planning18.png",
   },
 ];
 

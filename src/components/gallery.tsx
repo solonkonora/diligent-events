@@ -133,13 +133,9 @@ export default function EventsPage() {
                 <div key={index} className="rounded-lg bg-white p-8 shadow-md">
                   <div className="mb-4 flex items-center">
                     <div className="mr-4">
-                      <Image
-                        src={testimonial.avatar || "/placeholder.svg"}
-                        alt={testimonial.name}
-                        width={60}
-                        height={60}
-                        className="rounded-full"
-                      />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-700">
+                        {testimonial.name.charAt(0)}
+                      </div>
                     </div>
                     <div>
                       <h4 className="font-bold text-blue-800">
@@ -192,7 +188,7 @@ const featuredEvents = [
     location: "Chariot Hotel, Muea",
     description:
       "We provided a team of 10 professional hostesses and 5 protocol officers for this prestigious Wedding, ensuring seamless guest management for over 500 attendees",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.35.39.jpeg",
     tags: ["wedding"],
   },
   {
@@ -201,7 +197,7 @@ const featuredEvents = [
     location: "Bokwai, Dr Tabah's Resident",
     description:
       "We provided compassionate support and protocol services during this solemn funeral celebration, ensuring that the family received the utmost respect and care during their time of mourning. Our team managed the logistics and coordinated with clergy and attendees to create a dignified atmosphere.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "../../../assets/images/planning13.png",
     tags: ["Funeral", "Celebration", "Protocol"],
   },
   {
@@ -210,7 +206,7 @@ const featuredEvents = [
     location: "Molyko Stadium",
     description:
       "This impactful revival event drew thousands from various communities, focusing on spiritual renewal and unity. Our team ensured smooth event operations, including seating arrangements, sound systems, and hospitality services, to foster a welcoming and uplifting environment for all attendees.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "../../../assets/images/church.png",
     tags: ["Revival", "Church", "Community"],
   },
   {
@@ -219,7 +215,7 @@ const featuredEvents = [
     location: "City Convention Center",
     description:
       "We served at a memorable graduation ceremony, celebrating the achievements of graduates with family and friends. Our protocol officers coordinated the event schedule, managed guest speakers, and ensured that every detail was perfect for this significant milestone in the graduates' lives.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "../../../assets/images/grad.jpg",
     tags: ["Graduation", "Ceremony", "Celebration"],
   },
 ];
@@ -228,6 +224,22 @@ const galleryImages = [
   {
     src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.39 (1).jpeg",
     alt: "Corporate conference with hostesses",
+  },
+  {
+    src: "/assets/images/five.jpeg",
+    alt: "Trade show hostesses",
+  },
+  {
+    src: "/assets/images/planning11.png",
+    alt: "Trade show hostesses",
+  },
+  {
+    src: "/assets/images/deco.jpg",
+    alt: "deco",
+  },
+  {
+    src: "/assets/images/deco2.png",
+    alt: "deco",
   },
   {
     src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.41 (2).jpeg",
@@ -260,10 +272,6 @@ const galleryImages = [
     alt: "Gala dinner",
   },
   {
-    src: "/assets/images/five.jpeg",
-    alt: "Trade show hostesses",
-  },
-  {
     src: "/assets/images/WhatsApp Image 2025-05-01 at 08.35.42.jpeg",
     alt: "Gala dinner",
   },
@@ -275,7 +283,6 @@ const testimonials = [
     position: "Wedding Planner",
     quote:
       "The professionalism and attention to detail from the team made our wedding day truly unforgettable. They managed every aspect with grace, ensuring everything went smoothly and allowing us to enjoy our special moment.",
-    avatar: "/placeholder.svg?height=60&width=60",
     event: "Emily & James' Wedding",
   },
   {
@@ -283,7 +290,6 @@ const testimonials = [
     position: "Family Member",
     quote:
       "During our time of loss, the support and sensitivity shown by the event team were invaluable. They handled the logistics with care, allowing our family to focus on honoring our loved one.",
-    avatar: "/placeholder.svg?height=60&width=60",
     event: "Celebration of Life for John Smith",
   },
   {
@@ -291,7 +297,6 @@ const testimonials = [
     position: "Church Leader",
     quote:
       "The team’s dedication to creating a welcoming and uplifting atmosphere for our church revival event was outstanding. Their organization and attention to detail helped foster a spirit of community and renewal.",
-    avatar: "/placeholder.svg?height=60&width=60",
     event: "Global Church Revival 2023",
   },
   {
@@ -299,7 +304,6 @@ const testimonials = [
     position: "Graduation Coordinator",
     quote:
       "The event team did a phenomenal job organizing our graduation ceremony. From coordinating speakers to managing the guests, their expertise made the event memorable for every graduate and their families.",
-    avatar: "/placeholder.svg?height=60&width=60",
     event: "City High School Graduation",
   },
 ];

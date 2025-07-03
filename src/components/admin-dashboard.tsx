@@ -59,6 +59,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
+import { EventManagement } from "./admin-event-managment";
 
 type Profile = {
   id: string;
@@ -336,7 +337,6 @@ export function AdminDashboard() {
 
       {/* Main content */}
       <div className="flex flex-1 flex-col">
-        {/* Top navbar */}
         <header className="flex h-20 items-center justify-between bg-white px-6 shadow">
           <div>
             <h1 className="text-xl font-semibold text-gray-800">
@@ -470,11 +470,7 @@ export function AdminDashboard() {
               <h2 className="mb-4 text-xl font-semibold text-gray-700">
                 Event Management
               </h2>
-              <div className="rounded bg-white p-6 shadow">
-                <p className="text-gray-500">
-                  Event management features coming soon.
-                </p>
-              </div>
+              {profile?.id && <EventManagement profileId={profile.id} />}
             </section>
           )}
 

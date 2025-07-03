@@ -50,7 +50,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Clear error when field is modified
+    // clear error when field is modified
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -146,7 +146,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         details: "",
       });
       setSelectedServiceIds([]);
-      // Call success callback if provided
+      // call success callback if provided
       if (onSuccess) onSuccess();
     } catch (err) {
       console.error("Exception:", err);
