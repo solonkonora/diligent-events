@@ -252,7 +252,7 @@ export default function ClientDashboard() {
                     onClick={() => setActiveTab("newBooking")}
                     className="rounded bg-blue-500 p-4 text-left text-white hover:bg-blue-600"
                   >
-                    <h3 className="text-lg font-semibold">Book an Event</h3>
+                    <h3 className="text-lg font-semibold">Book for Services</h3>
                     <p className="mt-1 text-sm">
                       Schedule your next event with us
                     </p>
