@@ -9,13 +9,12 @@ interface EventManagementProps {
 }
 
 export function EventManagement({ profileId }: EventManagementProps) {
-  // State for bookings
+  // state for bookings
   const [bookings, setBookings] = useState<any[]>([]);
   const [bookingsLoading, setBookingsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
 
-  // State for viewing/editing
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -23,7 +22,6 @@ export function EventManagement({ profileId }: EventManagementProps) {
   const [updating, setUpdating] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  // State for services
   const [availableServices, setAvailableServices] = useState<any[]>([]);
 
   // Edit form state
@@ -134,6 +132,9 @@ export function EventManagement({ profileId }: EventManagementProps) {
 
     setUpdating(true);
     try {
+      console.log("Updating booking:", selectedBooking.id);
+      console.log("New services to add:", editForm.services);
+
       // Update booking
       const { error: bookingError } = await supabase
         .from("bookings")
@@ -150,16 +151,26 @@ export function EventManagement({ profileId }: EventManagementProps) {
         return;
       }
 
-      // Update services
-      // First delete all existing services
-      await supabase
+      // Clear existing services first
+      console.log("Removing existing booking services");
+      const { error: deleteError } = await supabase
         .from("bookings_services")
         .delete()
         .eq("booking_id", selectedBooking.id);
 
-      // Then insert new ones
+      if (deleteError) {
+        console.error("Error deleting existing services:", deleteError);
+        toast.error("Failed to update services");
+        return;
+      }
+
+      // Only insert new services if there are any selected
       if (editForm.services.length > 0) {
-        const servicesToInsert = editForm.services.map((serviceId) => ({
+        // Make sure we have unique service IDs
+        const uniqueServiceIds = [...new Set(editForm.services)];
+        console.log("Adding new services:", uniqueServiceIds);
+
+        const servicesToInsert = uniqueServiceIds.map((serviceId) => ({
           booking_id: selectedBooking.id,
           service_id: serviceId,
         }));
@@ -169,9 +180,11 @@ export function EventManagement({ profileId }: EventManagementProps) {
           .insert(servicesToInsert);
 
         if (servicesError) {
+          console.error("Error adding new services:", servicesError);
           toast.error("Failed to update services");
-          console.error(servicesError);
         }
+      } else {
+        console.log("No services selected, skipping service update");
       }
 
       toast.success("Booking updated");

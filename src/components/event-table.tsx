@@ -179,7 +179,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-700">My Events</h2>
+        <h2 className="text-xl font-semibold text-gray-700">My Bookings</h2>
         <button
           className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           onClick={onRefresh}
@@ -252,7 +252,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
               {events.length === 0 && (
                 <tr>
                   <td colSpan={5} className="p-4 text-center text-gray-500">
-                    No events found. Book your first event!
+                    No services found. Book your first service!
                   </td>
                 </tr>
               )}
@@ -280,7 +280,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
             {editMode && editEvent ? (
               <>
                 <h3 className="mb-4 text-xl font-bold text-gray-800">
-                  Edit Event
+                  Edit Service
                 </h3>
                 <form onSubmit={handleEditSubmit} className="space-y-4">
                   {/* Event Type */}

@@ -1,58 +1,3 @@
-// "use client";
-
-// import { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation";
-// import { supabase } from "@/lib/supabaseClient";
-// import toast from "react-hot-toast";
-
-// export function AdminDashboard() {
-//   const router = useRouter();
-//   const [loading, setLoading] = useState(true);
-//   type Profile = {
-//     id: string;
-//     full_name: string;
-//     role: string;
-//   };
-
-//   const [profile, setProfile] = useState<Profile | null>(null);
-
-//   useEffect(() => {
-//     const checkRoleAndFetchProfile = async () => {
-//       const {
-//         data: { user },
-//       } = await supabase.auth.getUser();
-//       if (!user) {
-//         router.push("/auth/login");
-//         return;
-//       }
-//       // Fetch profile from profiles table
-//       const { data: profile } = await supabase
-//         .from("profiles")
-//         .select("*")
-//         .eq("id", user.id)
-//         .single();
-
-//       if (!profile || profile.role !== "admin") {
-//         toast.error("Unauthorized");
-//         router.push("/client"); // Redirect to client dashboard if not admin
-//       } else {
-//         setProfile(profile);
-//         setLoading(false);
-//       }
-//     };
-//     checkRoleAndFetchProfile();
-//   }, [router]);
-
-//   if (loading) return <div>Loading...</div>;
-
-//   return (
-//     <div className="flex h-screen flex-col items-center justify-center gap-4">
-//       <div>Welcome, {profile?.full_name} (Admin)</div>
-//       {/* ...rest of your admin dashboard... */}
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -196,7 +141,7 @@ export function AdminDashboard() {
           <h1
             className={`${sidebarOpen ? "block" : "hidden"} text-xl font-bold`}
           >
-            Diligent Events
+            Diligent Services
           </h1>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -300,7 +245,7 @@ export function AdminDashboard() {
                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                   />
                 </svg>
-                {sidebarOpen && <span className="ml-3">Events</span>}
+                {sidebarOpen && <span className="ml-3">Bookings</span>}
               </button>
             </li>
             <li>
@@ -358,7 +303,6 @@ export function AdminDashboard() {
         <main className="flex-1 overflow-y-auto p-6">
           {activeTab === "dashboard" && (
             <>
-              {/* Analytics */}
               <section className="mb-8">
                 <h2 className="mb-4 text-xl font-semibold text-gray-700">
                   Analytics
