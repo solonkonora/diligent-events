@@ -5,6 +5,11 @@ import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabaseClient";
 import error from "next/error";
 import { Phone } from "lucide-react";
+import { sendEmail } from "@/lib/emailService";
+import {
+  bookingConfirmationTemplate,
+  adminNotificationTemplate,
+} from "@/lib/emailTemplates";
 
 interface BookingFormProps {
   userId: string;
@@ -136,6 +141,60 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
       if (bsError) {
         toast.error("Failed to link services to booking");
         return;
+      }
+
+      // Get service names for selected services
+      const { data: servicesData } = await supabase
+        .from("services")
+        .select("name")
+        .in("id", selectedServiceIds);
+
+      const serviceNames = servicesData?.map((s) => s.name) || [];
+
+      // Get user profile info
+      const { data: profileData } = await supabase
+        .from("profiles")
+        .select("full_name, email")
+        .eq("id", userId)
+        .single();
+
+      const clientName = profileData?.full_name || "Valued Customer";
+      const clientEmail = profileData?.email;
+
+      // Send confirmation email to client if we have their email
+      if (clientEmail) {
+        sendEmail({
+          to: clientEmail,
+          subject: "Your Booking with Diligent Events",
+          html: bookingConfirmationTemplate(
+            clientName,
+            formData.eventType,
+            formData.date,
+            serviceNames
+          ),
+        }).then((success) => {
+          if (!success) {
+            console.warn("Failed to send client confirmation email");
+          }
+        });
+
+        // Send notification to admin
+        sendEmail({
+          to: "nkwadanora@gmail.com", // Your admin email
+          subject: "New Booking Request - Diligent Events",
+          html: adminNotificationTemplate(
+            clientName,
+            formData.eventType,
+            formData.date,
+            serviceNames,
+            formData.phone,
+            formData.details
+          ),
+        }).then((success) => {
+          if (!success) {
+            console.warn("Failed to send admin notification email");
+          }
+        });
       }
 
       toast.success("Booking request sent! We'll be in touch soon.");

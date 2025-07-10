@@ -1,4 +1,3 @@
-// src/lib/emailTemplates.ts
 export const bookingConfirmationTemplate = (
   clientName: string,
   eventType: string,

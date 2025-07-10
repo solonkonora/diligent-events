@@ -220,7 +220,7 @@ export default function ClientDashboard() {
             <span className="text-gray-600">Welcome, {profile?.full_name}</span>
             <button
               onClick={handleLogout}
-              className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+              className="rounded-md border border-gray-300 px-4 py-2 text-gray-700 hover:bg-red-600"
             >
               Logout
             </button>
