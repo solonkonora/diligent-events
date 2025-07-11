@@ -60,7 +60,7 @@ export default function Header() {
             href="/auth/login"
             className="rounded border px-4 py-2 text-sm font-medium transition-colors hover:text-orange-600"
           >
-            Signup
+            Login
           </Link>
 
           <ThemeSwitcher />

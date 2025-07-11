@@ -19,12 +19,13 @@ export default function LandingPage() {
             <div className="relative z-20 flex flex-1 items-center py-6 md:w-1/2 md:py-12">
               <div className="mx-auto w-full max-w-[90%] space-y-4 px-4 sm:px-6 md:space-y-8">
                 <h2 className="font-inter mb-6 text-8xl font-bold text-orange-500 md:text-6xl">
-                  Professional Event Services
+                  Professional Services For All Event Types
                 </h2>
 
                 <p className="max-w-2xl rounded-2xl border border-white/20 bg-gradient-to-r from-blue-800/70 to-orange-600/70 px-6 py-4 font-sans text-base leading-relaxed font-medium text-white/95 shadow-2xl backdrop-blur-lg md:px-8 md:py-6 md:text-lg lg:text-xl">
-                  From planning to execution, we deliver exceptional events that
-                  exceed expectations
+                  From planning to execution! We provide logistics, rentals, and
+                  planning support tailored to your event, so you can focus on
+                  enjoying it
                 </p>
 
                 <div className="flex flex-wrap gap-3 md:gap-4">

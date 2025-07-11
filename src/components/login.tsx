@@ -40,7 +40,7 @@ export default function LoginPage() {
         });
 
       if (!supabaseError) {
-        // Fetch user profile from profiles table
+        // fetch user profile from profiles table
         const {
           data: { user },
         } = await supabase.auth.getUser();
@@ -144,10 +144,17 @@ export default function LoginPage() {
         <button
           type="button"
           onClick={async () => {
+            const isDevelopment = process.env.NODE_ENV === "development";
+            const siteUrl = isDevelopment
+              ? process.env.NEXT_PUBLIC_DEVELOPMENT_URL
+              : process.env.NEXT_PUBLIC_PRODUCTION_URL;
+
+            const redirectUrl = `${siteUrl}/client`;
+
             const { error } = await supabase.auth.signInWithOAuth({
               provider: "google",
               options: {
-                redirectTo: window.location.origin + "/client",
+                redirectTo: redirectUrl,
               },
             });
             if (error) {

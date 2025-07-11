@@ -37,7 +37,23 @@ export default function ClientDashboard() {
   const [events, setEvents] = useState<Event[]>([]);
   const [eventsLoading, setEventsLoading] = useState(false);
 
-  // Fetch bookings with joined services
+  useEffect(() => {
+    // clean URL if it contains auth tokens
+    if (window.location.hash && window.location.hash.includes("access_token")) {
+      // remove the hash fragment without reloading the page
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    // also checking for query parameters
+    if (
+      window.location.search &&
+      window.location.search.includes("access_token")
+    ) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
+  // fetch bookings with joined services
   const fetchEvents = async () => {
     setEventsLoading(true);
     try {
@@ -53,8 +69,6 @@ export default function ClientDashboard() {
         )
         .eq("user_id", profile?.id)
         .order("event_date", { ascending: true });
-
-      console.log("Raw bookings data:", data);
 
       if (error) {
         toast.error("Failed to load events");

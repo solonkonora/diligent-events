@@ -373,6 +373,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
             <thead>
               <tr className="bg-gray-100">
                 <th className="px-4 py-2 text-left">Client</th>
+                <th className="px-4 py-2 text-left">Phone</th>
                 <th className="px-4 py-2 text-left">Event Type</th>
                 <th className="px-4 py-2 text-left">Date</th>
                 <th className="px-4 py-2 text-left">Services</th>
@@ -384,6 +385,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
               {filteredBookings.map((booking) => (
                 <tr key={booking.id} className="border-b hover:bg-gray-50">
                   <td className="px-4 py-2">{booking.client_name}</td>
+                  <td className="px-4 py-2">{booking.phone || "—"}</td>
                   <td className="px-4 py-2">{booking.event_type}</td>
                   <td className="px-4 py-2">
                     {new Date(booking.event_date).toLocaleDateString()}
@@ -559,6 +561,10 @@ export function EventManagement({ profileId }: EventManagementProps) {
                 <div>
                   <span className="font-semibold">Client:</span>{" "}
                   {selectedBooking.client_name}
+                </div>
+                <div>
+                  <span className="font-semibold">Phone:</span>{" "}
+                  {selectedBooking.phone || "—"}
                 </div>
                 <div>
                   <span className="font-semibold">Event Type:</span>{" "}
