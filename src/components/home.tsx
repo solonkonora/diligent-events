@@ -1,100 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import ContactButtons from "./contact-buttons";
+// import ContactButtons from "./contact-buttons";
 import Header from "./header";
 import Footer from "./footer";
+import HeroSection from "./hero-section";
 
 export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
         <Header />
+        <HeroSection />
 
-        {/* hero Section */}
-        <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 pt-2 md:pt-10">
-          {/* main Hero Content */}
-          <div className="flex min-h-[85vh] w-full flex-col md:min-h-[90vh] md:flex-row">
-            {/* text content */}
-            <div className="relative z-20 flex flex-1 items-center py-6 md:w-1/2 md:py-12">
-              <div className="mx-auto w-full max-w-[90%] space-y-4 px-4 sm:px-6 md:space-y-8">
-                <h2 className="font-inter mb-6 text-8xl font-bold text-orange-500 md:text-6xl">
-                  Professional Services For All Event Types
-                </h2>
-
-                <p className="max-w-2xl rounded-2xl border border-white/20 bg-gradient-to-r from-blue-800/70 to-orange-600/70 px-6 py-4 font-sans text-base leading-relaxed font-medium text-white/95 shadow-2xl backdrop-blur-lg md:px-8 md:py-6 md:text-lg lg:text-xl">
-                  From planning to execution! We provide logistics, rentals, and
-                  planning support tailored to your event, so you can focus on
-                  enjoying it
-                </p>
-
-                <div className="flex flex-wrap gap-3 md:gap-4">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="border-2 border-orange-400 bg-gradient-to-r from-orange-500 to-orange-600 text-sm text-white shadow-xl transition-all hover:scale-105 hover:from-orange-600 hover:to-orange-700 hover:shadow-orange-500/40 md:text-base"
-                  >
-                    <Link href="/services">Our Services</Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    className="border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-blue-700 text-sm text-white shadow-xl transition-all hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-blue-500/40 md:text-base"
-                  >
-                    <Link href="/contact">Contact Us</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* image section */}
-            <div className="relative flex flex-1 items-center justify-center p-4 pb-6 md:w-1/2 md:p-6 md:pb-8">
-              <div className="relative h-[300px] w-[260px] overflow-hidden rounded-3xl shadow-2xl md:h-[400px] md:w-[320px] lg:h-[480px] lg:w-[380px]">
-                <Image
-                  src="../../../assets/images/two.jpeg"
-                  alt="Professional hostesses"
-                  fill
-                  className="object-cover object-top"
-                  priority
-                />
-
-                {/* Color Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-blue-800/30 to-orange-500/25"></div>
-
-                <div className="absolute right-4 bottom-4 left-4 z-10 md:right-6 md:bottom-6 md:left-6">
-                  <div className="rounded-xl border border-white/20 bg-gradient-to-r from-orange-600/85 to-blue-700/85 p-3 shadow-xl backdrop-blur-md md:rounded-2xl md:p-6">
-                    <h3 className="mb-1 font-sans text-base font-bold tracking-wide text-white md:mb-3 md:text-xl">
-                      Professional Excellence
-                    </h3>
-                    <p className="font-sans text-xs leading-relaxed text-white/90 md:text-base">
-                      Experienced staff dedicated to making your events
-                      memorable and seamless
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
+        {/* <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
             <ContactButtons />
-          </div>
-        </section>
-
-        {/* <section className="bg-gradient-to-r from-blue-600 to-orange-500 py-20 text-white">
-          <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-            <h2 className="font-inter mb-6 text-4xl font-bold md:text-6xl">
-              Professional Event Services
-            </h2>
-            <p className="font-roboto mx-auto mb-8 max-w-3xl text-xl md:text-2xl">
-              From planning to execution, we deliver exceptional events that
-              exceed expectations
-            </p>
-            <button className="rounded-lg bg-white px-8 py-3 text-lg font-semibold text-blue-600 transition-colors hover:bg-gray-100">
-              Get Started
-            </button>
-          </div>
-        </section> */}
+          </div> */}
+        {/* </section> */}
 
         {/* Services Overview */}
         <section className="bg-white py-16 md:py-20">
