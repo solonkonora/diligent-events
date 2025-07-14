@@ -333,7 +333,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
         </div>
       </div>
 
-      {/* Filters */}
+      {/* filters */}
       <div className="mb-4 flex flex-wrap items-center gap-4">
         <div>
           <input
@@ -364,7 +364,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
         </button>
       </div>
 
-      {/* Bookings Table */}
+      {/* bookings table */}
       <div className="overflow-x-auto rounded bg-white shadow">
         {bookingsLoading ? (
           <div className="p-4">Loading bookings...</div>
@@ -446,7 +446,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
         )}
       </div>
 
-      {/* View/Edit Modal */}
+      {/* view & edit modal */}
       {modalOpen && selectedBooking && (
         <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black">
           <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">

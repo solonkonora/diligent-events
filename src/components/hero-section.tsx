@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
-      {/* Background Image with Overlay */}
+      {/* background Image with Overlay */}
       <div className="absolute inset-0">
         <Image
           src="../../../assets/images/two.jpeg"
@@ -17,15 +17,14 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-blue-800/80 to-orange-600/70"></div>
       </div>
 
-      {/* Decorative Elements */}
+      {/* decorative Elements */}
       <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-orange-500/20 blur-3xl"></div>
       <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl"></div>
 
-      {/* Hero Content */}
+      {/* hero Content */}
       <div className="relative z-10 flex min-h-[calc(100vh-4rem)] items-center pt-16 md:min-h-[calc(100vh-5rem)] md:pt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-            {/* Text Content */}
             <div className="text-center lg:text-left">
               <h1 className="m-4 text-3xl leading-tight font-bold md:text-4xl lg:text-5xl xl:text-6xl">
                 <span className="text-white">Create </span>
@@ -44,7 +43,7 @@ export default function HeroSection() {
                 hostesses, catering, logistics, and equipment rentals.
               </p>
 
-              {/* CTA Buttons */}
+              {/* CTA buttons */}
               <div className="mb-8 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
                 <Button
                   asChild
