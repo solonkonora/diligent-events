@@ -33,42 +33,70 @@ export default function LoginPage() {
     toast.loading("Logging in...", { id: "login" });
 
     try {
+      // Step 1: Authenticate with Supabase
       const { data, error: supabaseError } =
         await supabase.auth.signInWithPassword({
           email,
           password,
         });
 
-      if (!supabaseError) {
-        // fetch user profile from profiles table
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (user) {
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("role")
-            .eq("id", user.id)
-            .single();
-
-          setIsLoggedin(true);
-
-          if (profile?.role === "admin") {
-            router.push("/admin");
-          } else {
-            router.push("/client");
-          }
-
-          toast.success("Login successful!", { id: "login" });
-        } else {
-          setError("User not found after login.");
-          toast.error("User not found after login.", { id: "login" });
-        }
-      } else {
+      if (supabaseError) {
         setError(supabaseError.message);
         toast.error(supabaseError.message, { id: "login" });
+        return;
       }
-    } catch {
+
+      // Step 2: Get authenticated user
+      const {
+        data: { user },
+        error: getUserError,
+      } = await supabase.auth.getUser();
+
+      if (getUserError || !user) {
+        setError("Failed to get user information.");
+        toast.error("Failed to get user information.", { id: "login" });
+        return;
+      }
+
+      // Step 3: Fetch user profile and role
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (profileError) {
+        console.error("Profile fetch error:", profileError);
+        setError("Failed to fetch profile. Please try again.");
+        toast.error("Failed to fetch profile. Please try again.", {
+          id: "login",
+        });
+        return;
+      }
+
+      if (!profile) {
+        setError("No profile found for this user.");
+        toast.error("No profile found for this user.", { id: "login" });
+        return;
+      }
+
+      // Step 4: Set logged in state and redirect based on role
+      setIsLoggedin(true);
+
+      if (profile.role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/client");
+      }
+
+      toast.success("Login successful!", { id: "login" });
+    } catch (loginException) {
+      console.error("❌ LOGIN: === GENERAL LOGIN EXCEPTION ===");
+      console.error("❌ LOGIN: Exception:", loginException);
+      console.error(
+        "❌ LOGIN: This should be rare - indicates issue outside profile fetch"
+      );
+      setError(`Login failed: ${loginException?.message || "Unknown error"}`);
       toast.error("An error occurred. Please try again.", { id: "login" });
     }
   };
@@ -144,21 +172,21 @@ export default function LoginPage() {
         <button
           type="button"
           onClick={async () => {
-            const isDevelopment = process.env.NODE_ENV === "development";
-            const siteUrl = isDevelopment
-              ? process.env.NEXT_PUBLIC_DEVELOPMENT_URL
-              : process.env.NEXT_PUBLIC_PRODUCTION_URL;
+            const redirectUrl = `${window.location.origin}/auth/callback`;
 
-            const redirectUrl = `${siteUrl}/client`;
+            try {
+              const { error } = await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: {
+                  redirectTo: redirectUrl,
+                },
+              });
 
-            const { error } = await supabase.auth.signInWithOAuth({
-              provider: "google",
-              options: {
-                redirectTo: redirectUrl,
-              },
-            });
-            if (error) {
-              toast.error(error.message);
+              if (error) {
+                toast.error(error.message);
+              }
+            } catch (oauthException) {
+              toast.error("OAuth failed. Please try again.");
             }
           }}
           className="mt-4 mb-4 flex w-full items-center justify-center gap-2 rounded-xl bg-gray-300 py-3 text-black hover:bg-red-700"

@@ -11,6 +11,13 @@ type Profile = {
   full_name: string;
   role: string;
   created_at?: string;
+  bookingCount?: number;
+  lastBooking?: string | null;
+  bookings?: Array<{
+    id: string;
+    created_at: string;
+    status: string;
+  }>;
 };
 
 export function AdminDashboard() {
@@ -30,28 +37,74 @@ export function AdminDashboard() {
   });
   const [activeTab, setActiveTab] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [userFilter, setUserFilter] = useState<"all" | "active" | "recent">("active");
 
-  // Move fetchUsers and fetchAnalytics outside useEffect
+  // Fetch only business-relevant users (those with bookings or interactions)
   const fetchUsers = async () => {
     setUsersLoading(true);
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("id, full_name, role, created_at");
-    if (error) {
+
+    try {
+      let query = supabase
+        .from("profiles")
+        .select(
+          `
+          id, 
+          full_name, 
+          role, 
+          created_at,
+          bookings(id, created_at, status)
+        `
+        )
+        .neq("role", "admin"); // Exclude other admins
+
+      // Apply filters based on userFilter state
+      if (userFilter === "active") {
+        // Only users with bookings
+        query = query.not("bookings", "is", null);
+      } else if (userFilter === "recent") {
+        // Users with activity in last 30 days
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        query = query.gte("bookings.created_at", thirtyDaysAgo.toISOString());
+      }
+      // "all" filter doesn't add any constraints
+
+      const { data, error } = await query.order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Error fetching users:", error);
+        toast.error("Failed to fetch users");
+        setUsers([]);
+      } else {
+        // Transform data to include booking metrics
+        const processedUsers = data?.map((user) => ({
+          ...user,
+          bookingCount: user.bookings?.length || 0,
+          lastBooking: user.bookings?.[0]?.created_at || null,
+        })) || [];
+
+        setUsers(processedUsers);
+      }
+    } catch (err) {
+      console.error("Error in fetchUsers:", err);
       toast.error("Failed to fetch users");
-    } else {
-      setUsers(data || []);
+      setUsers([]);
     }
+
     setUsersLoading(false);
   };
 
   const fetchAnalytics = async () => {
-    // Basic analytics: total users, admins, clients
-    const { data, error } = await supabase.from("profiles").select("role");
+    // Analytics based on business-relevant users only
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("role")
+      .neq("role", "admin"); // Exclude admins from analytics
+
     if (!error && data) {
       const total = data.length;
-      const admins = data.filter((u: any) => u.role === "admin").length;
-      const clients = data.filter((u: any) => u.role === "client").length;
+      const admins = data.filter((u: Profile) => u.role === "admin").length;
+      const clients = data.filter((u: Profile) => u.role === "client").length;
       setAnalytics({ total, admins, clients });
     }
   };
@@ -68,7 +121,7 @@ export function AdminDashboard() {
       // Fetch profile from profiles table
       const { data: profile } = await supabase
         .from("profiles")
-        .select("*")
+        .select("id, full_name, role, created_at")
         .eq("id", user.id)
         .single();
 
@@ -85,6 +138,13 @@ export function AdminDashboard() {
 
     checkRoleAndFetchProfile();
   }, [router]);
+
+  // Re-fetch users when filter changes
+  useEffect(() => {
+    if (profile && profile.role === "admin") {
+      fetchUsers();
+    }
+  }, [userFilter]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Change user role
   const handleRoleChange = async (id: string, newRole: string) => {
@@ -291,7 +351,7 @@ export function AdminDashboard() {
             <span className="text-gray-600">Welcome, {profile?.full_name}</span>
             <button
               onClick={handleLogout}
-              className="rounded-md border border-gray-300 px-4 py-2 text-gray-700 transition-colors duration-200 hover:border-red-600 hover:bg-red-600 hover:text-white"
+              className="rounded-md border border-gray-300 px-4 py-2 text-gray-700 hover:bg-red-600"
             >
               Logout
             </button>
@@ -348,12 +408,23 @@ export function AdminDashboard() {
                 <h2 className="text-xl font-semibold text-gray-700">
                   User Management
                 </h2>
-                <button
-                  className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                  onClick={fetchUsers}
-                >
-                  Refresh
-                </button>
+                <div className="flex gap-2">
+                  <select
+                    value={userFilter}
+                    onChange={(e) => setUserFilter(e.target.value as "all" | "active" | "recent")}
+                    className="rounded border px-3 py-2"
+                  >
+                    <option value="active">Active Users (with bookings)</option>
+                    <option value="recent">Recent Activity (last 30 days)</option>
+                    <option value="all">All Users</option>
+                  </select>
+                  <button
+                    className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                    onClick={fetchUsers}
+                  >
+                    Refresh
+                  </button>
+                </div>
               </div>
               <div className="overflow-x-auto rounded bg-white shadow">
                 {usersLoading ? (
@@ -364,6 +435,8 @@ export function AdminDashboard() {
                       <tr className="bg-gray-100">
                         <th className="px-4 py-2 text-left">Name</th>
                         <th className="px-4 py-2 text-left">Role</th>
+                        <th className="px-4 py-2 text-left">Bookings</th>
+                        <th className="px-4 py-2 text-left">Last Activity</th>
                         <th className="px-4 py-2 text-left">Joined</th>
                         <th className="px-4 py-2 text-left">Actions</th>
                       </tr>
@@ -384,6 +457,16 @@ export function AdminDashboard() {
                               <option value="admin">admin</option>
                               <option value="client">client</option>
                             </select>
+                          </td>
+                          <td className="px-4 py-2">
+                            <span className="rounded bg-blue-100 px-2 py-1 text-sm text-blue-800">
+                              {u.bookingCount || 0} bookings
+                            </span>
+                          </td>
+                          <td className="px-4 py-2">
+                            {u.lastBooking
+                              ? new Date(u.lastBooking).toLocaleDateString()
+                              : "No activity"}
                           </td>
                           <td className="px-4 py-2">
                             {u.created_at

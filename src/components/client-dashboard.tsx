@@ -108,7 +108,7 @@ export default function ClientDashboard() {
       }
       const { data: profile } = await supabase
         .from("profiles")
-        .select("*")
+        .select("id, full_name, role, created_at")
         .eq("id", user.id)
         .single();
 

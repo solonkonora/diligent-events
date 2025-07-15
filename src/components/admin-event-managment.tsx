@@ -18,13 +18,13 @@ export function EventManagement({ profileId }: EventManagementProps) {
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [cancellingId, setCancellingId] = useState<string | null>(null);
+
   const [updating, setUpdating] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const [availableServices, setAvailableServices] = useState<any[]>([]);
 
-  // Edit form state
+  // edit form state
   const [editForm, setEditForm] = useState({
     event_type: "",
     event_date: "",
@@ -32,7 +32,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
     services: [] as string[],
   });
 
-  // Fetch bookings with user profiles and services
+  // fetch bookings with user profiles and services
   const fetchBookings = async () => {
     setBookingsLoading(true);
     try {
@@ -56,7 +56,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
         return;
       }
 
-      // Format bookings with client name and services
+      // format bookings with client name and services
       const formattedBookings = data?.map((booking) => ({
         ...booking,
         client_name: booking.profiles?.full_name || "Unknown",
@@ -75,7 +75,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
     }
   };
 
-  // Fetch services
+  // fetch services
   const fetchServices = async () => {
     try {
       const { data, error } = await supabase
@@ -91,7 +91,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
     }
   };
 
-  // View booking details
+  // view booking details
   const handleViewBooking = (booking: any) => {
     setSelectedBooking(booking);
     setEditMode(false);
@@ -100,7 +100,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
 
   // Open edit modal
   const handleEditBooking = (booking: any) => {
-    // Map booking services to IDs
+    // map booking services to IDs
     const serviceIds =
       booking.bookings_services
         ?.map((bs: any) => bs.service_id)
@@ -117,7 +117,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
     setModalOpen(true);
   };
 
-  // Handle form field changes
+  // handle form field changes
   const handleEditChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -125,7 +125,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
     setEditForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Save booking changes
+  // save booking changes
   const handleSaveEdit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedBooking) return;
@@ -135,7 +135,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
       console.log("Updating booking:", selectedBooking.id);
       console.log("New services to add:", editForm.services);
 
-      // Update booking
+      // update booking
       const { error: bookingError } = await supabase
         .from("bookings")
         .update({
@@ -151,7 +151,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
         return;
       }
 
-      // Clear existing services first
+      // clear existing services first
       console.log("Removing existing booking services");
       const { error: deleteError } = await supabase
         .from("bookings_services")
@@ -164,7 +164,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
         return;
       }
 
-      // Only insert new services if there are any selected
+      // only insert new services if there are any selected
       if (editForm.services.length > 0) {
         // Make sure we have unique service IDs
         const uniqueServiceIds = [...new Set(editForm.services)];
@@ -199,33 +199,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
     }
   };
 
-  // Cancel a booking
-  const handleCancelBooking = async (id: string) => {
-    if (!confirm("Are you sure you want to cancel this booking?")) return;
-
-    setCancellingId(id);
-    try {
-      const { error } = await supabase
-        .from("bookings")
-        .update({ status: "cancelled" })
-        .eq("id", id);
-
-      if (error) {
-        toast.error("Failed to cancel booking");
-        console.error(error);
-      } else {
-        toast.success("Booking cancelled");
-        fetchBookings();
-      }
-    } catch (err) {
-      console.error("Error cancelling booking:", err);
-      toast.error("Something went wrong");
-    } finally {
-      setCancellingId(null);
-    }
-  };
-
-  // delete cancelled bookings
+  // delete bookings
   const handleDeleteBooking = async (id: string) => {
     if (
       !confirm(
@@ -262,7 +236,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
         console.error(bookingError);
       } else {
         toast.success("Booking permanently deleted");
-        fetchBookings(); // Refresh the list
+        fetchBookings(); // refreshes the list
       }
     } catch (err) {
       console.error("Error deleting booking:", err);
@@ -418,26 +392,13 @@ export function EventManagement({ profileId }: EventManagementProps) {
                     >
                       Edit
                     </button>
-
-                    {booking.status !== "cancelled" ? (
-                      <button
-                        className="rounded bg-gray-500 px-2 py-1 text-xs text-white hover:bg-red-600"
-                        onClick={() => handleCancelBooking(booking.id)}
-                        disabled={cancellingId === booking.id}
-                      >
-                        {cancellingId === booking.id ? "..." : "Cancel"}
-                      </button>
-                    ) : (
-                      <button
-                        className="rounded bg-red-700 px-2 py-1 text-xs text-white hover:bg-red-800"
-                        onClick={() => {
-                          handleDeleteBooking(booking.id);
-                        }}
-                        disabled={deletingId === booking.id}
-                      >
-                        {deletingId === booking.id ? "Deleting..." : "Delete"}
-                      </button>
-                    )}
+                    <button
+                      className="rounded bg-gray-500 px-2 py-1 text-xs text-white hover:bg-red-800"
+                      onClick={() => handleDeleteBooking(booking.id)}
+                      disabled={deletingId === booking.id}
+                    >
+                      {deletingId === booking.id ? "Deleting..." : "Delete"}
+                    </button>
                   </td>
                 </tr>
               ))}
