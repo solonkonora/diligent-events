@@ -37,7 +37,9 @@ export function AdminDashboard() {
   });
   const [activeTab, setActiveTab] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [userFilter, setUserFilter] = useState<"all" | "active" | "recent">("active");
+  const [userFilter, setUserFilter] = useState<"all" | "active" | "recent">(
+    "active"
+  );
 
   // Fetch only business-relevant users (those with bookings or interactions)
   const fetchUsers = async () => {
@@ -69,7 +71,9 @@ export function AdminDashboard() {
       }
       // "all" filter doesn't add any constraints
 
-      const { data, error } = await query.order("created_at", { ascending: false });
+      const { data, error } = await query.order("created_at", {
+        ascending: false,
+      });
 
       if (error) {
         console.error("Error fetching users:", error);
@@ -77,11 +81,12 @@ export function AdminDashboard() {
         setUsers([]);
       } else {
         // Transform data to include booking metrics
-        const processedUsers = data?.map((user) => ({
-          ...user,
-          bookingCount: user.bookings?.length || 0,
-          lastBooking: user.bookings?.[0]?.created_at || null,
-        })) || [];
+        const processedUsers =
+          data?.map((user) => ({
+            ...user,
+            bookingCount: user.bookings?.length || 0,
+            lastBooking: user.bookings?.[0]?.created_at || null,
+          })) || [];
 
         setUsers(processedUsers);
       }
@@ -103,8 +108,8 @@ export function AdminDashboard() {
 
     if (!error && data) {
       const total = data.length;
-      const admins = data.filter((u: Profile) => u.role === "admin").length;
-      const clients = data.filter((u: Profile) => u.role === "client").length;
+      const admins = data.filter((u) => u.role === "admin").length;
+      const clients = data.filter((u) => u.role === "client").length;
       setAnalytics({ total, admins, clients });
     }
   };
@@ -144,7 +149,7 @@ export function AdminDashboard() {
     if (profile && profile.role === "admin") {
       fetchUsers();
     }
-  }, [userFilter]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [userFilter]);
 
   // Change user role
   const handleRoleChange = async (id: string, newRole: string) => {
@@ -411,11 +416,17 @@ export function AdminDashboard() {
                 <div className="flex gap-2">
                   <select
                     value={userFilter}
-                    onChange={(e) => setUserFilter(e.target.value as "all" | "active" | "recent")}
+                    onChange={(e) =>
+                      setUserFilter(
+                        e.target.value as "all" | "active" | "recent"
+                      )
+                    }
                     className="rounded border px-3 py-2"
                   >
                     <option value="active">Active Users (with bookings)</option>
-                    <option value="recent">Recent Activity (last 30 days)</option>
+                    <option value="recent">
+                      Recent Activity (last 30 days)
+                    </option>
                     <option value="all">All Users</option>
                   </select>
                   <button

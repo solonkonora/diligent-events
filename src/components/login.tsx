@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useContext, useState } from "react";
@@ -66,7 +68,6 @@ export default function LoginPage() {
         .single();
 
       if (profileError) {
-        console.error("Profile fetch error:", profileError);
         setError("Failed to fetch profile. Please try again.");
         toast.error("Failed to fetch profile. Please try again.", {
           id: "login",
@@ -90,12 +91,7 @@ export default function LoginPage() {
       }
 
       toast.success("Login successful!", { id: "login" });
-    } catch (loginException) {
-      console.error("❌ LOGIN: === GENERAL LOGIN EXCEPTION ===");
-      console.error("❌ LOGIN: Exception:", loginException);
-      console.error(
-        "❌ LOGIN: This should be rare - indicates issue outside profile fetch"
-      );
+    } catch (loginException: any) {
       setError(`Login failed: ${loginException?.message || "Unknown error"}`);
       toast.error("An error occurred. Please try again.", { id: "login" });
     }
@@ -172,7 +168,19 @@ export default function LoginPage() {
         <button
           type="button"
           onClick={async () => {
-            const redirectUrl = `${window.location.origin}/auth/callback`;
+            // Determine if we're in development
+            const isDevelopment =
+              process.env.NODE_ENV === "development" ||
+              window.location.hostname === "localhost" ||
+              window.location.hostname === "127.0.0.1" ||
+              window.location.port !== "";
+
+            // Use localhost for development, otherwise use current origin
+            const baseUrl = isDevelopment
+              ? "http://localhost:3000"
+              : window.location.origin;
+
+            const redirectUrl = `${baseUrl}/auth/callback`;
 
             try {
               const { error } = await supabase.auth.signInWithOAuth({
@@ -185,7 +193,7 @@ export default function LoginPage() {
               if (error) {
                 toast.error(error.message);
               }
-            } catch (oauthException) {
+            } catch {
               toast.error("OAuth failed. Please try again.");
             }
           }}
