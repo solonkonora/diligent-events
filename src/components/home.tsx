@@ -186,22 +186,20 @@ const testimonials = [
     position: "CEO, Joyful Events",
     quote:
       "The hostesses provided to serve on buffet tables for our past events were exceptional. Their professionalism and attention to detail made our event run smoothly.",
-    avatar:
-      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.39.03 (1).jpeg",
+    avatar: "../../../assets/images/prof.png",
   },
   {
     name: "Kencho Desmond",
     position: "Executive Director, Revobit Cameroon",
     quote:
       "Working with this agency has been a game-changer for our corporate events. Their protocol officers understand exactly what our high-profile guests expect.",
-    avatar:
-      "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39 (2).jpeg",
+    avatar: "../../../assets/images/pro.png",
   },
   {
     name: "Che Claris",
     position: "Wedding Planner",
     quote:
       "I have been recommending their services to all my clients. The hostesses are not only professional but also add that special touch to make events memorable.",
-    avatar: "../../../assets/images/WhatsApp Image 2025-05-01 at 08.43.39.jpeg",
+    avatar: "../../../assets/images/prof.png",
   },
 ];
