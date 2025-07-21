@@ -73,7 +73,7 @@ export default function SignupPage() {
         ) : (
           <>
             <p className="mb-4 cursor-pointer text-center text-gray-400">
-              create your account
+              Create your account
             </p>
             <input
               type="text"
