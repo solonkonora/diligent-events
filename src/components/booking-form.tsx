@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabaseClient";
 import error from "next/error";
-import { Phone } from "lucide-react";
 import { sendEmail } from "@/lib/emailService";
 import {
   bookingConfirmationTemplate,
@@ -113,7 +112,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
             guests: parseInt(formData.guests) || 0,
             budget_range: formData.budget,
             details: formData.details,
-            Phone: formData.phone,
+            phone: formData.phone,
             status: "pending",
             created_at: new Date().toISOString(),
           },
@@ -151,50 +150,65 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
 
       const serviceNames = servicesData?.map((s) => s.name) || [];
 
-      // Get user profile info
+      // Get user profile info and email from auth.users
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const userEmail = user?.email;
+
       const { data: profileData } = await supabase
         .from("profiles")
-        .select("full_name, email")
+        .select("full_name")
         .eq("id", userId)
         .single();
 
-      const clientName = profileData?.full_name || "Valued Customer";
-      const clientEmail = profileData?.email;
+      const clientName =
+        profileData?.full_name ||
+        user?.user_metadata?.full_name ||
+        "Valued Customer";
+      const clientEmail = userEmail;
 
       // Send confirmation email to client if we have their email
       if (clientEmail) {
-        sendEmail({
-          to: clientEmail,
-          subject: "Your Booking with Diligent Events",
-          html: bookingConfirmationTemplate(
-            clientName,
-            formData.eventType,
-            formData.date,
-            serviceNames
-          ),
-        }).then((success) => {
-          if (!success) {
-            console.warn("Failed to send client confirmation email");
-          }
-        });
+        try {
+          const clientEmailSent = await sendEmail({
+            to: clientEmail,
+            subject: "Your Booking with Diligent Events",
+            html: bookingConfirmationTemplate(
+              clientName,
+              formData.eventType,
+              formData.date,
+              serviceNames
+            ),
+          });
 
-        // Send notification to admin
-        sendEmail({
-          to: "nkwadanora@gmail.com", // Your admin email
-          subject: "New Booking Request - Diligent Events",
-          html: adminNotificationTemplate(
-            clientName,
-            formData.eventType,
-            formData.date,
-            serviceNames,
-            formData.phone,
-            formData.details
-          ),
-        }).then((success) => {
-          if (!success) {
+          if (!clientEmailSent) {
+            toast.error(
+              "Booking created but confirmation email failed to send"
+            );
+          }
+
+          // Send notification to admin
+          const adminEmailSent = await sendEmail({
+            to: "nkwadanora@gmail.com", // Your admin email
+            subject: "New Booking Request - Diligent Events",
+            html: adminNotificationTemplate(
+              clientName,
+              formData.eventType,
+              formData.date,
+              serviceNames,
+              formData.phone,
+              formData.details
+            ),
+          });
+
+          if (!adminEmailSent) {
             console.warn("Failed to send admin notification email");
           }
-        });
+        } catch (emailError) {
+          console.error("Email sending error:", emailError);
+          toast.error("Booking created but emails failed to send");
+        }
       }
 
       toast.success("Booking request sent! We'll be in touch soon.");

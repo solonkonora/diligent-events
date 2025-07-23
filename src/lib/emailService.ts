@@ -26,7 +26,7 @@ export async function sendEmail({
       return false;
     }
 
-    return data.success;
+    return data?.success === true;
   } catch (error) {
     console.error("Exception calling email function:", error);
     return false;

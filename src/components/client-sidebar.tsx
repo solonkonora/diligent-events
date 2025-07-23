@@ -14,9 +14,7 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
   setSidebarOpen,
 }) => (
   <div
-    className={`${
-      sidebarOpen ? "w-64" : "w-20"
-    } bg-blue-800 text-white transition-all duration-300 ease-in-out`}
+    className={`h-screen ${sidebarOpen ? "w-64" : "w-20"} bg-blue-800 text-white transition-all duration-300 ease-in-out`}
   >
     <div className="flex h-20 items-center justify-between px-4">
       <h1 className={`${sidebarOpen ? "block" : "hidden"} text-xl font-bold`}>

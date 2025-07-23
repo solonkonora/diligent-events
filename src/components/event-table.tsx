@@ -178,16 +178,19 @@ const EventsTable: React.FC<EventsTableProps> = ({
 
   return (
     <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-700">My Bookings</h2>
+      <div className="mb-4 flex flex-col items-center justify-between gap-2 sm:flex-row">
+        <h2 className="text-lg font-semibold text-gray-700 sm:text-xl">
+          My Bookings
+        </h2>
         <button
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          className="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 sm:w-auto"
           onClick={onRefresh}
         >
           Refresh
         </button>
       </div>
-      <div className="overflow-x-auto rounded bg-white shadow">
+      {/* Responsive: Table on md+, cards on mobile */}
+      <div className="hidden overflow-x-auto rounded bg-white shadow md:block">
         {loading ? (
           <div className="p-4">Loading events...</div>
         ) : (
@@ -260,13 +263,78 @@ const EventsTable: React.FC<EventsTableProps> = ({
           </table>
         )}
       </div>
-
+      {/* Mobile cards */}
+      <div className="space-y-4 md:hidden">
+        {loading ? (
+          <div className="rounded bg-white p-4 shadow">Loading events...</div>
+        ) : events.length === 0 ? (
+          <div className="rounded bg-white p-4 text-center text-gray-500 shadow">
+            No services found. Book your first service!
+          </div>
+        ) : (
+          events.map((event) => (
+            <div
+              key={event.id}
+              className="flex flex-col gap-2 rounded bg-white p-4 shadow"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-semibold text-gray-700">
+                  {event.event_type}
+                </span>
+                <span
+                  className={`rounded-full px-3 py-1 text-xs ${
+                    event.status === "confirmed"
+                      ? "bg-blue-100 text-blue-800"
+                      : event.status === "cancelled"
+                        ? "bg-red-100 text-red-800"
+                        : "bg-yellow-100 text-yellow-800"
+                  }`}
+                >
+                  {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
+                </span>
+              </div>
+              <div className="text-sm text-gray-600">
+                <span className="font-medium">Date:</span>{" "}
+                {new Date(event.date).toLocaleDateString()}
+              </div>
+              <div className="text-sm text-gray-600">
+                <span className="font-medium">Services:</span>{" "}
+                {event.services || "—"}
+              </div>
+              <div className="mt-2 flex gap-2">
+                <button
+                  className="flex-1 rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+                  onClick={() => handleView(event)}
+                >
+                  View
+                </button>
+                <button
+                  className="flex-1 rounded bg-green-500 px-2 py-1 text-xs text-white hover:bg-green-600"
+                  onClick={() => openEditModal(event)}
+                  disabled={event.status === "cancelled"}
+                >
+                  Edit
+                </button>
+                <button
+                  className="flex-1 rounded bg-gray-500 px-2 py-1 text-xs text-white hover:bg-red-600 disabled:opacity-50"
+                  onClick={() => handleCancel(event)}
+                  disabled={
+                    cancelling === event.id || event.status === "cancelled"
+                  }
+                >
+                  {cancelling === event.id ? "Cancelling..." : "Cancel"}
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
       {/* Modal for event details or edit */}
       {modalOpen && (selectedEvent || editEvent) && (
         <div className="bg-opacity-40 fixed inset-0 z-50 flex items-center justify-center bg-black">
-          <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+          <div className="relative w-full max-w-md rounded-lg bg-white p-4 shadow-lg sm:p-6">
             <button
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700"
+              className="absolute top-3 right-3 text-2xl text-gray-400 hover:text-gray-700"
               onClick={() => {
                 setModalOpen(false);
                 setEditMode(false);
@@ -279,7 +347,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
             </button>
             {editMode && editEvent ? (
               <>
-                <h3 className="mb-4 text-xl font-bold text-gray-800">
+                <h3 className="mb-4 text-lg font-bold text-gray-800 sm:text-xl">
                   Edit Service
                 </h3>
                 <form onSubmit={handleEditSubmit} className="space-y-4">
@@ -367,7 +435,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
               </>
             ) : selectedEvent ? (
               <>
-                <h3 className="mb-4 text-xl font-bold text-gray-800">
+                <h3 className="mb-4 text-lg font-bold text-gray-800 sm:text-xl">
                   Event Details
                 </h3>
                 <div className="space-y-2">
