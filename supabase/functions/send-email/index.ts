@@ -24,7 +24,7 @@ async function sendEmailViaSendGrid(
     ? FROM_EMAIL.match(/<(.+)>/)?.[1] || FROM_EMAIL
     : FROM_EMAIL;
 
-  const content = [];
+  const content: { type: string; value: string }[] = [];
 
   if (text && text.trim().length > 0) {
     content.push({

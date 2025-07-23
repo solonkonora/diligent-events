@@ -434,8 +434,8 @@ export function AdminDashboard() {
                 />
               </svg>
             </button>
-            <h1 className="text-sm font-semibold text-gray-800 lg:text-sm sm:text-xl">
-              Admin Dashboard
+            <h1 className="text-lg font-semibold text-gray-800 sm:text-xl">
+              Admin Portal
             </h1>
           </div>
           <div className="flex items-center gap-2 lg:gap-2">

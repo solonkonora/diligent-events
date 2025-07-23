@@ -223,9 +223,9 @@ export default function ClientDashboard() {
       />
       {/* Sidebar */}
       <div
-        className={`fixed z-50 h-full transition-transform duration-300 lg:static lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } w-64 lg:w-64`}
+        className={`fixed z-50 h-full transition-transform duration-300 lg:static ${
+          sidebarOpen ? "w-64 translate-x-0" : "w-20 -translate-x-full lg:w-20"
+        } lg:translate-x-0`}
       >
         <SidebarNav
           sidebarOpen={sidebarOpen}
@@ -236,12 +236,12 @@ export default function ClientDashboard() {
       </div>
 
       {/* Main content */}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col transition-all duration-300">
         <header className="flex h-16 items-center justify-between bg-white px-4 shadow sm:px-6">
           <div className="flex items-center gap-2">
-            {/* Sidebar toggle for mobile */}
+            {/* Sidebar toggle for mobile and desktop */}
             <button
-              className="rounded-md p-2 hover:bg-gray-200 focus:outline-none lg:hidden"
+              className="rounded-md p-2 hover:bg-gray-200 focus:outline-none"
               onClick={() => setSidebarOpen((open) => !open)}
               aria-label="Open sidebar"
             >

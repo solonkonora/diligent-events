@@ -18,6 +18,7 @@ export default [
       "babel.config.js",
       "postcss.config.js",
       "coverage/**",
+      "supabase/functions/send-email/index.ts",
     ],
   },
 
