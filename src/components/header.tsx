@@ -23,42 +23,49 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* desktop navigation */}
         <nav className="hidden items-center gap-6 md:flex">
           <Link
             href="/"
-            className="text-sm font-medium transition-colors hover:text-blue-600"
+            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="text-sm font-medium transition-colors hover:text-blue-600"
+            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
           >
             About Us
           </Link>
           <Link
             href="/services"
-            className="text-sm font-medium transition-colors hover:text-blue-600"
+            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
           >
             Services
           </Link>
           <Link
             href="/gallery"
-            className="text-sm font-medium transition-colors hover:text-blue-600"
+            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
           >
             Events
           </Link>
           <Link
             href="/contact"
-            className="text-sm font-medium transition-colors hover:text-blue-600"
+            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
           >
             Contact
           </Link>
 
           <Link
+            href="/auth/signup"
+            className="rounded border px-4 py-2 text-sm font-medium transition-colors hover:bg-orange-100 hover:text-orange-600"
+          >
+            SignUp
+          </Link>
+
+          <Link
             href="/auth/login"
-            className="rounded border px-4 py-2 text-sm font-medium transition-colors hover:text-orange-600"
+            className="rounded border px-4 py-2 text-sm font-medium transition-colors hover:bg-orange-100 hover:text-orange-600"
           >
             Login
           </Link>
@@ -74,7 +81,7 @@ export default function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <nav className="mt-8 flex flex-col gap-4">
+            <nav className="mt-8 ml-8 flex flex-col gap-4">
               <Link
                 href="/"
                 className="text-lg font-medium transition-colors hover:text-blue-600"
