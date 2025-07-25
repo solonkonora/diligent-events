@@ -58,7 +58,7 @@ export function AdminDashboard() {
           bookings(id, created_at, status)
         `
         )
-        .neq("role", "admin"); // Exclude other admins
+        // .neq("role", "admin"); // Exclude other admins
 
       // Apply filters based on userFilter state
       if (userFilter === "active") {
@@ -70,7 +70,6 @@ export function AdminDashboard() {
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         query = query.gte("bookings.created_at", thirtyDaysAgo.toISOString());
       }
-      // "all" filter doesn't add any constraints
 
       const { data, error } = await query.order("created_at", {
         ascending: false,
@@ -101,11 +100,9 @@ export function AdminDashboard() {
   };
 
   const fetchAnalytics = async () => {
-    // Analytics based on business-relevant users only
     const { data, error } = await supabase
       .from("profiles")
-      .select("role")
-      .neq("role", "admin"); // Exclude admins from analytics
+      .select("role"); // Do not exclude admins here
 
     if (!error && data) {
       const total = data.length;
@@ -155,7 +152,6 @@ export function AdminDashboard() {
   // handle window resize for sidebar behavior
   useEffect(() => {
     const handleResize = () => {
-      // On large screens, keep sidebar open by default
       if (window.innerWidth >= 1024) {
         setSidebarOpen(true);
       } else {
@@ -165,8 +161,6 @@ export function AdminDashboard() {
 
     // set initial state
     handleResize();
-
-    // add event listener
     window.addEventListener("resize", handleResize);
 
     // cleanup
@@ -222,7 +216,7 @@ export function AdminDashboard() {
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="bg-opacity-50 fixed inset-0 z-20 bg-black lg:hidden"
+          className="bg-opacity-50 fixed inset-0 z-20 bg-black/50 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
