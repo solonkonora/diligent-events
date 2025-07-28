@@ -432,7 +432,7 @@ export function AdminDashboard() {
               Admin Portal
             </h1>
           </div>
-          <div className="flex items-center gap-2 lg:gap-2">
+          <div className="flex items-center gap-2 lg:gap-6">
             <span className="hidden text-sm text-gray-600 sm:block lg:text-base">
               Welcome, {profile?.full_name}
             </span>
@@ -446,7 +446,7 @@ export function AdminDashboard() {
         </header>
 
         {/* Content area */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+        <main className="flex-1 overflow-y-auto">
           {activeTab === "dashboard" && (
             <>
               <section className="mb-6 lg:mb-8">
@@ -659,10 +659,10 @@ export function AdminDashboard() {
 
           {activeTab === "events" && (
             <section>
-              <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
+              <h2 className="my-4 ml-4 text-lg font-semibold text-gray-700 lg:text-xl">
                 Event Management
               </h2>
-              <div className="rounded bg-white p-4 shadow lg:p-6">
+              <div className="rounded bg-white p-0 shadow m-0">
                 {profile?.id && <EventManagement profileId={profile.id} />}
               </div>
             </section>

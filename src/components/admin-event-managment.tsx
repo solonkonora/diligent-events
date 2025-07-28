@@ -318,7 +318,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
   }, [profileId]);
 
   return (
-    <section className="space-y-4 p-4 lg:space-y-6 lg:p-6">
+    <section className="space-y-4 p-4 lg:space-y-6 lg:p-1">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="rounded-lg bg-white p-4 shadow-md lg:p-6">
           <h3 className="mb-2 text-sm font-medium text-gray-700 sm:text-base lg:text-lg">
