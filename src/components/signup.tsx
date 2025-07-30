@@ -54,25 +54,25 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-200 px-4">
+    <div className="bg-background text-foreground flex h-screen items-center justify-center px-4 transition-colors duration-300">
       <form
         onSubmit={handleSignup}
-        className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-md"
+        className="bg-card border-border w-full max-w-sm rounded-2xl border p-8 shadow-md transition-colors duration-300 dark:shadow-lg"
       >
-        <h2 className="mb-4 text-center text-3xl font-bold text-blue-600">
+        <h2 className="text-primary mb-4 text-center text-3xl font-bold">
           Create Account
         </h2>
         {error && (
-          <p className="mb-4 text-center text-sm text-red-500">{error}</p>
+          <p className="text-destructive mb-4 text-center text-sm">{error}</p>
         )}
         {emailSent ? (
-          <p className="mb-4 text-center text-green-600">
+          <p className="text-success mb-4 text-center">
             Signup successful! Please check your email to confirm your account
             before logging in.
           </p>
         ) : (
           <>
-            <p className="mb-4 cursor-pointer text-center text-gray-400">
+            <p className="text-muted-foreground mb-4 cursor-pointer text-center">
               Create your account
             </p>
             <input
@@ -82,7 +82,7 @@ export default function SignupPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="mb-4 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
+              className="border-input bg-input text-foreground placeholder:text-muted-foreground focus:ring-primary mb-4 w-full rounded-xl border p-3 transition-colors duration-300 focus:ring-2 focus:outline-none"
             />
 
             <input
@@ -92,7 +92,7 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mb-4 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
+              className="border-input bg-input text-foreground placeholder:text-muted-foreground focus:ring-primary mb-4 w-full rounded-xl border p-3 transition-colors duration-300 focus:ring-2 focus:outline-none"
             />
 
             <input
@@ -102,30 +102,30 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mb-6 w-full rounded-xl border border-gray-300 p-3 text-gray-400"
+              className="border-input bg-input text-foreground placeholder:text-muted-foreground focus:ring-primary mb-6 w-full rounded-xl border p-3 transition-colors duration-300 focus:ring-2 focus:outline-none"
             />
 
             <button
               type="submit"
-              className="w-full rounded-xl bg-green-600 py-3 text-white hover:bg-green-700"
+              className="text-primary-foreground w-full rounded-xl bg-green-600 py-3 font-semibold transition-colors duration-200 hover:bg-green-700"
             >
               Sign Up
             </button>
           </>
         )}
-        <div className="mt-6 text-center text-sm text-gray-600">
+        <div className="text-muted-foreground mt-6 text-center text-sm">
           Already have an account?{" "}
           <button
             type="button"
             onClick={goToLogin}
-            className="text-blue-600 underline hover:text-blue-800"
+            className="hover:text-primary/80 underline transition-colors"
           >
             Log in
           </button>
           <div className="my-4 flex items-center">
-            <hr className="flex-grow border-gray-300" />
-            <span className="mx-2 text-sm text-gray-400">OR</span>
-            <hr className="flex-grow border-gray-300" />
+            <hr className="border-border flex-grow" />
+            <span className="text-muted-foreground mx-2 text-sm">OR</span>
+            <hr className="border-border flex-grow" />
           </div>
           <button
             type="button"
@@ -140,7 +140,7 @@ export default function SignupPage() {
                 toast.error(error.message);
               }
             }}
-            className="mt-4 mb-4 flex w-full items-center justify-center gap-2 rounded-xl bg-gray-300 py-3 text-black hover:bg-red-700"
+            className="bg-muted text-foreground mt-4 mb-4 flex w-full items-center justify-center gap-2 rounded-xl py-3 transition-colors duration-200 hover:bg-red-700 dark:hover:bg-red-600"
           >
             <svg width="20" height="20" viewBox="0 0 48 48">
               <g>
