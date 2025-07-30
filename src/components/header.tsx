@@ -11,7 +11,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white px-6 text-black backdrop-blur">
+    <header className="border-border bg-background text-foreground sticky top-0 z-50 w-full border-b px-6 backdrop-blur">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center">
@@ -27,45 +27,45 @@ export default function Header() {
         <nav className="hidden items-center gap-6 md:flex">
           <Link
             href="/"
-            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
+            className="hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/40 rounded bg-transparent px-2 py-1 text-sm font-medium transition-colors"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
+            className="hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/40 rounded bg-transparent px-2 py-1 text-sm font-medium transition-colors"
           >
             About Us
           </Link>
           <Link
             href="/services"
-            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
+            className="hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/40 rounded bg-transparent px-2 py-1 text-sm font-medium transition-colors"
           >
             Services
           </Link>
           <Link
             href="/gallery"
-            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
+            className="hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/40 rounded bg-transparent px-2 py-1 text-sm font-medium transition-colors"
           >
             Events
           </Link>
           <Link
             href="/contact"
-            className="rounded px-2 py-1 text-sm font-medium transition-colors hover:bg-blue-100 hover:text-blue-600"
+            className="hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/40 rounded bg-transparent px-2 py-1 text-sm font-medium transition-colors"
           >
             Contact
           </Link>
 
           <Link
             href="/auth/signup"
-            className="rounded border px-4 py-2 text-sm font-medium transition-colors hover:bg-orange-100 hover:text-orange-600"
+            className="border-primary bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground dark:bg-primary dark:text-primary-foreground rounded border px-4 py-2 text-sm font-medium transition-colors"
           >
             SignUp
           </Link>
 
           <Link
             href="/auth/login"
-            className="rounded border px-4 py-2 text-sm font-medium transition-colors hover:bg-orange-100 hover:text-orange-600"
+            className="border-secondary bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground rounded border px-4 py-2 text-sm font-medium transition-colors"
           >
             Login
           </Link>
@@ -76,7 +76,7 @@ export default function Header() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="outline" size="icon">
-              <Menu className="h-5 w-5 text-black" />
+              <Menu className="text-foreground h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
@@ -84,35 +84,35 @@ export default function Header() {
             <nav className="mt-8 ml-8 flex flex-col gap-4">
               <Link
                 href="/"
-                className="text-lg font-medium transition-colors hover:text-blue-600"
+                className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Home
               </Link>
               <Link
                 href="/about"
-                className="text-lg font-medium transition-colors hover:text-blue-600"
+                className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 About Us
               </Link>
               <Link
                 href="/services"
-                className="text-lg font-medium transition-colors hover:text-blue-600"
+                className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Services
               </Link>
               <Link
                 href="/gallery"
-                className="text-lg font-medium transition-colors hover:text-blue-600"
+                className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Events
               </Link>
               <Link
                 href="/contact"
-                className="text-lg font-medium transition-colors hover:text-blue-600"
+                className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Contact
