@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-// import ContactButtons from "./contact-buttons";
 import Header from "./header";
 import Footer from "./footer";
 import HeroSection from "./hero-section";
+import ContactButtons from "./contact-buttons";
 
 export default function LandingPage() {
   return (
@@ -13,19 +13,19 @@ export default function LandingPage() {
         <Header />
         <HeroSection />
 
-        {/* <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
-            <ContactButtons />
-          </div> */}
+        <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
+          <ContactButtons />
+        </div>
         {/* </section> */}
 
         {/* Services Overview */}
-        <section className="bg-white py-16 md:py-20">
+        <section className="dark:bg-background bg-white py-16 md:py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Our Premium Services
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 Comprehensive event solutions tailored to your needs
               </p>
             </div>
@@ -34,7 +34,7 @@ export default function LandingPage() {
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className="flex flex-col overflow-hidden rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg"
+                  className="dark:bg-card dark:border-border flex flex-col overflow-hidden rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg dark:border dark:shadow-none"
                 >
                   <div className="relative h-58 w-full">
                     <Image
@@ -47,10 +47,12 @@ export default function LandingPage() {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="mb-3 text-xl font-bold text-blue-800">
+                    <h3 className="dark:text-primary mb-3 text-xl font-bold text-blue-800">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600">{service.description}</p>
+                    <p className="dark:text-muted-foreground text-gray-600">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -59,7 +61,7 @@ export default function LandingPage() {
             <div className="mt-12 text-center">
               <Button
                 asChild
-                className="bg-orange-500 text-white hover:bg-orange-600"
+                className="dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/80 bg-orange-500 text-white hover:bg-orange-600"
               >
                 <Link href="/services">View All Services</Link>
               </Button>
