@@ -16,7 +16,6 @@ export default function LandingPage() {
         <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
           <ContactButtons />
         </div>
-        {/* </section> */}
 
         {/* Services Overview */}
         <section className="dark:bg-background bg-white py-16 md:py-20">
@@ -70,13 +69,13 @@ export default function LandingPage() {
         </section>
 
         {/* Testimonials */}
-        <section className="bg-gray-50 py-20">
+        <section className="dark:bg-card bg-gray-50 py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 What Our Clients Say
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 We take pride in delivering exceptional service that exceeds
                 expectations.
               </p>
@@ -84,7 +83,10 @@ export default function LandingPage() {
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="rounded-lg bg-white p-8 shadow-md">
+                <div
+                  key={index}
+                  className="dark:bg-background dark:border-border rounded-lg bg-white p-8 shadow-md dark:border"
+                >
                   <div className="mb-4 flex items-center">
                     <div className="mr-4">
                       <Image
@@ -96,34 +98,36 @@ export default function LandingPage() {
                       />
                     </div>
                     <div>
-                      <h4 className="font-bold text-blue-800">
+                      <h4 className="dark:text-primary font-bold text-blue-800">
                         {testimonial.name}
                       </h4>
-                      <p className="text-sm text-gray-500">
+                      <p className="dark:text-muted-foreground text-sm text-gray-500">
                         {testimonial.position}
                       </p>
                     </div>
                   </div>
-                  <p className="text-gray-600 italic">{testimonial.quote}</p>
+                  <p className="dark:text-muted-foreground text-gray-600 italic">
+                    {testimonial.quote}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
+        <section className="dark:bg-primary dark:text-primary-foreground bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="mb-6 text-3xl font-bold md:text-4xl">
+            <h2 className="dark:text-primary-foreground mb-6 text-3xl font-bold md:text-4xl">
               Ready to Elevate Your Next Event?
             </h2>
-            <p className="mx-auto mb-8 max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-muted-foreground mx-auto mb-8 max-w-3xl text-xl text-blue-100">
               Contact us today to discuss how our professional hostesses and
               protocol officers can make your event truly exceptional.
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-orange-500 text-white hover:bg-orange-600"
+              className="dark:bg-background dark:text-primary dark:hover:bg-background/80 bg-orange-500 text-white hover:bg-orange-600"
             >
               <Link href="/auth/login?redirect=/client">Get in Touch</Link>
             </Button>
