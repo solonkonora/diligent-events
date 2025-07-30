@@ -10,10 +10,12 @@ export default function EventsPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="dark:bg-primary dark:text-primary-foreground relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Our Events</h1>
-            <p className="mx-auto max-w-3xl text-xl text-blue-100">
+            <h1 className="dark:text-primary-foreground mb-6 text-4xl font-bold md:text-5xl">
+              Our Events
+            </h1>
+            <p className="dark:text-muted-foreground mx-auto max-w-3xl text-xl text-blue-100">
               Explore our portfolio of prestigious events where we've provided
               exceptional hostess and protocol services.
             </p>
@@ -23,13 +25,13 @@ export default function EventsPage() {
         </section>
 
         {/* Featured Events */}
-        <section className="bg-white py-20">
+        <section className="dark:bg-background bg-white py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Featured Events
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 Highlights from a few of our prestigious and successful events.
               </p>
             </div>
@@ -38,7 +40,9 @@ export default function EventsPage() {
               {featuredEvents.map((event, index) => (
                 <div
                   key={index}
-                  className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
+                  className={`dark:bg-card dark:border-border flex flex-col rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg dark:border dark:shadow-none ${
+                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                  } items-center gap-12`}
                 >
                   <div className="md:w-1/2">
                     <Image
@@ -50,20 +54,22 @@ export default function EventsPage() {
                     />
                   </div>
                   <div className="space-y-4 md:w-1/2">
-                    <div className="mb-2 flex items-center gap-2 text-sm text-gray-500">
+                    <div className="dark:text-muted-foreground mb-2 flex items-center gap-2 text-sm text-gray-500">
                       <span>{event.date}</span>
                       <span>•</span>
                       <span>{event.location}</span>
                     </div>
-                    <h3 className="text-2xl font-bold text-blue-800">
+                    <h3 className="dark:text-primary text-2xl font-bold text-blue-800">
                       {event.title}
                     </h3>
-                    <p className="text-lg text-gray-600">{event.description}</p>
+                    <p className="dark:text-muted-foreground text-lg text-gray-600">
+                      {event.description}
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {event.tags.map((tag, idx) => (
                         <span
                           key={idx}
-                          className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
+                          className="dark:bg-background dark:text-primary rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
                         >
                           {tag}
                         </span>
@@ -77,13 +83,13 @@ export default function EventsPage() {
         </section>
 
         {/* Event Gallery */}
-        <section className="bg-gray-50 py-20">
+        <section className="dark:bg-card bg-gray-50 py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Event Gallery
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 A visual showcase of our presence at various prestigious events.
               </p>
             </div>
@@ -92,7 +98,7 @@ export default function EventsPage() {
               {galleryImages.map((image, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden rounded-lg shadow-md transition-shadow hover:shadow-lg"
+                  className="dark:bg-background dark:border-border rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg dark:border"
                 >
                   <Image
                     src={image.src || "/placeholder.svg"}
@@ -108,7 +114,7 @@ export default function EventsPage() {
             <div className="mt-12 text-center">
               <Button
                 asChild
-                className="bg-orange-500 text-white hover:bg-orange-600"
+                className="dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/80 bg-orange-500 text-white hover:bg-orange-600"
               >
                 <Link href="/contact">Book Us For Your Event</Link>
               </Button>
@@ -117,39 +123,44 @@ export default function EventsPage() {
         </section>
 
         {/* Testimonials */}
-        <section className="bg-gray-50 py-20">
+        <section className="dark:bg-card bg-gray-50 py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Event Success Stories
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 Hear what event organizers have to say about our services.
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="rounded-lg bg-white p-8 shadow-md">
+                <div
+                  key={index}
+                  className="dark:bg-background dark:border-border rounded-lg bg-white p-8 shadow-md dark:border"
+                >
                   <div className="mb-4 flex items-center">
                     <div className="mr-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-700">
+                      <div className="dark:bg-card dark:text-primary flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-700">
                         {testimonial.name.charAt(0)}
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-bold text-blue-800">
+                      <h4 className="dark:text-primary font-bold text-blue-800">
                         {testimonial.name}
                       </h4>
-                      <p className="text-sm text-gray-500">
+                      <p className="dark:text-muted-foreground text-sm text-gray-500">
                         {testimonial.position}
                       </p>
                     </div>
                   </div>
-                  <p className="mb-4 text-gray-600 italic">
+                  <p className="dark:text-muted-foreground mb-4 text-gray-600 italic">
                     "{testimonial.quote}"
                   </p>
-                  <p className="text-sm text-gray-500">{testimonial.event}</p>
+                  <p className="dark:text-muted-foreground text-sm text-gray-500">
+                    {testimonial.event}
+                  </p>
                 </div>
               ))}
             </div>
@@ -157,19 +168,19 @@ export default function EventsPage() {
         </section>
 
         {/* Call to Action */}
-        <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
+        <section className="dark:bg-primary dark:text-primary-foreground bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="mb-6 text-3xl font-bold md:text-4xl">
+            <h2 className="dark:text-primary-foreground mb-6 text-3xl font-bold md:text-4xl">
               Ready to Make Your Event Exceptional?
             </h2>
-            <p className="mx-auto mb-8 max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-muted-foreground mx-auto mb-8 max-w-3xl text-xl text-blue-100">
               Contact us today to discuss how our professional hostesses and
               protocol officers can elevate your next event.
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-orange-500 text-white hover:bg-orange-600"
+              className="dark:bg-background dark:text-primary dark:hover:bg-background/80 bg-orange-500 text-white hover:bg-orange-600"
             >
               <Link href="/contact">Get in Touch</Link>
             </Button>
