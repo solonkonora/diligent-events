@@ -397,7 +397,7 @@ export function AdminDashboard() {
                   />
                 </svg>
                 {(sidebarOpen || window.innerWidth < 1024) && (
-                  <span className="ml-3">Settings</span>
+                  <span className="mr-3">Settings</span>
                 )}
               </button>
             </li>
@@ -449,7 +449,7 @@ export function AdminDashboard() {
         <main className="flex-1 overflow-y-auto">
           {activeTab === "dashboard" && (
             <>
-              <section className="mb-6 lg:mb-8">
+              <section className="m-6 lg:mb-8">
                 <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
                   Analytics
                 </h2>
@@ -482,7 +482,7 @@ export function AdminDashboard() {
               </section>
 
               <section>
-                <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
+                <h2 className="m-6 text-lg font-semibold text-gray-700 lg:text-xl">
                   Recent Activity
                 </h2>
                 <div className="rounded bg-white p-4 shadow lg:p-6">
@@ -496,7 +496,7 @@ export function AdminDashboard() {
 
           {activeTab === "users" && (
             <section>
-              <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="m-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <h2 className="text-lg font-semibold text-gray-700 lg:text-xl">
                   User Management
                 </h2>
@@ -670,7 +670,7 @@ export function AdminDashboard() {
 
           {activeTab === "settings" && (
             <section>
-              <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
+              <h2 className="p-4 text-lg font-semibold text-gray-700 lg:text-xl">
                 Settings
               </h2>
               <div className="rounded bg-white p-4 shadow lg:p-6">
