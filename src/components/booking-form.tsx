@@ -190,7 +190,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
 
           // Send notification to admin
           const adminEmailSent = await sendEmail({
-            to: "nkwadanora@gmail.com", // Your admin email
+            to: "nkwadanora@gmail.com", //  admin email
             subject: "New Booking Request - Diligent Events",
             html: adminNotificationTemplate(
               clientName,
@@ -280,14 +280,14 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           onChange={handleChange}
           className={`mt-1 block w-full rounded-md border ${errors.eventType ? "border-red-500" : "border-gray-300"} px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none`}
         >
-          <option value="">Select event type</option>
+          <option value=""> </option>
           <option value="corporate">Corporate Event</option>
           <option value="cultural">Cultural Event</option>
           <option value="wedding">Wedding</option>
           <option value="birthday">Birthday Party</option>
           <option value="conference">Conference</option>
           <option value="anniversary">Anniversary</option>
-          <option value="graduation">Graduation Celebration</option>
+          <option value="graduation">Graduation</option>
           <option value="other">Other</option>
         </select>
         {errors.eventType && (
@@ -369,10 +369,10 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           className={`mt-1 block w-full rounded-md border ${errors.budget ? "border-red-500" : "border-gray-300"} px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none`}
         >
           <option value="">Select your amount range</option>
-          <option value="under_100k">Under 100,000FCFA</option>
-          <option value="100k_to_200k">100,000FCFA - 200,000FCFA</option>
-          <option value="300k_to_500k">300,000FCFA - 500,000FCFA</option>
-          <option value="over_800k">Over 800,000FCFA</option>
+          <option value="under_100k">Below 100,000 FCFA</option>
+          <option value="100k_to_200k">100,000 FCFA - 200,000 FCFA</option>
+          <option value="300k_to_500k">300,000 FCFA - 500,000 FCFA</option>
+          <option value="over_800k">Over 800,000 FCFA</option>
         </select>
         {errors.budget && (
           <p className="mt-1 text-sm text-red-500">{errors.budget}</p>
@@ -393,7 +393,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           value={formData.details}
           onChange={handleChange}
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-          placeholder="Tell us about your event..."
+          placeholder="more helpful details about your event..."
         ></textarea>
       </div>
 

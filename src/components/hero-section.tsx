@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+    <section className="dark:bg-background relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
       {/* background Image with Overlay */}
       <div className="absolute inset-0">
         <Image
@@ -14,12 +14,12 @@ export default function HeroSection() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-blue-800/80 to-orange-600/70"></div>
+        <div className="dark:from-background dark:via-background/90 dark:to-background/80 absolute inset-0 bg-gradient-to-r from-blue-900/90 via-blue-800/80 to-orange-600/70 dark:bg-gradient-to-r"></div>
       </div>
 
       {/* decorative Elements */}
-      <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-orange-500/20 blur-3xl"></div>
-      <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl"></div>
+      <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-orange-500/20 blur-3xl dark:bg-orange-400/10"></div>
+      <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-400/10"></div>
 
       {/* hero Content */}
       <div className="relative z-10 flex min-h-[calc(100vh-4rem)] items-center pt-16 md:min-h-[calc(100vh-5rem)] md:pt-20">
@@ -27,18 +27,20 @@ export default function HeroSection() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div className="text-center lg:text-left">
               <h1 className="m-4 text-3xl leading-tight font-bold md:text-4xl lg:text-5xl xl:text-6xl">
-                <span className="text-white">Create </span>
-                <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+                <span className="dark:text-foreground text-white">Create </span>
+                <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent dark:from-orange-300 dark:to-orange-500">
                   Unforgettable
                 </span>
                 <br />
-                <span className="text-white">Events with </span>
-                <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                <span className="dark:text-foreground text-white">
+                  Events with{" "}
+                </span>
+                <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent dark:from-blue-300 dark:to-blue-500">
                   Excellence
                 </span>
               </h1>
 
-              <p className="mx-auto mb-6 max-w-2xl text-lg text-blue-100 md:text-2xl lg:mx-0">
+              <p className="dark:text-muted-foreground mx-auto mb-6 max-w-2xl text-lg text-blue-100 md:text-2xl lg:mx-0">
                 We provide comprehensive event services including professional
                 hostesses, catering, logistics, and equipment rentals.
               </p>
@@ -48,7 +50,7 @@ export default function HeroSection() {
                 <Button
                   asChild
                   size="lg"
-                  className="transform rounded-xl border-2 border-orange-400/50 bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-lg font-semibold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:from-orange-600 hover:to-orange-700 hover:shadow-orange-500/30"
+                  className="dark:text-primary-foreground transform rounded-xl border-2 border-orange-400/50 bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-lg font-semibold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:from-orange-600 hover:to-orange-700 hover:shadow-orange-500/30"
                 >
                   <Link href="/auth/login?redirect=/client">
                     Book Your Event
@@ -72,7 +74,7 @@ export default function HeroSection() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-xl border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/20"
+                  className="dark:border-border dark:bg-background/30 dark:text-foreground dark:hover:bg-background/50 rounded-xl border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/20"
                 >
                   <Link href="/services">
                     View Services
@@ -94,21 +96,21 @@ export default function HeroSection() {
               </div>
 
               {/* trust Indicators */}
-              <div className="flex flex-wrap items-center justify-center gap-8 text-blue-200 lg:justify-start">
+              <div className="dark:text-muted-foreground flex flex-wrap items-center justify-center gap-8 text-blue-200 lg:justify-start">
                 <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-orange-400"></div>
+                  <div className="h-2 w-2 rounded-full bg-orange-400 dark:bg-orange-500"></div>
                   <span className="text-sm font-medium">
                     500+ Events Completed
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-orange-400"></div>
+                  <div className="h-2 w-2 rounded-full bg-orange-400 dark:bg-orange-500"></div>
                   <span className="text-sm font-medium">
                     Professional Staff
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-orange-400"></div>
+                  <div className="h-2 w-2 rounded-full bg-orange-400 dark:bg-orange-500"></div>
                   <span className="text-sm font-medium">24/7 Support</span>
                 </div>
               </div>
@@ -117,7 +119,7 @@ export default function HeroSection() {
             <div className="relative">
               <div className="relative z-10">
                 {/* main Image Card */}
-                <div className="relative rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-sm">
+                <div className="dark:border-border dark:bg-background/40 relative rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-sm">
                   <div className="relative h-80 w-full overflow-hidden rounded-2xl">
                     <Image
                       src="/assets/images/five.jpeg"
@@ -125,10 +127,10 @@ export default function HeroSection() {
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="dark:from-background/80 absolute inset-0 bg-gradient-to-t from-black/50 to-transparent dark:to-transparent"></div>
 
                     {/* floating Service Cards */}
-                    <div className="absolute -top-4 -right-4 rounded-xl bg-orange-500 p-4 text-white shadow-xl">
+                    <div className="absolute -top-4 -right-4 rounded-xl bg-orange-500 p-4 text-white shadow-xl dark:bg-orange-600">
                       <div className="text-2xl font-bold">100%</div>
                       <div className="text-sm">Satisfaction</div>
                     </div>
@@ -136,21 +138,27 @@ export default function HeroSection() {
 
                   {/* service Preview */}
                   <div className="mt-4 grid grid-cols-3 gap-4">
-                    <div className="rounded-xl border border-white/20 bg-white/10 p-3 text-center">
-                      <div className="mb-1 text-2xl text-orange-400">🎭</div>
-                      <div className="text-xs font-medium text-white">
+                    <div className="dark:border-border dark:bg-background/40 rounded-xl border border-white/20 bg-white/10 p-3 text-center">
+                      <div className="mb-1 text-2xl text-orange-400 dark:text-orange-500">
+                        🎭
+                      </div>
+                      <div className="dark:text-foreground text-xs font-medium text-white">
                         Hostesses
                       </div>
                     </div>
-                    <div className="rounded-xl border border-white/20 bg-white/10 p-3 text-center">
-                      <div className="mb-1 text-2xl text-orange-400">🍽️</div>
-                      <div className="text-xs font-medium text-white">
+                    <div className="dark:border-border dark:bg-background/40 rounded-xl border border-white/20 bg-white/10 p-3 text-center">
+                      <div className="mb-1 text-2xl text-orange-400 dark:text-orange-500">
+                        🍽️
+                      </div>
+                      <div className="dark:text-foreground text-xs font-medium text-white">
                         Catering
                       </div>
                     </div>
-                    <div className="rounded-xl border border-white/20 bg-white/10 p-3 text-center">
-                      <div className="mb-1 text-2xl text-orange-400">🪑</div>
-                      <div className="text-xs font-medium text-white">
+                    <div className="dark:border-border dark:bg-background/40 rounded-xl border border-white/20 bg-white/10 p-3 text-center">
+                      <div className="mb-1 text-2xl text-orange-400 dark:text-orange-500">
+                        🪑
+                      </div>
+                      <div className="dark:text-foreground text-xs font-medium text-white">
                         Rentals
                       </div>
                     </div>
@@ -159,8 +167,8 @@ export default function HeroSection() {
               </div>
 
               {/* floating Elements */}
-              <div className="absolute -top-8 -left-8 h-24 w-24 animate-pulse rounded-full bg-gradient-to-br from-orange-400 to-orange-600 opacity-80"></div>
-              <div className="absolute -right-6 -bottom-6 h-32 w-32 animate-pulse rounded-full bg-gradient-to-br from-blue-400 to-blue-600 opacity-60 delay-1000"></div>
+              <div className="absolute -top-8 -left-8 h-24 w-24 animate-pulse rounded-full bg-gradient-to-br from-orange-400 to-orange-600 opacity-80 dark:from-orange-500 dark:to-orange-700"></div>
+              <div className="absolute -right-6 -bottom-6 h-32 w-32 animate-pulse rounded-full bg-gradient-to-br from-blue-400 to-blue-600 opacity-60 delay-1000 dark:from-blue-500 dark:to-blue-700"></div>
             </div>
           </div>
         </div>
@@ -170,7 +178,7 @@ export default function HeroSection() {
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transform">
         <div className="animate-bounce">
           <svg
-            className="h-6 w-6 text-white/70"
+            className="dark:text-muted-foreground h-6 w-6 text-white/70"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

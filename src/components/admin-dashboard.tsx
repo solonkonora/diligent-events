@@ -58,7 +58,7 @@ export function AdminDashboard() {
           bookings(id, created_at, status)
         `
         )
-        .neq("role", "admin"); // Exclude other admins
+        // .neq("role", "admin"); // Exclude other admins
 
       // Apply filters based on userFilter state
       if (userFilter === "active") {
@@ -70,7 +70,6 @@ export function AdminDashboard() {
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         query = query.gte("bookings.created_at", thirtyDaysAgo.toISOString());
       }
-      // "all" filter doesn't add any constraints
 
       const { data, error } = await query.order("created_at", {
         ascending: false,
@@ -101,11 +100,9 @@ export function AdminDashboard() {
   };
 
   const fetchAnalytics = async () => {
-    // Analytics based on business-relevant users only
     const { data, error } = await supabase
       .from("profiles")
-      .select("role")
-      .neq("role", "admin"); // Exclude admins from analytics
+      .select("role"); // Do not exclude admins here
 
     if (!error && data) {
       const total = data.length;
@@ -155,7 +152,6 @@ export function AdminDashboard() {
   // handle window resize for sidebar behavior
   useEffect(() => {
     const handleResize = () => {
-      // On large screens, keep sidebar open by default
       if (window.innerWidth >= 1024) {
         setSidebarOpen(true);
       } else {
@@ -165,8 +161,6 @@ export function AdminDashboard() {
 
     // set initial state
     handleResize();
-
-    // add event listener
     window.addEventListener("resize", handleResize);
 
     // cleanup
@@ -222,7 +216,7 @@ export function AdminDashboard() {
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="bg-opacity-50 fixed inset-0 z-20 bg-black lg:hidden"
+          className="bg-opacity-50 fixed inset-0 z-20 bg-black/50 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -403,7 +397,7 @@ export function AdminDashboard() {
                   />
                 </svg>
                 {(sidebarOpen || window.innerWidth < 1024) && (
-                  <span className="ml-3">Settings</span>
+                  <span className="mr-3">Settings</span>
                 )}
               </button>
             </li>
@@ -438,7 +432,7 @@ export function AdminDashboard() {
               Admin Portal
             </h1>
           </div>
-          <div className="flex items-center gap-2 lg:gap-2">
+          <div className="flex items-center gap-2 lg:gap-6">
             <span className="hidden text-sm text-gray-600 sm:block lg:text-base">
               Welcome, {profile?.full_name}
             </span>
@@ -452,10 +446,10 @@ export function AdminDashboard() {
         </header>
 
         {/* Content area */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+        <main className="flex-1 overflow-y-auto">
           {activeTab === "dashboard" && (
             <>
-              <section className="mb-6 lg:mb-8">
+              <section className="m-6 lg:mb-8">
                 <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
                   Analytics
                 </h2>
@@ -488,7 +482,7 @@ export function AdminDashboard() {
               </section>
 
               <section>
-                <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
+                <h2 className="m-6 text-lg font-semibold text-gray-700 lg:text-xl">
                   Recent Activity
                 </h2>
                 <div className="rounded bg-white p-4 shadow lg:p-6">
@@ -502,7 +496,7 @@ export function AdminDashboard() {
 
           {activeTab === "users" && (
             <section>
-              <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="m-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <h2 className="text-lg font-semibold text-gray-700 lg:text-xl">
                   User Management
                 </h2>
@@ -665,10 +659,10 @@ export function AdminDashboard() {
 
           {activeTab === "events" && (
             <section>
-              <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
+              <h2 className="my-4 ml-4 text-lg font-semibold text-gray-700 lg:text-xl">
                 Event Management
               </h2>
-              <div className="rounded bg-white p-4 shadow lg:p-6">
+              <div className="rounded bg-white p-0 shadow m-0">
                 {profile?.id && <EventManagement profileId={profile.id} />}
               </div>
             </section>
@@ -676,7 +670,7 @@ export function AdminDashboard() {
 
           {activeTab === "settings" && (
             <section>
-              <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
+              <h2 className="p-4 text-lg font-semibold text-gray-700 lg:text-xl">
                 Settings
               </h2>
               <div className="rounded bg-white p-4 shadow lg:p-6">

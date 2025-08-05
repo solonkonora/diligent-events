@@ -10,60 +10,60 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-blue-900 text-white">
+    <footer className="dark:bg-background dark:text-foreground bg-blue-900 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Company Info */}
           <div>
             <h3 className="mb-4 text-xl font-bold">
               Hostess<span className="text-orange-500">Agency</span>
             </h3>
-            <p className="mb-4 text-blue-200">
+            <p className="dark:text-muted-foreground mb-4 text-blue-200">
               Elevating events with professional hostess and protocol services
               since 2022.
             </p>
             <div className="flex space-x-4">
+              {/* Social icons */}
               <a
                 href="#"
-                className="text-blue-200 transition-colors hover:text-orange-500"
+                className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
               >
                 <SiFacebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 transition-colors hover:text-orange-500"
+                className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
               >
                 <SiInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 transition-colors hover:text-orange-500"
+                className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
               >
                 <SiGitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 transition-colors hover:text-orange-500"
+                className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
               >
                 <SiLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 transition-colors hover:text-orange-500"
+                className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
               >
                 <SiGmail className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
+                <span className="sr-only">Gmail</span>
               </a>
               <a
                 href="#"
-                className="text-blue-200 transition-colors hover:text-orange-500"
+                className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
               >
                 <SiPhonepe className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
+                <span className="sr-only">Phone</span>
               </a>
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Home
                 </Link>
@@ -83,7 +83,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   About Us
                 </Link>
@@ -91,7 +91,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Services
                 </Link>
@@ -99,7 +99,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/events"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Events
                 </Link>
@@ -107,7 +107,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Contact
                 </Link>
@@ -122,7 +122,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Event Hostesses/Protocol
                 </Link>
@@ -130,7 +130,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   General Cleaning (Office, Houses, Cite etc)
                 </Link>
@@ -138,7 +138,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Rentals (Chairs, Tables etc)
                 </Link>
@@ -146,7 +146,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Event Planning
                 </Link>
@@ -154,7 +154,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Service Traiteur
                 </Link>
@@ -162,7 +162,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   General Logistics
                 </Link>
@@ -170,7 +170,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Decoration
                 </Link>
@@ -178,7 +178,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services"
-                  className="text-blue-200 transition-colors hover:text-orange-500"
+                  className="dark:text-muted-foreground text-blue-200 transition-colors hover:text-orange-500 dark:hover:text-orange-400"
                 >
                   Lots More...
                 </Link>
@@ -192,13 +192,17 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <SiPhonepe className="mt-0.5 mr-2 h-5 w-5 flex-shrink-0 text-orange-500" />
-                <span className="text-blue-200">+237-676-717-626</span>
+                <span className="dark:text-muted-foreground text-blue-200">
+                  +237-676-717-626
+                </span>
               </li>
               <li className="flex items-start">
                 <SiGmail className="mt-0.5 mr-2 h-5 w-5 flex-shrink-0 text-orange-500" />
-                <span className="text-blue-200">info@diligentservers.com</span>
+                <span className="dark:text-muted-foreground text-blue-200">
+                  info@diligentservers.com
+                </span>
               </li>
-              <li className="text-blue-200">
+              <li className="dark:text-muted-foreground text-blue-200">
                 Ndongo Carrefour
                 <br />
                 Ndongo
@@ -209,16 +213,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-blue-800 pt-8 text-center text-sm text-blue-300">
+        <div className="dark:border-border dark:text-muted-foreground mt-12 border-t border-blue-800 pt-8 text-center text-sm text-blue-300">
           <p>
             &copy; {new Date().getFullYear()} EventsManagementAgency. All rights
             reserved.
           </p>
           <div className="mt-2 space-x-4">
-            <Link href="#" className="transition-colors hover:text-orange-500">
+            <Link
+              href="#"
+              className="dark:text-muted-foreground transition-colors hover:text-orange-500 dark:hover:text-orange-400"
+            >
               Privacy Policy
             </Link>
-            <Link href="#" className="transition-colors hover:text-orange-500">
+            <Link
+              href="#"
+              className="dark:text-muted-foreground transition-colors hover:text-orange-500 dark:hover:text-orange-400"
+            >
               Terms of Service
             </Link>
           </div>

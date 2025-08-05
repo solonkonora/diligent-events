@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
 
   // No code - redirect to client-side page to handle fragment tokens
   console.log("No code received, redirecting to client-side callback page");
-  return NextResponse.redirect(`${requestUrl.origin}/auth/callback/page`);
+  return NextResponse.redirect(`${requestUrl.origin}/auth/callback-client`);
 }
 
 // Helper function to handle user profile and redirect

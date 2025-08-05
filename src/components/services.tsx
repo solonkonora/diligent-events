@@ -10,12 +10,12 @@ export default function ServicesPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="dark:bg-primary dark:text-primary-foreground relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="mb-6 text-4xl font-bold md:text-5xl">
+            <h1 className="dark:text-primary-foreground mb-6 text-4xl font-bold md:text-5xl">
               Our Services
             </h1>
-            <p className="mx-auto max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-muted-foreground mx-auto max-w-3xl text-xl text-blue-100">
               Comprehensive hostess and protocol services tailored to meet the
               unique needs of your events.
             </p>
@@ -24,13 +24,13 @@ export default function ServicesPage() {
           <ContactButtons />
         </section>
 
-        <section className="bg-white py-20">
+        <section className="dark:bg-background bg-white py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Comprehensive Event Solutions
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 From corporate gatherings to private celebrations, we provide
                 professional hostess and protocol services that elevate your
               </p>
@@ -40,7 +40,7 @@ export default function ServicesPage() {
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
+                  className={`dark:bg-card dark:border-border flex flex-col rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg dark:border dark:shadow-none ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
                 >
                   <div className="md:w-1/2">
                     <Image
@@ -52,17 +52,19 @@ export default function ServicesPage() {
                     />
                   </div>
                   <div className="space-y-4 md:w-1/2">
-                    <h3 className="text-2xl font-bold text-blue-800">
+                    <h3 className="dark:text-primary text-2xl font-bold text-blue-800">
                       {service.title}
                     </h3>
-                    <p className="text-lg text-gray-600">
+                    <p className="dark:text-muted-foreground text-lg text-gray-600">
                       {service.description}
                     </p>
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="mr-2 text-orange-500">✓</span>
-                          <span className="text-gray-600">{feature}</span>
+                          <span className="dark:text-muted-foreground text-gray-600">
+                            {feature}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -73,13 +75,13 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="bg-gray-50 py-20">
+        <section className="dark:bg-card bg-gray-50 py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Additional Services
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 Complementary services to enhance your event experience.
               </p>
             </div>
@@ -88,16 +90,18 @@ export default function ServicesPage() {
               {additionalServices.map((service, index) => (
                 <div
                   key={index}
-                  className="rounded-lg bg-white p-8 shadow-md transition-shadow hover:shadow-lg"
+                  className="dark:bg-background dark:border-border rounded-lg bg-white p-8 shadow-md transition-shadow hover:shadow-lg dark:border"
                 >
-                  <h3 className="mb-3 text-xl font-bold text-blue-800">
+                  <h3 className="dark:text-primary mb-3 text-xl font-bold text-blue-800">
                     {service.title}
                   </h3>
-                  <p className="mb-4 text-gray-600">{service.description}</p>
+                  <p className="dark:text-muted-foreground mb-4 text-gray-600">
+                    {service.description}
+                  </p>
                   <Button
                     asChild
                     variant="outline"
-                    className="border-blue-600 text-blue-600 hover:bg-blue-50"
+                    className="dark:border-primary dark:text-primary dark:hover:bg-primary/10 border-blue-600 text-blue-600 hover:bg-blue-50"
                   >
                     <Link href="/contact">Inquire</Link>
                   </Button>
@@ -107,13 +111,13 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="bg-white py-20">
+        <section className="dark:bg-background bg-white py-20">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
+              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Flexible Pricing Options
               </h2>
-              <p className="mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 We offer transparent pricing with packages designed to suit
                 events of all sizes and budgets.
               </p>
@@ -123,31 +127,37 @@ export default function ServicesPage() {
               {pricingPlans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`overflow-hidden rounded-lg shadow-lg ${plan.featured ? "relative border-2 border-orange-500" : ""}`}
+                  className={`overflow-hidden rounded-lg shadow-lg ${plan.featured ? "relative border-2 border-orange-500 dark:border-orange-400" : "dark:border-border dark:border"}`}
                 >
                   {plan.featured && (
-                    <div className="bg-orange-500 py-1 text-center font-medium text-white">
+                    <div className="dark:bg-primary dark:text-primary-foreground bg-orange-500 py-1 text-center font-medium text-white">
                       Most Popular
                     </div>
                   )}
                   <div
-                    className={`p-8 ${plan.featured ? "bg-blue-50" : "bg-white"}`}
+                    className={`p-8 ${plan.featured ? "dark:bg-card bg-blue-50" : "dark:bg-background bg-white"}`}
                   >
-                    <h3 className="mb-2 text-2xl font-bold text-blue-800">
+                    <h3 className="dark:text-primary mb-2 text-2xl font-bold text-blue-800">
                       {plan.title}
                     </h3>
-                    <p className="mb-6 text-gray-600">{plan.description}</p>
+                    <p className="dark:text-muted-foreground mb-6 text-gray-600">
+                      {plan.description}
+                    </p>
                     <div className="mb-6">
-                      <span className="text-4xl font-bold text-blue-800">
+                      <span className="dark:text-primary text-4xl font-bold text-blue-800">
                         ${plan.price}
                       </span>
-                      <span className="text-gray-500"> / {plan.unit}</span>
+                      <span className="dark:text-muted-foreground text-gray-500">
+                        <br />/ {plan.unit}
+                      </span>
                     </div>
                     <ul className="mb-8 space-y-3">
                       {plan.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="mr-2 text-orange-500">✓</span>
-                          <span className="text-gray-600">{feature}</span>
+                          <span className="dark:text-muted-foreground text-gray-600">
+                            {feature}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -155,8 +165,8 @@ export default function ServicesPage() {
                       asChild
                       className={
                         plan.featured
-                          ? "w-full bg-orange-500 hover:bg-orange-600"
-                          : "w-full bg-blue-600 hover:bg-blue-700"
+                          ? "dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/80 w-full bg-orange-500 hover:bg-orange-600"
+                          : "dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/80 w-full bg-blue-600 hover:bg-blue-700"
                       }
                     >
                       <Link href="/contact">Get Started</Link>
@@ -166,10 +176,13 @@ export default function ServicesPage() {
               ))}
             </div>
 
-            <div className="mt-12 text-center text-gray-600">
+            <div className="dark:text-muted-foreground mt-12 text-center text-gray-600">
               <p>
                 Need a custom solution?{" "}
-                <Link href="/contact" className="text-blue-600 hover:underline">
+                <Link
+                  href="/contact"
+                  className="dark:text-primary text-blue-600 hover:underline"
+                >
                   Contact us
                 </Link>{" "}
                 for personalized pricing.
@@ -179,19 +192,19 @@ export default function ServicesPage() {
         </section>
 
         {/* Call to Action */}
-        <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
+        <section className="dark:bg-primary dark:text-primary-foreground bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="mb-6 text-3xl font-bold md:text-4xl">
+            <h2 className="dark:text-primary-foreground mb-6 text-3xl font-bold md:text-4xl">
               Ready to Elevate Your Next Event?
             </h2>
-            <p className="mx-auto mb-8 max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-muted-foreground mx-auto mb-8 max-w-3xl text-xl text-blue-100">
               Contact us today to discuss how our professional hostesses and
               protocol officers can make your event truly exceptional.
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-orange-500 text-white hover:bg-orange-600"
+              className="dark:bg-background dark:text-primary dark:hover:bg-background/80 bg-orange-500 text-white hover:bg-orange-600"
             >
               <Link href="/contact">Get in Touch</Link>
             </Button>

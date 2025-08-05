@@ -318,7 +318,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
   }, [profileId]);
 
   return (
-    <section className="space-y-4 p-4 lg:space-y-6 lg:p-6">
+    <section className="space-y-4 p-4 lg:space-y-6 lg:p-1">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="rounded-lg bg-white p-4 shadow-md lg:p-6">
           <h3 className="mb-2 text-sm font-medium text-gray-700 sm:text-base lg:text-lg">
@@ -477,7 +477,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
             </div>
 
             {/* desktop table view */}
-            <div className="hidden lg:block overflow-x-auto">
+            <div className="hidden lg:block overflow-x-auto w-full" style={{ maxWidth: "calc(100vw - 280px)" }}>
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
