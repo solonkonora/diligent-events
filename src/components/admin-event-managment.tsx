@@ -477,7 +477,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
             </div>
 
             {/* desktop table view */}
-            <div className="hidden lg:block overflow-x-auto w-full" style={{ maxWidth: 'calc(100vw - 280px)' }}>
+            <div className="hidden lg:block overflow-x-auto w-full" style={{ maxWidth: "calc(100vw - 280px)" }}>
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
