@@ -207,13 +207,13 @@ export default function ClientDashboard() {
 
   if (loading)
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="bg-background text-foreground flex h-screen items-center justify-center">
         Loading...
       </div>
     );
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="bg-background flex h-screen">
       {/* Sidebar overlay for mobile */}
       <div
         className={`bg-opacity-40 fixed inset-0 z-40 bg-black transition-opacity lg:hidden ${
@@ -237,16 +237,16 @@ export default function ClientDashboard() {
 
       {/* Main content */}
       <div className="flex min-w-0 flex-1 flex-col transition-all duration-300">
-        <header className="flex h-16 items-center justify-between bg-white px-4 shadow sm:px-6">
+        <header className="bg-card flex h-16 items-center justify-between px-4 shadow sm:px-6">
           <div className="flex items-center gap-2">
             {/* Sidebar toggle for mobile and desktop */}
             <button
-              className="rounded-md p-2 hover:bg-gray-200 focus:outline-none"
+              className="hover:bg-muted rounded-md p-2 focus:outline-none"
               onClick={() => setSidebarOpen((open) => !open)}
               aria-label="Open sidebar"
             >
               <svg
-                className="h-6 w-6 text-gray-700"
+                className="text-foreground h-6 w-6"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -259,17 +259,17 @@ export default function ClientDashboard() {
                 />
               </svg>
             </button>
-            <h1 className="text-lg font-semibold text-gray-800 sm:text-xl">
+            <h1 className="text-foreground text-lg font-semibold sm:text-xl">
               Client Portal
             </h1>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
-            <span className="hidden text-gray-600 sm:inline">
+            <span className="text-muted-foreground hidden sm:inline">
               Welcome, {profile?.full_name}
             </span>
             <button
               onClick={handleLogout}
-              className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-red-600 hover:text-white sm:px-4 sm:py-2"
+              className="border-border text-foreground hover:bg-destructive hover:text-destructive-foreground rounded-md border px-3 py-2 text-sm sm:px-4 sm:py-2"
             >
               Logout
             </button>
@@ -280,7 +280,7 @@ export default function ClientDashboard() {
           {activeTab === "dashboard" && (
             <>
               <section className="mb-4 sm:mb-8">
-                <div className="rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 p-4 text-white shadow-lg sm:p-6">
+                <div className="from-primary to-primary/80 text-primary-foreground rounded-lg bg-gradient-to-r p-4 shadow-lg sm:p-6">
                   <h2 className="text-xl font-bold sm:text-2xl">
                     Welcome back, {profile?.full_name}!
                   </h2>
@@ -293,13 +293,13 @@ export default function ClientDashboard() {
 
               {/* Quick Actions */}
               <section>
-                <h2 className="mb-2 text-lg font-semibold text-gray-700 sm:mb-4 sm:text-xl">
+                <h2 className="text-foreground mb-2 text-lg font-semibold sm:mb-4 sm:text-xl">
                   Quick Actions
                 </h2>
                 <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
                   <button
                     onClick={() => setActiveTab("newBooking")}
-                    className="rounded bg-blue-500 p-3 text-left text-white hover:bg-blue-600 sm:p-4"
+                    className="bg-primary text-primary-foreground hover:bg-primary/80 rounded p-3 text-left sm:p-4"
                   >
                     <h3 className="text-base font-semibold sm:text-lg">
                       Book for Services
@@ -310,7 +310,7 @@ export default function ClientDashboard() {
                   </button>
                   <button
                     onClick={() => setActiveTab("profile")}
-                    className="rounded bg-purple-500 p-3 text-left text-white hover:bg-purple-600 sm:p-4"
+                    className="rounded bg-purple-600 p-3 text-left text-white hover:bg-purple-700 sm:p-4"
                   >
                     <h3 className="text-base font-semibold sm:text-lg">
                       Update Profile
@@ -321,7 +321,7 @@ export default function ClientDashboard() {
                   </button>
                   <button
                     onClick={() => setActiveTab("help")}
-                    className="rounded bg-blue-500 p-3 text-left text-white hover:bg-blue-600 sm:p-4"
+                    className="bg-primary text-primary-foreground hover:bg-primary/80 rounded p-3 text-left sm:p-4"
                   >
                     <h3 className="text-base font-semibold sm:text-lg">
                       Get Help
@@ -348,10 +348,10 @@ export default function ClientDashboard() {
 
           {activeTab === "newBooking" && (
             <section className="space-y-4 sm:space-y-6">
-              <h2 className="text-xl font-semibold text-gray-800 sm:text-2xl">
+              <h2 className="text-foreground text-xl font-semibold sm:text-2xl">
                 Book a Service
               </h2>
-              <div className="rounded-xl bg-white p-4 shadow-md sm:p-6">
+              <div className="bg-card rounded-xl p-4 shadow-md sm:p-6">
                 {profile && (
                   <BookingForm userId={profile.id} onSuccess={fetchEvents} />
                 )}

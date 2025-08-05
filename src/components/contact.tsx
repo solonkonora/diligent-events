@@ -16,7 +16,7 @@ export default function ContactPage() {
             <h1 className="dark:text-primary-foreground mb-6 text-4xl font-bold md:text-5xl">
               Contact Us
             </h1>
-            <p className="dark:text-muted-foreground mx-auto max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-foreground mx-auto max-w-3xl text-xl text-blue-100">
               Get in touch with our team to discuss your event needs and how we
               can help make your event exceptional.
             </p>

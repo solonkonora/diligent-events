@@ -240,12 +240,14 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
       onSubmit={createBooking}
     >
       <div className="col-span-1 md:col-span-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Select Services <span className="text-red-500">*</span>
+        <label className="text-foreground block text-sm font-medium">
+          Select Services <span className="text-destructive">*</span>
         </label>
         <div className="mt-2 flex flex-wrap gap-4">
           {services.length === 0 && (
-            <span className="text-gray-500">No services available.</span>
+            <span className="text-muted-foreground">
+              No services available.
+            </span>
           )}
           {services.map((services) => (
             <label key={services.id} className="flex items-center gap-2">
@@ -255,30 +257,30 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
                 onChange={(e) =>
                   handleServiceChange(services.id, e.target.checked)
                 }
-                className="rounded border-gray-300"
+                className="border-border text-primary focus:ring-primary rounded"
               />
-              {services.name}
+              <span className="text-foreground">{services.name}</span>
             </label>
           ))}
         </div>
         {errors.services && (
-          <p className="mt-1 text-sm text-red-500">{errors.services}</p>
+          <p className="text-destructive mt-1 text-sm">{errors.services}</p>
         )}
       </div>
 
       <div className="col-span-1">
         <label
           htmlFor="eventType"
-          className="block text-sm font-medium text-gray-700"
+          className="text-foreground block text-sm font-medium"
         >
-          Event Type <span className="text-red-500">*</span>
+          Event Type <span className="text-destructive">*</span>
         </label>
         <select
           id="eventType"
           name="eventType"
           value={formData.eventType}
           onChange={handleChange}
-          className={`mt-1 block w-full rounded-md border ${errors.eventType ? "border-red-500" : "border-gray-300"} px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none`}
+          className={`mt-1 block w-full rounded-md border ${errors.eventType ? "border-destructive" : "border-border"} bg-background text-foreground focus:border-primary focus:ring-primary px-3 py-2 shadow-sm focus:outline-none`}
         >
           <option value=""> </option>
           <option value="corporate">Corporate Event</option>
@@ -291,16 +293,16 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           <option value="other">Other</option>
         </select>
         {errors.eventType && (
-          <p className="mt-1 text-sm text-red-500">{errors.eventType}</p>
+          <p className="text-destructive mt-1 text-sm">{errors.eventType}</p>
         )}
       </div>
 
       <div>
         <label
           htmlFor="date"
-          className="block text-sm font-medium text-gray-700"
+          className="text-foreground block text-sm font-medium"
         >
-          Date <span className="text-red-500">*</span>
+          Date <span className="text-destructive">*</span>
         </label>
         <input
           type="date"
@@ -308,19 +310,19 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           name="date"
           value={formData.date}
           onChange={handleChange}
-          className={`mt-1 block w-full rounded-md border ${errors.date ? "border-red-500" : "border-gray-300"} px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none`}
+          className={`mt-1 block w-full rounded-md border ${errors.date ? "border-destructive" : "border-border"} bg-background text-foreground focus:border-primary focus:ring-primary px-3 py-2 shadow-sm focus:outline-none`}
         />
         {errors.date && (
-          <p className="mt-1 text-sm text-red-500">{errors.date}</p>
+          <p className="text-destructive mt-1 text-sm">{errors.date}</p>
         )}
       </div>
 
       <div>
         <label
           htmlFor="phone"
-          className="block text-sm font-medium text-gray-700"
+          className="text-foreground block text-sm font-medium"
         >
-          Phone Number <span className="text-red-500">*</span>
+          Phone Number <span className="text-destructive">*</span>
         </label>
         <input
           type="tel"
@@ -328,18 +330,18 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className={`mt-1 block w-full rounded-md border ${errors.phone ? "border-red-500" : "border-gray-300"} px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none`}
+          className={`mt-1 block w-full rounded-md border ${errors.phone ? "border-destructive" : "border-border"} bg-background text-foreground focus:border-primary focus:ring-primary px-3 py-2 shadow-sm focus:outline-none`}
           placeholder="+237 xxx xxx xxx"
         />
         {errors.phone && (
-          <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+          <p className="text-destructive mt-1 text-sm">{errors.phone}</p>
         )}
       </div>
 
       <div>
         <label
           htmlFor="guests"
-          className="block text-sm font-medium text-gray-700"
+          className="text-foreground block text-sm font-medium"
         >
           Approximate Number of Expected Guests
         </label>
@@ -349,7 +351,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           name="guests"
           value={formData.guests}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+          className="border-border bg-background text-foreground focus:border-primary focus:ring-primary mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none"
           placeholder="0"
         />
       </div>
@@ -357,16 +359,16 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
       <div>
         <label
           htmlFor="budget"
-          className="block text-sm font-medium text-gray-700"
+          className="text-foreground block text-sm font-medium"
         >
-          Budget Range <span className="text-red-500">*</span>
+          Budget Range <span className="text-destructive">*</span>
         </label>
         <select
           id="budget"
           name="budget"
           value={formData.budget}
           onChange={handleChange}
-          className={`mt-1 block w-full rounded-md border ${errors.budget ? "border-red-500" : "border-gray-300"} px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none`}
+          className={`mt-1 block w-full rounded-md border ${errors.budget ? "border-destructive" : "border-border"} bg-background text-foreground focus:border-primary focus:ring-primary px-3 py-2 shadow-sm focus:outline-none`}
         >
           <option value="">Select your amount range</option>
           <option value="under_100k">Below 100,000 FCFA</option>
@@ -375,14 +377,14 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           <option value="over_800k">Over 800,000 FCFA</option>
         </select>
         {errors.budget && (
-          <p className="mt-1 text-sm text-red-500">{errors.budget}</p>
+          <p className="text-destructive mt-1 text-sm">{errors.budget}</p>
         )}
       </div>
 
       <div className="md:col-span-2">
         <label
           htmlFor="details"
-          className="block text-sm font-medium text-gray-700"
+          className="text-foreground block text-sm font-medium"
         >
           Event Details
         </label>
@@ -392,7 +394,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
           rows={4}
           value={formData.details}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+          className="border-border bg-background text-foreground focus:border-primary focus:ring-primary mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none"
           placeholder="more helpful details about your event..."
         ></textarea>
       </div>
@@ -401,7 +403,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-md bg-blue-500 px-6 py-2 text-white hover:bg-blue-600 disabled:bg-blue-300"
+          className="bg-primary text-primary-foreground hover:bg-primary/80 disabled:bg-muted disabled:text-muted-foreground rounded-md px-6 py-2"
         >
           {isSubmitting ? "Submitting..." : "Submit Request"}
         </button>

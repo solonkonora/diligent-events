@@ -120,7 +120,7 @@ export default function LandingPage() {
             <h2 className="dark:text-primary-foreground mb-6 text-3xl font-bold md:text-4xl">
               Ready to Elevate Your Next Event?
             </h2>
-            <p className="dark:text-muted-foreground mx-auto mb-8 max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-foreground mx-auto mb-8 max-w-3xl text-xl text-blue-100">
               Contact us today to discuss how our professional hostesses and
               protocol officers can make your event truly exceptional.
             </p>

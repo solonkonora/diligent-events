@@ -15,7 +15,7 @@ export default function EventsPage() {
             <h1 className="dark:text-primary-foreground mb-6 text-4xl font-bold md:text-5xl">
               Our Events
             </h1>
-            <p className="dark:text-muted-foreground mx-auto max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-foreground mx-auto max-w-3xl text-xl text-blue-100">
               Explore our portfolio of prestigious events where we've provided
               exceptional hostess and protocol services.
             </p>
