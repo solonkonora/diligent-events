@@ -6,8 +6,8 @@ import { supabase } from "@/lib/supabaseClient";
 import error from "next/error";
 import { sendEmail } from "@/lib/emailService";
 import {
-  bookingConfirmationTemplate,
   adminNotificationTemplate,
+  bookingConfirmationTemplate,
 } from "@/lib/emailTemplates";
 
 interface BookingFormProps {
@@ -31,7 +31,6 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
     details: "",
     phone: "",
   });
-
   const [services, setServices] = useState<Services[]>([]);
   const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -142,7 +141,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         return;
       }
 
-      // Get service names for selected services
+      // get service names for selected services
       const { data: servicesData } = await supabase
         .from("services")
         .select("name")
@@ -150,7 +149,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
 
       const serviceNames = servicesData?.map((s) => s.name) || [];
 
-      // Get user profile info and email from auth.users
+      // get user profile info and email from auth.users
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -168,18 +167,42 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
         "Valued Customer";
       const clientEmail = userEmail;
 
-      // Send confirmation email to client if we have their email
+      // send confirmation email to client if we have their email
       if (clientEmail) {
         try {
+          // Fetch AI reply from API route
+          const aiResponse = await fetch("/api/generateBookingReply", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              clientName,
+              eventType: formData.eventType,
+              eventDate: formData.date,
+              services: serviceNames.join(", "),
+            }),
+          });
+          const aiData = await aiResponse.json();
+          const aiReply = aiData.reply;
+
+          // Use AI reply in email template
+          const clientEmailHtml = bookingConfirmationTemplate(
+            clientName,
+            formData.eventType,
+            formData.date,
+            serviceNames,
+            aiReply
+          );
+
+          // debug log for AI-generated email content
+          console.log(
+            "AI-generated booking confirmation email HTML:",
+            clientEmailHtml
+          );
+
           const clientEmailSent = await sendEmail({
             to: clientEmail,
             subject: "Your Booking with Diligent Events",
-            html: bookingConfirmationTemplate(
-              clientName,
-              formData.eventType,
-              formData.date,
-              serviceNames
-            ),
+            html: clientEmailHtml,
           });
 
           if (!clientEmailSent) {
@@ -188,7 +211,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
             );
           }
 
-          // Send notification to admin
+          // send notification to admin
           const adminEmailSent = await sendEmail({
             to: "nkwadanora@gmail.com", //  admin email
             subject: "New Booking Request - Diligent Events",
@@ -213,7 +236,7 @@ export default function BookingForm({ userId, onSuccess }: BookingFormProps) {
 
       toast.success("Booking request sent! We'll be in touch soon.");
 
-      // Reset form
+      // reset form
       setFormData({
         serviceType: "",
         eventType: "",
