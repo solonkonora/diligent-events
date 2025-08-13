@@ -1,4 +1,5 @@
 import React from "react";
+import ThemeSwitcher from "./theme-switcher";
 
 interface SidebarNavProps {
   sidebarOpen: boolean;
@@ -14,7 +15,9 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
   setSidebarOpen,
 }) => (
   <div
-    className={`h-screen ${sidebarOpen ? "w-64" : "w-20"} bg-blue-800 text-white transition-all duration-300 ease-in-out`}
+    className={`relative flex h-full flex-col ${
+      sidebarOpen ? "w-64" : "w-20"
+    } bg-blue-800 text-white transition-all duration-300 ease-in-out`}
   >
     <div className="flex h-20 items-center justify-between px-4">
       <h1 className={`${sidebarOpen ? "block" : "hidden"} text-xl font-bold`}>
@@ -57,7 +60,7 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         )}
       </button>
     </div>
-    <nav className="mt-8">
+    <nav className="mt-8 flex-1">
       <ul>
         <li>
           <button
@@ -181,6 +184,31 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         </li>
       </ul>
     </nav>
+    <div className="mt-auto flex w-full flex-col items-center gap-2 pb-4">
+      <a
+        href="/auth/logout"
+        className="flex w-11/12 items-center rounded px-6 py-3 text-red-300 transition-colors hover:bg-blue-700 hover:text-red-400"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1"
+          />
+        </svg>
+        {sidebarOpen && <span className="ml-3">Logout</span>}
+      </a>
+      <div className="ml-3 flex w-full">
+        <ThemeSwitcher />
+      </div>
+    </div>
   </div>
 );
 
