@@ -145,7 +145,7 @@ export default function ServicesPage() {
                     </p>
                     <div className="mb-6">
                       <span className="dark:text-primary text-4xl font-bold text-blue-800">
-                        ${plan.price}
+                        FCFA{plan.price}
                       </span>
                       <span className="dark:text-muted-foreground text-gray-500">
                         <br />/ {plan.unit}
@@ -313,10 +313,10 @@ const pricingPlans = [
   {
     title: "Basic",
     description: "Perfect for small events",
-    price: 499,
+    price: 50000,
     unit: "event",
     features: [
-      "2 professional hostesses",
+      "4 professional hostesses",
       "4-hour event coverage",
       "Basic guest management",
       "Standard attire",
@@ -327,10 +327,10 @@ const pricingPlans = [
   {
     title: "Premium",
     description: "Ideal for medium-sized events",
-    price: 999,
+    price: 100000,
     unit: "event",
     features: [
-      "4 professional hostesses",
+      "8 professional hostesses",
       "8-hour event coverage",
       "VIP guest handling",
       "Custom-branded attire",
@@ -341,7 +341,7 @@ const pricingPlans = [
   {
     title: "Elite",
     description: "For large-scale prestigious events",
-    price: 1999,
+    price: 150000,
     unit: "event",
     features: [
       "8+ professional hostesses",
