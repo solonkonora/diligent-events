@@ -24,7 +24,7 @@ export default function ServicesPage() {
           <ContactButtons />
         </section>
 
-        <section className="dark:bg-background bg-white py-20">
+        <section className="dark:bg-background bg-white py-12">
           <div className="container mx-auto px-4">
             <div className="mb-16 text-center">
               <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
@@ -36,22 +36,24 @@ export default function ServicesPage() {
               </p>
             </div>
 
-            <div className="space-y-20">
+            <div className="space-y-0">
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className={`dark:bg-card dark:border-border flex flex-col rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg dark:border dark:shadow-none ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
+                  className={`dark:bg-card dark:border-border flex flex-col md:flex-row ${
+                    index % 2 !== 0 ? "md:flex-row-reverse" : ""
+                  } items-stretch gap-0 rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg md:gap-0 dark:border dark:shadow-none`}
                 >
-                  <div className="md:w-1/2">
+                  <div className="flex w-full items-center justify-center p-4 md:w-1/2 md:p-8">
                     <Image
                       src={service.image || "/placeholder.svg"}
                       alt={service.title}
                       width={600}
                       height={400}
-                      className="rounded-lg shadow-lg"
+                      className="h-auto max-h-[350px] w-full rounded-lg object-cover shadow-lg md:max-h-[400px]"
                     />
                   </div>
-                  <div className="space-y-4 md:w-1/2">
+                  <div className="flex w-full flex-col justify-center space-y-4 p-6 md:w-1/2 md:p-8">
                     <h3 className="dark:text-primary text-2xl font-bold text-blue-800">
                       {service.title}
                     </h3>
@@ -127,7 +129,11 @@ export default function ServicesPage() {
               {pricingPlans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`overflow-hidden rounded-lg shadow-lg ${plan.featured ? "relative border-2 border-orange-500 dark:border-orange-400" : "dark:border-border dark:border"}`}
+                  className={`overflow-hidden rounded-lg shadow-lg ${
+                    plan.featured
+                      ? "relative border-2 border-orange-500 dark:border-orange-400"
+                      : "dark:border-border dark:border"
+                  }`}
                 >
                   {plan.featured && (
                     <div className="dark:bg-primary dark:text-primary-foreground bg-orange-500 py-1 text-center font-medium text-white">
@@ -135,7 +141,11 @@ export default function ServicesPage() {
                     </div>
                   )}
                   <div
-                    className={`p-8 ${plan.featured ? "dark:bg-card bg-blue-50" : "dark:bg-background bg-white"}`}
+                    className={`p-8 ${
+                      plan.featured
+                        ? "dark:bg-card bg-blue-50"
+                        : "dark:bg-background bg-white"
+                    }`}
                   >
                     <h3 className="dark:text-primary mb-2 text-2xl font-bold text-blue-800">
                       {plan.title}
@@ -145,7 +155,7 @@ export default function ServicesPage() {
                     </p>
                     <div className="mb-6">
                       <span className="dark:text-primary text-4xl font-bold text-blue-800">
-                        FCFA{plan.price}
+                        {plan.price}FCFA
                       </span>
                       <span className="dark:text-muted-foreground text-gray-500">
                         <br />/ {plan.unit}
