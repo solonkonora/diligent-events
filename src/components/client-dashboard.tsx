@@ -181,10 +181,10 @@ export default function ClientDashboard() {
     };
   }, [profile]);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/auth/login");
-  };
+  // const handleLogout = async () => {
+  //   await supabase.auth.signOut();
+  //   router.push("/auth/login");
+  // };
 
   // Todo: Update profile function
   // This function updates the profile in the database and updates the local state
@@ -267,12 +267,12 @@ export default function ClientDashboard() {
             <span className="text-muted-foreground hidden sm:inline">
               Welcome, {profile?.full_name}
             </span>
-            <button
+            {/* <button
               onClick={handleLogout}
               className="border-border text-foreground hover:bg-destructive hover:text-destructive-foreground rounded-md border px-3 py-2 text-sm sm:px-4 sm:py-2"
             >
               Logout
-            </button>
+            </button> */}
           </div>
         </header>
 
