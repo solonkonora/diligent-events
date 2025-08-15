@@ -25,7 +25,7 @@ export default function Header() {
         </div>
 
         {/* Desktop navigation */}
-        <nav className="hidden items-center gap-4 md:flex lg:gap-6">
+        <nav className="hidden items-center gap-4 lg:flex lg:gap-6">
           <Link
             href="/"
             className="hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/40 rounded bg-transparent px-2 py-1 text-sm font-medium transition-colors"
@@ -75,7 +75,7 @@ export default function Header() {
 
         {/* Mobile navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
+          <SheetTrigger asChild className="lg:hidden">
             <Button variant="outline" size="icon">
               <Menu className="text-foreground h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
