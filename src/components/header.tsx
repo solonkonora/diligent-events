@@ -117,6 +117,20 @@ export default function Header() {
               >
                 Contact
               </Link>
+              <Link
+                href="/login"
+                className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </Link>
+              <Link
+                href="/signup"
+                className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Signup
+              </Link>
 
               <ThemeSwitcher />
             </nav>
