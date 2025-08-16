@@ -241,7 +241,7 @@ export default function ClientDashboard() {
           <div className="flex items-center gap-2">
             {/* Sidebar toggle for mobile and desktop */}
             <button
-              className="hover:bg-muted rounded-md p-2 focus:outline-none"
+              className="rounded-md p-2 hover:bg-gray-200 focus:outline-none lg:hidden"
               onClick={() => setSidebarOpen((open) => !open)}
               aria-label="Open sidebar"
             >
