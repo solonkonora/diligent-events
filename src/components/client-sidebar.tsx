@@ -1,4 +1,5 @@
 import React from "react";
+import ThemeSwitcher from "./theme-switcher";
 
 interface SidebarNavProps {
   sidebarOpen: boolean;
@@ -14,7 +15,7 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
   setSidebarOpen,
 }) => (
   <div
-    className={`h-screen ${sidebarOpen ? "w-64" : "w-20"} bg-blue-800 text-white transition-all duration-300 ease-in-out`}
+    className={`h-screen ${sidebarOpen ? "w-64" : "w-20"} bg-primary text-primary-foreground flex flex-col transition-all duration-300 ease-in-out`}
   >
     <div className="flex h-20 items-center justify-between px-4">
       <h1 className={`${sidebarOpen ? "block" : "hidden"} text-xl font-bold`}>
@@ -22,7 +23,7 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
       </h1>
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="rounded-full p-2 hover:bg-blue-700"
+        className="hover:bg-primary/80 rounded-full p-2"
       >
         {sidebarOpen ? (
           <svg
@@ -57,13 +58,15 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         )}
       </button>
     </div>
-    <nav className="mt-8">
+    <nav className="mt-8 flex-1">
       <ul>
         <li>
           <button
             onClick={() => setActiveTab("dashboard")}
-            className={`flex w-full items-center px-6 py-3 ${
-              activeTab === "dashboard" ? "bg-blue-900" : "hover:bg-blue-700"
+            className={`flex w-full items-center rounded px-6 py-3 transition-colors ${
+              activeTab === "dashboard"
+                ? "bg-primary/80 text-primary-foreground"
+                : "hover:bg-primary/60 hover:text-primary-foreground"
             }`}
           >
             <svg
@@ -86,8 +89,10 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         <li>
           <button
             onClick={() => setActiveTab("bookings")}
-            className={`flex w-full items-center px-6 py-3 ${
-              activeTab === "bookings" ? "bg-blue-900" : "hover:bg-blue-700"
+            className={`flex w-full items-center rounded px-6 py-3 transition-colors ${
+              activeTab === "bookings"
+                ? "bg-primary/80 text-primary-foreground"
+                : "hover:bg-primary/60 hover:text-primary-foreground"
             }`}
           >
             <svg
@@ -110,8 +115,10 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         <li>
           <button
             onClick={() => setActiveTab("newBooking")}
-            className={`flex w-full items-center px-6 py-3 ${
-              activeTab === "newBooking" ? "bg-blue-900" : "hover:bg-blue-700"
+            className={`flex w-full items-center rounded px-6 py-3 transition-colors ${
+              activeTab === "newBooking"
+                ? "bg-primary/80 text-primary-foreground"
+                : "hover:bg-primary/60 hover:text-primary-foreground"
             }`}
           >
             <svg
@@ -134,8 +141,10 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         <li>
           <button
             onClick={() => setActiveTab("profile")}
-            className={`flex w-full items-center px-6 py-3 ${
-              activeTab === "profile" ? "bg-blue-900" : "hover:bg-blue-700"
+            className={`flex w-full items-center rounded px-6 py-3 transition-colors ${
+              activeTab === "profile"
+                ? "bg-primary/80 text-primary-foreground"
+                : "hover:bg-primary/60 hover:text-primary-foreground"
             }`}
           >
             <svg
@@ -158,8 +167,10 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         <li>
           <button
             onClick={() => setActiveTab("help")}
-            className={`flex w-full items-center px-6 py-3 ${
-              activeTab === "help" ? "bg-blue-900" : "hover:bg-blue-700"
+            className={`flex w-full items-center rounded px-6 py-3 transition-colors ${
+              activeTab === "help"
+                ? "bg-primary/80 text-primary-foreground"
+                : "hover:bg-primary/60 hover:text-primary-foreground"
             }`}
           >
             <svg
@@ -181,6 +192,9 @@ const SidebarNav: React.FC<SidebarNavProps> = ({
         </li>
       </ul>
     </nav>
+    <div className="mb-4 flex items-center justify-center">
+      <ThemeSwitcher />
+    </div>
   </div>
 );
 

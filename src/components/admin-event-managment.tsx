@@ -320,11 +320,11 @@ export function EventManagement({ profileId }: EventManagementProps) {
   return (
     <section className="space-y-4 p-4 lg:space-y-6 lg:p-1">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="rounded-lg bg-white p-4 shadow-md lg:p-6">
-          <h3 className="mb-2 text-sm font-medium text-gray-700 sm:text-base lg:text-lg">
+        <div className="rounded-lg bg-card p-4 shadow-md lg:p-6">
+          <h3 className="mb-2 text-sm font-medium text-muted-foreground sm:text-base lg:text-lg">
             Upcoming Events
           </h3>
-          <p className="text-xl font-bold text-blue-600 sm:text-2xl lg:text-3xl">
+          <p className="text-xl font-bold text-primary sm:text-2xl lg:text-3xl">
             {
               bookings.filter(
                 (b) =>
@@ -334,39 +334,37 @@ export function EventManagement({ profileId }: EventManagementProps) {
             }
           </p>
         </div>
-        <div className="rounded-lg bg-white p-4 shadow-md lg:p-6">
-          <h3 className="mb-2 text-sm font-medium text-gray-700 sm:text-base lg:text-lg">
+        <div className="rounded-lg bg-card p-4 shadow-md lg:p-6">
+          <h3 className="mb-2 text-sm font-medium text-muted-foreground sm:text-base lg:text-lg">
             Event Status
           </h3>
           <div className="flex flex-wrap gap-1 lg:gap-2">
-            <span className="rounded-full bg-yellow-100 px-2 py-1 text-xs text-yellow-800 sm:px-3 sm:text-sm">
+            <span className="rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100 px-2 py-1 text-xs sm:px-3 sm:text-sm">
               Pending: {bookings.filter((b) => b.status === "pending").length}
             </span>
-            <span className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800 sm:px-3 sm:text-sm">
-              Confirmed:{" "}
-              {bookings.filter((b) => b.status === "confirmed").length}
+            <span className="rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 px-2 py-1 text-xs sm:px-3 sm:text-sm">
+              Confirmed: {bookings.filter((b) => b.status === "confirmed").length}
             </span>
-            <span className="rounded-full bg-red-100 px-2 py-1 text-xs text-red-800 sm:px-3 sm:text-sm">
-              Cancelled:{" "}
-              {bookings.filter((b) => b.status === "cancelled").length}
+            <span className="rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100 px-2 py-1 text-xs sm:px-3 sm:text-sm">
+              Cancelled: {bookings.filter((b) => b.status === "cancelled").length}
             </span>
           </div>
         </div>
       </div>
 
       {/* filters */}
-      <div className="rounded-lg bg-white p-4 shadow-md lg:p-6">
+      <div className="rounded-lg bg-card p-4 shadow-md lg:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center">
             <input
               type="text"
               placeholder="Search by name or event type"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm ring-1 focus:border-blue-500 focus:ring-blue-500 focus:outline-none sm:w-64 lg:text-base"
+              className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm ring-1 focus:border-primary focus:ring-primary focus:outline-none sm:w-64 lg:text-base"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <select
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm ring-1 focus:border-blue-500 focus:ring-blue-500 focus:outline-none sm:w-auto lg:text-base"
+              className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm ring-1 focus:border-primary focus:ring-primary focus:outline-none sm:w-auto lg:text-base"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
             >
@@ -377,7 +375,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
             </select>
           </div>
           <button
-            className="w-full rounded-lg bg-blue-500 px-4 py-2 text-sm text-white ring-2 transition-colors hover:bg-blue-600 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none sm:w-auto lg:text-base"
+            className="w-full rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm ring-2 transition-colors hover:bg-primary/80 focus:ring-primary focus:ring-offset-2 focus:outline-none sm:w-auto lg:text-base"
             onClick={fetchBookings}
           >
             Refresh
@@ -386,43 +384,43 @@ export function EventManagement({ profileId }: EventManagementProps) {
       </div>
 
       {/* bookings - mobile card view & desktop table */}
-      <div className="rounded-lg bg-white shadow-md">
+      <div className="rounded-lg bg-card shadow-md">
         {bookingsLoading ? (
           <div className="p-6 text-center">
-            <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
-            <p className="mt-2 text-gray-600">Loading bookings...</p>
+            <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+            <p className="mt-2 text-muted-foreground">Loading bookings...</p>
           </div>
         ) : filteredBookings.length === 0 ? (
-          <div className="p-6 text-center text-gray-500">
+          <div className="p-6 text-center text-muted-foreground">
             No bookings found matching your criteria.
           </div>
         ) : (
           <>
             {/* mobile card View */}
             <div className="block lg:hidden">
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-border">
                 {filteredBookings.map((booking) => (
                   <div key={booking.id} className="p-4">
                     <div className="flex items-start justify-between">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-sm font-medium text-gray-900 truncate">
+                          <h3 className="text-sm font-medium text-foreground truncate">
                             {booking.client_name}
                           </h3>
                           <span
                             className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
                               booking.status === "confirmed"
-                                ? "bg-blue-100 text-blue-800"
+                                ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
                                 : booking.status === "cancelled"
-                                  ? "bg-red-100 text-red-800"
-                                  : "bg-yellow-100 text-yellow-800"
+                                  ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100"
+                                  : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
                             }`}
                           >
                             {booking.status.charAt(0).toUpperCase() +
                               booking.status.slice(1)}
                           </span>
                         </div>
-                        <div className="space-y-1 text-sm text-gray-600">
+                        <div className="space-y-1 text-sm text-muted-foreground">
                           <p>
                             <span className="font-medium">Event:</span>{" "}
                             {booking.event_type}
@@ -440,20 +438,20 @@ export function EventManagement({ profileId }: EventManagementProps) {
                         </div>
                         <div className="mt-3 flex flex-wrap gap-2">
                           <button
-                            className="rounded-lg bg-blue-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                            className="rounded-lg bg-primary text-primary-foreground px-3 py-1.5 text-xs font-medium hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
                             onClick={() => handleViewBooking(booking)}
                           >
                             View
                           </button>
                           <button
-                            className="rounded-lg bg-green-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1"
+                            className="rounded-lg bg-green-600 text-white px-3 py-1.5 text-xs font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-1"
                             onClick={() => handleEditBooking(booking)}
                           >
                             Edit
                           </button>
                           {booking.status !== "cancelled" ? (
                             <button
-                              className="rounded-lg bg-gray-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1"
+                              className="rounded-lg bg-muted text-muted-foreground px-3 py-1.5 text-xs font-medium hover:bg-destructive focus:outline-none focus:ring-2 focus:ring-muted focus:ring-offset-1"
                               onClick={() => handleCancelBooking(booking.id)}
                               disabled={cancellingId === booking.id}
                             >
@@ -461,7 +459,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
                             </button>
                           ) : (
                             <button
-                              className="rounded-lg bg-red-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-1"
+                              className="rounded-lg bg-destructive text-destructive-foreground px-3 py-1.5 text-xs font-medium hover:bg-destructive/80 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-1"
                               onClick={() => handleDeleteBooking(booking.id)}
                               disabled={deletingId === booking.id}
                             >
@@ -478,52 +476,52 @@ export function EventManagement({ profileId }: EventManagementProps) {
 
             {/* desktop table view */}
             <div className="hidden lg:block overflow-x-auto w-full" style={{ maxWidth: "calc(100vw - 280px)" }}>
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-border">
+                <thead className="bg-muted">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Client
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Event Type
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Date
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Services
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-card divide-y divide-border">
                   {filteredBookings.map((booking) => (
-                    <tr key={booking.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <tr key={booking.id} className="hover:bg-muted/50">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
                         {booking.client_name}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                         {booking.event_type}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                         {new Date(booking.event_date).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                      <td className="px-6 py-4 text-sm text-muted-foreground max-w-xs truncate">
                         {booking.services || "—"}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
                           className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
                             booking.status === "confirmed"
-                              ? "bg-blue-100 text-blue-800"
+                              ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
                               : booking.status === "cancelled"
-                                ? "bg-red-100 text-red-800"
-                                : "bg-yellow-100 text-yellow-800"
+                                ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100"
+                                : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
                           }`}
                         >
                           {booking.status.charAt(0).toUpperCase() +
@@ -533,20 +531,20 @@ export function EventManagement({ profileId }: EventManagementProps) {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
                           <button
-                            className="rounded bg-blue-500 px-3 py-1 text-xs text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                            className="rounded bg-primary text-primary-foreground px-3 py-1 text-xs hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
                             onClick={() => handleViewBooking(booking)}
                           >
                             View
                           </button>
                           <button
-                            className="rounded bg-green-500 px-3 py-1 text-xs text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1"
+                            className="rounded bg-green-600 text-white px-3 py-1 text-xs hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-1"
                             onClick={() => handleEditBooking(booking)}
                           >
                             Edit
                           </button>
                           {booking.status !== "cancelled" ? (
                             <button
-                              className="rounded bg-gray-500 px-3 py-1 text-xs text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1"
+                              className="rounded bg-muted text-muted-foreground px-3 py-1 text-xs hover:bg-destructive focus:outline-none focus:ring-2 focus:ring-muted focus:ring-offset-1"
                               onClick={() => handleCancelBooking(booking.id)}
                               disabled={cancellingId === booking.id}
                             >
@@ -554,7 +552,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
                             </button>
                           ) : (
                             <button
-                              className="rounded bg-red-700 px-3 py-1 text-xs text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-1"
+                              className="rounded bg-destructive text-destructive-foreground px-3 py-1 text-xs hover:bg-destructive/80 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-1"
                               onClick={() => handleDeleteBooking(booking.id)}
                               disabled={deletingId === booking.id}
                             >
@@ -575,10 +573,10 @@ export function EventManagement({ profileId }: EventManagementProps) {
       {/* view/edit modal */}
       {modalOpen && selectedBooking && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg bg-white shadow-xl sm:max-w-lg">
-            <div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 py-3 sm:px-6">
+          <div className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg bg-card shadow-xl sm:max-w-lg">
+            <div className="sticky top-0 z-10 bg-card border-b border-border px-4 py-3 sm:px-6">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900 sm:text-xl">
+                <h3 className="text-lg font-semibold text-foreground sm:text-xl">
                   {editMode ? "Edit Booking" : "Booking Details"}
                 </h3>
                 <button
@@ -587,7 +585,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
                     setEditMode(false);
                     setSelectedBooking(null);
                   }}
-                  className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="rounded-lg p-1 text-muted-foreground hover:bg-muted hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -600,7 +598,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
               {editMode ? (
                 <form onSubmit={handleSaveEdit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">
                       Event Type
                     </label>
                     <input
@@ -608,12 +606,12 @@ export function EventManagement({ profileId }: EventManagementProps) {
                       name="event_type"
                       value={editForm.event_type}
                       onChange={handleEditChange}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">
                       Date
                     </label>
                     <input
@@ -621,19 +619,19 @@ export function EventManagement({ profileId }: EventManagementProps) {
                       name="event_date"
                       value={editForm.event_date}
                       onChange={handleEditChange}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">
                       Status
                     </label>
                     <select
                       name="status"
                       value={editForm.status}
                       onChange={handleEditChange}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     >
                       <option value="pending">Pending</option>
                       <option value="confirmed">Confirmed</option>
@@ -641,10 +639,10 @@ export function EventManagement({ profileId }: EventManagementProps) {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">
                       Services
                     </label>
-                    <div className="max-h-40 overflow-y-auto rounded-lg border border-gray-300 p-3 space-y-2">
+                    <div className="max-h-40 overflow-y-auto rounded-lg border border-border bg-background p-3 space-y-2">
                       {availableServices.map((service) => (
                         <label
                           key={service.id}
@@ -664,9 +662,9 @@ export function EventManagement({ profileId }: EventManagementProps) {
                                   ),
                               }));
                             }}
-                            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                            className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                           />
-                          <span className="text-sm text-gray-700">{service.name}</span>
+                          <span className="text-sm text-foreground">{service.name}</span>
                         </label>
                       ))}
                     </div>
@@ -675,13 +673,13 @@ export function EventManagement({ profileId }: EventManagementProps) {
                     <button
                       type="button"
                       onClick={() => setEditMode(false)}
-                      className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
+                      className="w-full rounded-lg border border-border bg-background text-foreground px-4 py-2 text-sm font-medium hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="w-full rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
+                      className="w-full rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
                       disabled={updating}
                     >
                       {updating ? (
@@ -702,19 +700,19 @@ export function EventManagement({ profileId }: EventManagementProps) {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <span className="text-sm font-medium text-gray-500">Client</span>
-                      <p className="mt-1 text-sm text-gray-900">{selectedBooking.client_name}</p>
+                      <span className="text-sm font-medium text-muted-foreground">Client</span>
+                      <p className="mt-1 text-sm text-foreground">{selectedBooking.client_name}</p>
                     </div>
                     <div>
-                      <span className="text-sm font-medium text-gray-500">Status</span>
+                      <span className="text-sm font-medium text-muted-foreground">Status</span>
                       <p className="mt-1">
                         <span
                           className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
                             selectedBooking.status === "confirmed"
-                              ? "bg-blue-100 text-blue-800"
+                              ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
                               : selectedBooking.status === "cancelled"
-                                ? "bg-red-100 text-red-800"
-                                : "bg-yellow-100 text-yellow-800"
+                                ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100"
+                                : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
                           }`}
                         >
                           {selectedBooking.status.charAt(0).toUpperCase() +
@@ -723,51 +721,51 @@ export function EventManagement({ profileId }: EventManagementProps) {
                       </p>
                     </div>
                     <div>
-                      <span className="text-sm font-medium text-gray-500">Event Type</span>
-                      <p className="mt-1 text-sm text-gray-900">{selectedBooking.event_type}</p>
+                      <span className="text-sm font-medium text-muted-foreground">Event Type</span>
+                      <p className="mt-1 text-sm text-foreground">{selectedBooking.event_type}</p>
                     </div>
                     <div>
-                      <span className="text-sm font-medium text-gray-500">Date</span>
-                      <p className="mt-1 text-sm text-gray-900">
+                      <span className="text-sm font-medium text-muted-foreground">Date</span>
+                      <p className="mt-1 text-sm text-foreground">
                         {new Date(selectedBooking.event_date).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
                   <div>
-                    <span className="text-sm font-medium text-gray-500">Services</span>
-                    <p className="mt-1 text-sm text-gray-900">{selectedBooking.services || "—"}</p>
+                    <span className="text-sm font-medium text-muted-foreground">Services</span>
+                    <p className="mt-1 text-sm text-foreground">{selectedBooking.services || "—"}</p>
                   </div>
                   {selectedBooking.details && (
                     <div>
-                      <span className="text-sm font-medium text-gray-500">Details</span>
-                      <p className="mt-1 rounded-lg bg-gray-50 p-3 text-sm text-gray-900 whitespace-pre-wrap">
+                      <span className="text-sm font-medium text-muted-foreground">Details</span>
+                      <p className="mt-1 rounded-lg bg-muted p-3 text-sm text-foreground whitespace-pre-wrap">
                         {selectedBooking.details}
                       </p>
                     </div>
                   )}
                   <div>
-                    <span className="text-sm font-medium text-gray-500">Created</span>
-                    <p className="mt-1 text-sm text-gray-900">
+                    <span className="text-sm font-medium text-muted-foreground">Created</span>
+                    <p className="mt-1 text-sm text-foreground">
                       {new Date(selectedBooking.created_at).toLocaleString()}
                     </p>
                   </div>
 
-                  <div className="flex flex-col gap-3 pt-4 border-t border-gray-200 sm:flex-row sm:justify-end">
+                  <div className="flex flex-col gap-3 pt-4 border-t border-border sm:flex-row sm:justify-end">
                     <button
-                      className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
+                      className="w-full rounded-lg border border-border bg-background text-foreground px-4 py-2 text-sm font-medium hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
                       onClick={() => setModalOpen(false)}
                     >
                       Close
                     </button>
                     <button
-                      className="w-full rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
+                      className="w-full rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
                       onClick={() => setEditMode(true)}
                     >
                       Edit
                     </button>
                     {selectedBooking.status === "cancelled" && (
                       <button
-                        className="w-full rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-auto"
+                        className="w-full rounded-lg bg-destructive text-destructive-foreground px-4 py-2 text-sm font-medium hover:bg-destructive/80 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 sm:w-auto"
                         onClick={() => {
                           if (
                             confirm(

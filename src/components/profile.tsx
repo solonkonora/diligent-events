@@ -61,29 +61,29 @@ export default function ProfileSection({
 
   return (
     <section>
-      <h2 className="mb-6 text-xl font-semibold text-gray-700">My Profile</h2>
-      <div className="rounded-lg bg-white p-6 shadow-md">
+      <h2 className="text-foreground mb-6 text-xl font-semibold">My Profile</h2>
+      <div className="bg-card rounded-lg p-6 shadow-md">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="text-foreground block text-sm font-medium">
               Full Name
             </label>
             <input
               type="text"
               name="full_name"
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+              className="border-border bg-background text-foreground focus:border-primary focus:ring-primary mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none"
               value={updatedProfile.full_name || ""}
               onChange={handleInputChange}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="text-foreground block text-sm font-medium">
               Phone Number
             </label>
             <input
               type="tel"
               name="phone"
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+              className="border-border bg-background text-foreground focus:border-primary focus:ring-primary mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none"
               value={updatedProfile.phone || ""}
               onChange={handleInputChange}
             />
@@ -92,7 +92,7 @@ export default function ProfileSection({
             <button
               onClick={updateProfile}
               disabled={isUpdating}
-              className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:bg-blue-300"
+              className="bg-primary text-primary-foreground hover:bg-primary/80 disabled:bg-muted disabled:text-muted-foreground rounded-md px-4 py-2"
             >
               {isUpdating ? "Updating..." : "Update Profile"}
             </button>
@@ -100,13 +100,13 @@ export default function ProfileSection({
         </div>
 
         <div className="mt-8">
-          <h3 className="text-lg font-medium text-gray-700">Password</h3>
-          <p className="mt-1 text-sm text-gray-500">
+          <h3 className="text-foreground text-lg font-medium">Password</h3>
+          <p className="text-muted-foreground mt-1 text-sm">
             For security reasons, you can't view your current password.
           </p>
           <button
             onClick={() => toast.success("Password reset email sent!")}
-            className="mt-4 rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-50"
+            className="border-border bg-background text-foreground hover:bg-muted mt-4 rounded-md border px-4 py-2"
           >
             Reset Password
           </button>

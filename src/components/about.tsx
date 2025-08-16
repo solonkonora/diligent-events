@@ -13,7 +13,7 @@ export default function AboutPage() {
             <h1 className="dark:text-primary-foreground mb-6 text-4xl font-bold md:text-5xl">
               About Us
             </h1>
-            <p className="dark:text-muted-foreground mx-auto max-w-3xl text-xl text-blue-100">
+            <p className="dark:text-foreground mx-auto max-w-3xl text-xl text-blue-100">
               Learn about our journey, our mission, and the team behind our
               exceptional hostess and protocol services.
             </p>

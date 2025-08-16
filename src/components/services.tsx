@@ -117,7 +117,7 @@ export default function ServicesPage() {
               <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Flexible Pricing Options
               </h2>
-              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="dark:text-foreground mx-auto max-w-3xl text-lg text-gray-600">
                 We offer transparent pricing with packages designed to suit
                 events of all sizes and budgets.
               </p>

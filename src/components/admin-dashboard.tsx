@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
 import { EventManagement } from "./admin-event-managment";
+import AdminSidebar from "./admin-sidebar";
 
 type Profile = {
   id: string;
@@ -57,7 +58,7 @@ export function AdminDashboard() {
           created_at,
           bookings(id, created_at, status)
         `
-        )
+        );
         // .neq("role", "admin"); // Exclude other admins
 
       // Apply filters based on userFilter state
@@ -206,212 +207,36 @@ export function AdminDashboard() {
 
   if (loading)
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-background text-foreground">
         Loading...
       </div>
     );
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-background">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="bg-opacity-50 fixed inset-0 z-20 bg-black/50 lg:hidden"
+          className="bg-black/50 bg-opacity-50 fixed inset-0 z-20 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <div
-        className={`${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed inset-y-0 left-0 z-30 w-64 transform bg-blue-800 text-white transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 ${
-          sidebarOpen ? "lg:w-64" : "lg:w-20"
-        }`}
-      >
-        <div className="flex h-16 items-center justify-between px-4 lg:h-20">
-          <h1
-            className={`${
-              sidebarOpen ? "block" : "hidden lg:hidden"
-            } text-lg font-bold lg:text-xl`}
-          >
-            Diligent Services
-          </h1>
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="rounded-full p-2 hover:bg-blue-700"
-          >
-            {sidebarOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 lg:h-6 lg:w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 lg:h-6 lg:w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 5l7 7-7 7M5 5l7 7-7 7"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-        <nav className="mt-4 lg:mt-8">
-          <ul>
-            <li>
-              <button
-                onClick={() => {
-                  setActiveTab("dashboard");
-                  // Close sidebar on mobile after selection
-                  if (window.innerWidth < 1024) setSidebarOpen(false);
-                }}
-                className={`flex w-full items-center px-4 py-3 lg:px-6 ${
-                  activeTab === "dashboard"
-                    ? "bg-blue-900"
-                    : "hover:bg-blue-700"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 lg:h-6 lg:w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm0 10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10-10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zm0 10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                  />
-                </svg>
-                {(sidebarOpen || window.innerWidth < 1024) && (
-                  <span className="ml-3">Dashboard</span>
-                )}
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  setActiveTab("users");
-                  if (window.innerWidth < 1024) setSidebarOpen(false);
-                }}
-                className={`flex w-full items-center px-4 py-3 lg:px-6 ${
-                  activeTab === "users" ? "bg-blue-900" : "hover:bg-blue-700"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 lg:h-6 lg:w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4.354a4 4 0 110 5.292m0 0a4 4 0 100 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
-                {(sidebarOpen || window.innerWidth < 1024) && (
-                  <span className="ml-3">Users</span>
-                )}
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  setActiveTab("events");
-                  if (window.innerWidth < 1024) setSidebarOpen(false);
-                }}
-                className={`flex w-full items-center px-4 py-3 lg:px-6 ${
-                  activeTab === "events" ? "bg-blue-900" : "hover:bg-blue-700"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 lg:h-6 lg:w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                {(sidebarOpen || window.innerWidth < 1024) && (
-                  <span className="ml-3">Bookings</span>
-                )}
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  setActiveTab("settings");
-                  if (window.innerWidth < 1024) setSidebarOpen(false);
-                }}
-                className={`flex w-full items-center px-4 py-3 lg:px-6 ${
-                  activeTab === "settings" ? "bg-blue-900" : "hover:bg-blue-700"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 lg:h-6 lg:w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                {(sidebarOpen || window.innerWidth < 1024) && (
-                  <span className="mr-3">Settings</span>
-                )}
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <AdminSidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
       {/* Main content */}
       <div className="flex flex-1 flex-col">
-        <header className="flex h-16 items-center justify-between bg-white px-4 shadow lg:h-20 lg:px-4">
+        <header className="flex h-16 items-center justify-between bg-card px-4 shadow lg:h-20 lg:px-4">
           <div className="flex items-center">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="mr-3 rounded-md p-2 hover:bg-gray-100 lg:hidden"
+              className="mr-3 rounded-md p-2 hover:bg-muted lg:hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -428,17 +253,17 @@ export function AdminDashboard() {
                 />
               </svg>
             </button>
-            <h1 className="text-lg font-semibold text-gray-800 sm:text-xl">
+            <h1 className="text-lg font-semibold text-foreground sm:text-xl">
               Admin Portal
             </h1>
           </div>
           <div className="flex items-center gap-2 lg:gap-6">
-            <span className="hidden text-sm text-gray-600 sm:block lg:text-base">
+            <span className="hidden text-sm text-muted-foreground sm:block lg:text-base">
               Welcome, {profile?.full_name}
             </span>
             <button
               onClick={handleLogout}
-              className="rounded-md border border-gray-300 px-3 py-1 text-sm text-gray-700 hover:bg-red-600 hover:text-white lg:px-2 lg:py-2 lg:text-base"
+              className="rounded-md border border-border px-3 py-1 text-sm text-foreground hover:bg-destructive hover:text-destructive-foreground lg:px-2 lg:py-2 lg:text-base"
             >
               Logout
             </button>
@@ -450,31 +275,31 @@ export function AdminDashboard() {
           {activeTab === "dashboard" && (
             <>
               <section className="m-6 lg:mb-8">
-                <h2 className="mb-4 text-lg font-semibold text-gray-700 lg:text-xl">
+                <h2 className="mb-4 text-lg font-semibold text-foreground lg:text-xl">
                   Analytics
                 </h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  <div className="rounded bg-white p-4 shadow lg:p-6">
-                    <div className="text-2xl font-bold text-blue-600 lg:text-3xl">
+                  <div className="bg-card rounded p-4 shadow lg:p-6">
+                    <div className="text-2xl font-bold text-primary lg:text-3xl">
                       {analytics.total}
                     </div>
-                    <div className="text-sm text-gray-500 lg:text-base">
+                    <div className="text-sm text-muted-foreground lg:text-base">
                       Total Users
                     </div>
                   </div>
-                  <div className="rounded bg-white p-4 shadow lg:p-6">
+                  <div className="bg-card rounded p-4 shadow lg:p-6">
                     <div className="text-2xl font-bold text-green-600 lg:text-3xl">
                       {analytics.admins}
                     </div>
-                    <div className="text-sm text-gray-500 lg:text-base">
+                    <div className="text-sm text-muted-foreground lg:text-base">
                       Admins
                     </div>
                   </div>
-                  <div className="rounded bg-white p-4 shadow sm:col-span-2 lg:col-span-1 lg:p-6">
+                  <div className="bg-card rounded p-4 shadow sm:col-span-2 lg:col-span-1 lg:p-6">
                     <div className="text-2xl font-bold text-purple-600 lg:text-3xl">
                       {analytics.clients}
                     </div>
-                    <div className="text-sm text-gray-500 lg:text-base">
+                    <div className="text-sm text-muted-foreground lg:text-base">
                       Clients
                     </div>
                   </div>
@@ -482,11 +307,11 @@ export function AdminDashboard() {
               </section>
 
               <section>
-                <h2 className="m-6 text-lg font-semibold text-gray-700 lg:text-xl">
+                <h2 className="m-6 text-lg font-semibold text-foreground lg:text-xl">
                   Recent Activity
                 </h2>
-                <div className="rounded bg-white p-4 shadow lg:p-6">
-                  <p className="text-sm text-gray-500 lg:text-base">
+                <div className="bg-card rounded p-4 shadow lg:p-6">
+                  <p className="text-sm text-muted-foreground lg:text-base">
                     No recent activity to display.
                   </p>
                 </div>
@@ -497,7 +322,7 @@ export function AdminDashboard() {
           {activeTab === "users" && (
             <section>
               <div className="m-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <h2 className="text-lg font-semibold text-gray-700 lg:text-xl">
+                <h2 className="text-lg font-semibold text-foreground lg:text-xl">
                   User Management
                 </h2>
                 <div className="flex flex-col gap-2 sm:flex-row">
@@ -508,7 +333,7 @@ export function AdminDashboard() {
                         e.target.value as "all" | "active" | "recent"
                       )
                     }
-                    className="rounded border px-3 py-2 text-sm lg:text-base"
+                    className="rounded border border-border bg-background text-foreground px-3 py-2 text-sm lg:text-base"
                   >
                     <option value="active">Active Users (with bookings)</option>
                     <option value="recent">
@@ -517,7 +342,7 @@ export function AdminDashboard() {
                     <option value="all">All Users</option>
                   </select>
                   <button
-                    className="rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600 lg:text-base"
+                    className="bg-primary text-primary-foreground hover:bg-primary/80 rounded px-4 py-2 text-sm lg:text-base"
                     onClick={fetchUsers}
                   >
                     Refresh
@@ -527,23 +352,23 @@ export function AdminDashboard() {
               {/* Mobile Cards View */}
               <div className="block lg:hidden">
                 {usersLoading ? (
-                  <div className="rounded bg-white p-4 shadow">
+                  <div className="bg-card rounded p-4 shadow">
                     Loading users...
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {users.map((u) => (
-                      <div key={u.id} className="rounded bg-white p-4 shadow">
+                      <div key={u.id} className="bg-card rounded p-4 shadow">
                         <div className="mb-3 flex items-start justify-between">
                           <div>
-                            <h3 className="font-medium text-gray-900">{u.full_name}</h3>
+                            <h3 className="text-foreground font-medium">{u.full_name}</h3>
                             <div className="mt-1 flex items-center gap-2">
                               <select
                                 value={u.role}
                                 onChange={(e) =>
                                   handleRoleChange(u.id, e.target.value)
                                 }
-                                className="rounded border px-2 py-1 text-sm"
+                                className="rounded border border-border bg-background text-foreground px-2 py-1 text-sm"
                                 disabled={u.id === profile?.id}
                               >
                                 <option value="admin">admin</option>
@@ -552,7 +377,7 @@ export function AdminDashboard() {
                             </div>
                           </div>
                           <button
-                            className="rounded bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-700 disabled:opacity-50"
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/80 rounded px-3 py-1 text-sm disabled:opacity-50"
                             onClick={() => handleDelete(u.id)}
                             disabled={u.id === profile?.id}
                           >
@@ -561,24 +386,24 @@ export function AdminDashboard() {
                         </div>
                         <div className="grid grid-cols-2 gap-4 text-sm">
                           <div>
-                            <span className="text-gray-500">Bookings:</span>
+                            <span className="text-muted-foreground">Bookings:</span>
                             <div className="mt-1">
-                              <span className="rounded bg-blue-100 px-2 py-1 text-blue-800">
+                              <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 rounded px-2 py-1">
                                 {u.bookingCount || 0} bookings
                               </span>
                             </div>
                           </div>
                           <div>
-                            <span className="text-gray-500">Last Activity:</span>
-                            <div className="mt-1 text-gray-900">
+                            <span className="text-muted-foreground">Last Activity:</span>
+                            <div className="mt-1 text-foreground">
                               {u.lastBooking
                                 ? new Date(u.lastBooking).toLocaleDateString()
                                 : "No activity"}
                             </div>
                           </div>
                           <div className="col-span-2">
-                            <span className="text-gray-500">Joined:</span>
-                            <div className="mt-1 text-gray-900">
+                            <span className="text-muted-foreground">Joined:</span>
+                            <div className="mt-1 text-foreground">
                               {u.created_at
                                 ? new Date(u.created_at).toLocaleDateString()
                                 : ""}
@@ -592,32 +417,32 @@ export function AdminDashboard() {
               </div>
 
               {/* desktop table view */}
-              <div className="hidden overflow-x-auto rounded bg-white shadow lg:block">
+              <div className="bg-card hidden overflow-x-auto rounded shadow lg:block">
                 {usersLoading ? (
                   <div className="p-4">Loading users...</div>
                 ) : (
                   <table className="min-w-full table-auto">
                     <thead>
-                      <tr className="bg-gray-100">
-                        <th className="px-4 py-2 text-left lg:px-6 lg:py-3">Name</th>
-                        <th className="px-4 py-2 text-left lg:px-6 lg:py-3">Role</th>
-                        <th className="px-4 py-2 text-left lg:px-6 lg:py-3">Bookings</th>
-                        <th className="px-4 py-2 text-left lg:px-6 lg:py-3">Last Activity</th>
-                        <th className="px-4 py-2 text-left lg:px-6 lg:py-3">Joined</th>
-                        <th className="px-4 py-2 text-left lg:px-6 lg:py-3">Actions</th>
+                      <tr className="bg-muted">
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Name</th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Role</th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Bookings</th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Last Activity</th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Joined</th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {users.map((u) => (
-                        <tr key={u.id} className="border-b hover:bg-gray-50">
-                          <td className="px-4 py-2 lg:px-6 lg:py-3">{u.full_name}</td>
+                        <tr key={u.id} className="border-border hover:bg-muted/50 border-b">
+                          <td className="text-foreground px-4 py-2 lg:px-6 lg:py-3">{u.full_name}</td>
                           <td className="px-4 py-2 lg:px-6 lg:py-3">
                             <select
                               value={u.role}
                               onChange={(e) =>
                                 handleRoleChange(u.id, e.target.value)
                               }
-                              className="rounded border px-2 py-1 text-sm"
+                              className="rounded border border-border bg-background text-foreground px-2 py-1 text-sm"
                               disabled={u.id === profile?.id}
                             >
                               <option value="admin">admin</option>
@@ -625,7 +450,7 @@ export function AdminDashboard() {
                             </select>
                           </td>
                           <td className="px-4 py-2 lg:px-6 lg:py-3">
-                            <span className="rounded bg-blue-100 px-2 py-1 text-sm text-blue-800">
+                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 rounded px-2 py-1 text-sm">
                               {u.bookingCount || 0} bookings
                             </span>
                           </td>
@@ -641,7 +466,7 @@ export function AdminDashboard() {
                           </td>
                           <td className="px-4 py-2 lg:px-6 lg:py-3">
                             <button
-                              className="rounded bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-700 disabled:opacity-50"
+                              className="bg-destructive text-destructive-foreground hover:bg-destructive/80 rounded px-3 py-1 text-sm disabled:opacity-50"
                               onClick={() => handleDelete(u.id)}
                               disabled={u.id === profile?.id}
                             >
@@ -659,10 +484,10 @@ export function AdminDashboard() {
 
           {activeTab === "events" && (
             <section>
-              <h2 className="my-4 ml-4 text-lg font-semibold text-gray-700 lg:text-xl">
+              <h2 className="my-4 ml-4 text-lg font-semibold text-foreground lg:text-xl">
                 Event Management
               </h2>
-              <div className="rounded bg-white p-0 shadow m-0">
+              <div className="bg-card rounded p-0 shadow m-0">
                 {profile?.id && <EventManagement profileId={profile.id} />}
               </div>
             </section>
@@ -670,11 +495,11 @@ export function AdminDashboard() {
 
           {activeTab === "settings" && (
             <section>
-              <h2 className="p-4 text-lg font-semibold text-gray-700 lg:text-xl">
+              <h2 className="p-4 text-lg font-semibold text-foreground lg:text-xl">
                 Settings
               </h2>
-              <div className="rounded bg-white p-4 shadow lg:p-6">
-                <p className="text-sm text-gray-500 lg:text-base">
+              <div className="bg-card rounded p-4 shadow lg:p-6">
+                <p className="text-sm text-muted-foreground lg:text-base">
                   Settings and preferences coming soon.
                 </p>
               </div>
