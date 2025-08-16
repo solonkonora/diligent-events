@@ -32,7 +32,7 @@ export default function HeroSection() {
           <Link href="/auth/login?redirect=/client">Book Your Event</Link>
         </Button>
       </div>
-      {/* Services Preview at the bottom */}
+      {/* services Preview at the bottom */}
       <div className="absolute bottom-4 left-1/2 z-20 w-[98vw] max-w-xs -translate-x-1/2 px-1 sm:max-w-md md:max-w-lg">
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-3 md:grid-cols-5 md:gap-3">
           {[
