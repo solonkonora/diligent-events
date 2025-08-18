@@ -57,7 +57,7 @@ const ThemeSwitcher = () => {
       >
         <span
           className={`block h-6 w-6 rounded-full border border-orange-400 bg-white shadow-md transition-all duration-300 ${
-            isDark ? "translate-x-4" : "translate-x-0"
+            isDark ? "translate-x-3" : "-translate-x-3"
           }`}
         />
       </button>
