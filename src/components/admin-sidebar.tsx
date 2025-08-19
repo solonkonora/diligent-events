@@ -19,7 +19,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
     <>
       {/* Overlay for mobile/tablet */}
       <div
-        className={`fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden ${sidebarOpen ? "block" : "hidden"}`}
+        className={`fixed inset-0 z-40 bg-black/60 transition-opacity lg:hidden ${sidebarOpen ? "block" : "hidden"}`}
         onClick={() => setSidebarOpen(false)}
         aria-hidden="true"
       />

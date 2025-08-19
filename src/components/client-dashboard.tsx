@@ -216,7 +216,7 @@ export default function ClientDashboard() {
     <div className="bg-background flex h-screen">
       {/* Sidebar overlay for mobile */}
       <div
-        className={`bg-opacity-40 fixed inset-0 z-40 bg-black transition-opacity lg:hidden ${
+        className={`bg-opacity-40 fixed inset-0 z-40 bg-black/60 transition-opacity lg:hidden ${
           sidebarOpen ? "block" : "hidden"
         }`}
         onClick={() => setSidebarOpen(false)}

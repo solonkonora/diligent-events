@@ -572,7 +572,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
 
       {/* view/edit modal */}
       {modalOpen && selectedBooking && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50 p-4">
           <div className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg bg-card shadow-xl sm:max-w-lg">
             <div className="sticky top-0 z-10 bg-card border-b border-border px-4 py-3 sm:px-6">
               <div className="flex items-center justify-between">

@@ -217,7 +217,7 @@ export function AdminDashboard() {
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="bg-black/50 bg-opacity-50 fixed inset-0 z-20 lg:hidden"
+          className="bg-white/50 bg-opacity-50 fixed inset-0 z-20 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}

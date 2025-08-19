@@ -351,7 +351,7 @@ const EventsTable: React.FC<EventsTableProps> = ({
       </div>
       {/* Modal for event details or edit */}
       {modalOpen && (selectedEvent || editEvent) && (
-        <div className="bg-opacity-40 fixed inset-0 z-50 flex items-center justify-center bg-black">
+        <div className="bg-opacity-40 fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="bg-card relative w-full max-w-md rounded-lg p-4 shadow-lg sm:p-6">
             <button
               className="text-muted-foreground hover:text-foreground absolute top-3 right-3 text-2xl"
