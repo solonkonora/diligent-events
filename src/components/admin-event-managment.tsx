@@ -186,9 +186,9 @@ export function EventManagement({ profileId }: EventManagementProps) {
         return;
       }
 
-      // Only insert new services if there are any selected
+      // only insert new services if there are any selected
       if (editForm.services.length > 0) {
-        // Make sure we have unique service IDs
+        // make sure we have unique service IDs
         const uniqueServiceIds = [...new Set(editForm.services)];
         console.log("Adding new services:", uniqueServiceIds);
 

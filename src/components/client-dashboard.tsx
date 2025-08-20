@@ -222,14 +222,14 @@ export default function ClientDashboard() {
 
   return (
     <div className="bg-background flex h-screen">
-      {/* Sidebar overlay for mobile */}
+      {/* sidebar overlay for mobile */}
       <div
         className={`bg-opacity-40 fixed inset-0 z-40 bg-black/60 transition-opacity lg:hidden ${
           sidebarOpen ? "block" : "hidden"
         }`}
         onClick={() => setSidebarOpen(false)}
       />
-      {/* Sidebar */}
+      {/* sidebar */}
       <div
         className={`fixed z-50 h-full transition-transform duration-300 lg:static ${
           sidebarOpen ? "w-64 translate-x-0" : "w-20 -translate-x-full lg:w-20"
@@ -243,11 +243,11 @@ export default function ClientDashboard() {
         />
       </div>
 
-      {/* Main content */}
+      {/* main content */}
       <div className="flex min-w-0 flex-1 flex-col transition-all duration-300">
         <header className="bg-card flex h-16 items-center justify-between px-4 shadow sm:px-6">
           <div className="flex items-center gap-2">
-            {/* Sidebar toggle for mobile and desktop */}
+            {/* sidebar toggle for mobile and desktop */}
             <button
               className="rounded-md p-2 hover:bg-gray-200 focus:outline-none lg:hidden"
               onClick={() => setSidebarOpen((open) => !open)}
@@ -291,7 +291,6 @@ export default function ClientDashboard() {
                 </div>
               </section>
 
-              {/* Quick Actions */}
               <section>
                 <h2 className="text-foreground mb-2 text-lg font-semibold sm:mb-4 sm:text-xl">
                   Quick Actions
@@ -333,7 +332,7 @@ export default function ClientDashboard() {
                 </div>
               </section>
 
-              {/* Upcoming Events */}
+              {/* upcoming Events */}
               <UpcomingEvents events={events} />
             </>
           )}
