@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import toast from "react-hot-toast";
 
 type Event = {
   id: string;
@@ -23,6 +25,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
     services: "",
   });
   const [deleting, setDeleting] = useState(false);
+  const [updating, setUpdating] = useState(false);
 
   const handleCardClick = (event: Event) => {
     setSelectedEvent(event);
@@ -51,20 +54,45 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
-  const handleEditSubmit = (e: React.FormEvent) => {
+  const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Call update API here
-    closeModal();
+    if (!selectedEvent) return;
+    setUpdating(true);
+    const { error } = await supabase
+      .from("bookings")
+      .update({
+        event_type: editForm.event_type,
+        event_date: editForm.date,
+        status: editForm.status,
+      })
+      .eq("id", selectedEvent.id);
+    setUpdating(false);
+    if (error) {
+      toast.error("Failed to update event");
+    } else {
+      toast.success("Event updated!");
+      closeModal();
+      // Optionally, trigger a refresh in parent via props
+      window.location.reload();
+    }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (!selectedEvent) return;
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
     setDeleting(true);
-    // TODO: Call delete API here
-    setTimeout(() => {
-      setDeleting(false);
+    const { error } = await supabase
+      .from("bookings")
+      .delete()
+      .eq("id", selectedEvent.id);
+    setDeleting(false);
+    if (error) {
+      toast.error("Failed to delete event");
+    } else {
+      toast.success("Event deleted!");
       closeModal();
-    }, 1000);
+      window.location.reload();
+    }
   };
 
   return (
@@ -161,8 +189,9 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                   <button
                     type="submit"
                     className="bg-primary text-primary-foreground hover:bg-primary/80 w-full rounded py-2"
+                    disabled={updating}
                   >
-                    Save Changes
+                    {updating ? "Saving..." : "Save Changes"}
                   </button>
                 </form>
               </>
