@@ -50,7 +50,9 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
     setEditMode(true);
   };
 
-  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleEditChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
@@ -148,10 +150,14 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
             </button>
             {editMode ? (
               <>
-                <h3 className="text-foreground mb-4 text-lg font-bold">Edit Event</h3>
+                <h3 className="text-foreground mb-4 text-lg font-bold">
+                  Edit Event
+                </h3>
                 <form onSubmit={handleEditSubmit} className="space-y-4">
                   <div>
-                    <label className="text-muted-foreground block text-sm font-medium">Event Type</label>
+                    <label className="text-muted-foreground block text-sm font-medium">
+                      Event Type
+                    </label>
                     <input
                       type="text"
                       name="event_type"
@@ -162,7 +168,9 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                     />
                   </div>
                   <div>
-                    <label className="text-muted-foreground block text-sm font-medium">Date</label>
+                    <label className="text-muted-foreground block text-sm font-medium">
+                      Date
+                    </label>
                     <input
                       type="date"
                       name="date"
@@ -173,7 +181,9 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                     />
                   </div>
                   <div>
-                    <label className="text-muted-foreground block text-sm font-medium">Status</label>
+                    <label className="text-muted-foreground block text-sm font-medium">
+                      Status
+                    </label>
                     <select
                       name="status"
                       value={editForm.status}
@@ -213,7 +223,9 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                       : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
                   }`}
                 >
-                  {selectedEvent.status === "confirmed" ? "Confirmed" : "Pending"}
+                  {selectedEvent.status === "confirmed"
+                    ? "Confirmed"
+                    : "Pending"}
                 </span>
                 <div className="mt-6 flex justify-end gap-3">
                   <button
