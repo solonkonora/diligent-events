@@ -43,30 +43,28 @@ export function AdminDashboard() {
     "active"
   );
 
-  // Fetch only business-relevant users (those with bookings or interactions)
+  // fetch only business-relevant users (those with bookings or interactions)
   const fetchUsers = async () => {
     setUsersLoading(true);
 
     try {
-      let query = supabase
-        .from("profiles")
-        .select(
-          `
+      let query = supabase.from("profiles").select(
+        `
           id, 
           full_name, 
           role, 
           created_at,
           bookings(id, created_at, status)
         `
-        );
-        // .neq("role", "admin"); // Exclude other admins
+      );
+      // .neq("role", "admin"); // Exclude other admins
 
-      // Apply filters based on userFilter state
+      // apply filters based on userFilter state
       if (userFilter === "active") {
         // Only users with bookings
         query = query.not("bookings", "is", null);
       } else if (userFilter === "recent") {
-        // Users with activity in last 30 days
+        // users with activity in last 30 days
         const thirtyDaysAgo = new Date();
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         query = query.gte("bookings.created_at", thirtyDaysAgo.toISOString());
@@ -101,9 +99,7 @@ export function AdminDashboard() {
   };
 
   const fetchAnalytics = async () => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("role"); // Do not exclude admins here
+    const { data, error } = await supabase.from("profiles").select("role"); // Do not exclude admins here
 
     if (!error && data) {
       const total = data.length;
@@ -200,29 +196,29 @@ export function AdminDashboard() {
     }
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/auth/login");
-  };
+  // const handleLogout = async () => {
+  //   await supabase.auth.signOut();
+  //   router.push("/auth/login");
+  // };
 
   if (loading)
     return (
-      <div className="flex h-screen items-center justify-center bg-background text-foreground">
+      <div className="bg-background text-foreground flex h-screen items-center justify-center">
         Loading...
       </div>
     );
 
   return (
-    <div className="flex h-screen bg-background">
-      {/* Mobile overlay */}
+    <div className="bg-background flex h-screen">
+      {/* mobile overlay */}
       {sidebarOpen && (
         <div
-          className="bg-black/50 bg-opacity-50 fixed inset-0 z-20 lg:hidden"
+          className="bg-opacity-50 fixed inset-0 z-20 bg-white/50 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
+      {/* sidebar */}
       <AdminSidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -230,13 +226,13 @@ export function AdminDashboard() {
         setActiveTab={setActiveTab}
       />
 
-      {/* Main content */}
+      {/* main content */}
       <div className="flex flex-1 flex-col">
-        <header className="flex h-16 items-center justify-between bg-card px-4 shadow lg:h-20 lg:px-4">
+        <header className="bg-card flex h-16 items-center justify-between px-4 shadow lg:h-20 lg:px-4">
           <div className="flex items-center">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="mr-3 rounded-md p-2 hover:bg-muted lg:hidden"
+              className="hover:bg-muted mr-3 rounded-md p-2 lg:hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -253,37 +249,29 @@ export function AdminDashboard() {
                 />
               </svg>
             </button>
-            <h1 className="text-lg font-semibold text-foreground sm:text-xl">
+            <h1 className="text-foreground text-lg font-semibold sm:text-xl">
               Admin Portal
             </h1>
           </div>
-          <div className="flex items-center gap-2 lg:gap-6">
-            <span className="hidden text-sm text-muted-foreground sm:block lg:text-base">
-              Welcome, {profile?.full_name}
-            </span>
-            <button
-              onClick={handleLogout}
-              className="rounded-md border border-border px-3 py-1 text-sm text-foreground hover:bg-destructive hover:text-destructive-foreground lg:px-2 lg:py-2 lg:text-base"
-            >
-              Logout
-            </button>
-          </div>
+          <span className="mr-8 text-muted-foreground hidden text-sm sm:block lg:text-base">
+            Welcome, {profile?.full_name}
+          </span>
         </header>
 
-        {/* Content area */}
+        {/* content area */}
         <main className="flex-1 overflow-y-auto">
           {activeTab === "dashboard" && (
             <>
               <section className="m-6 lg:mb-8">
-                <h2 className="mb-4 text-lg font-semibold text-foreground lg:text-xl">
+                <h2 className="text-foreground mb-4 text-lg font-semibold lg:text-xl">
                   Analytics
                 </h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <div className="bg-card rounded p-4 shadow lg:p-6">
-                    <div className="text-2xl font-bold text-primary lg:text-3xl">
+                    <div className="text-primary text-2xl font-bold lg:text-3xl">
                       {analytics.total}
                     </div>
-                    <div className="text-sm text-muted-foreground lg:text-base">
+                    <div className="text-muted-foreground text-sm lg:text-base">
                       Total Users
                     </div>
                   </div>
@@ -291,7 +279,7 @@ export function AdminDashboard() {
                     <div className="text-2xl font-bold text-green-600 lg:text-3xl">
                       {analytics.admins}
                     </div>
-                    <div className="text-sm text-muted-foreground lg:text-base">
+                    <div className="text-muted-foreground text-sm lg:text-base">
                       Admins
                     </div>
                   </div>
@@ -299,7 +287,7 @@ export function AdminDashboard() {
                     <div className="text-2xl font-bold text-purple-600 lg:text-3xl">
                       {analytics.clients}
                     </div>
-                    <div className="text-sm text-muted-foreground lg:text-base">
+                    <div className="text-muted-foreground text-sm lg:text-base">
                       Clients
                     </div>
                   </div>
@@ -307,11 +295,11 @@ export function AdminDashboard() {
               </section>
 
               <section>
-                <h2 className="m-6 text-lg font-semibold text-foreground lg:text-xl">
+                <h2 className="text-foreground m-6 text-lg font-semibold lg:text-xl">
                   Recent Activity
                 </h2>
                 <div className="bg-card rounded p-4 shadow lg:p-6">
-                  <p className="text-sm text-muted-foreground lg:text-base">
+                  <p className="text-muted-foreground text-sm lg:text-base">
                     No recent activity to display.
                   </p>
                 </div>
@@ -322,7 +310,7 @@ export function AdminDashboard() {
           {activeTab === "users" && (
             <section>
               <div className="m-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <h2 className="text-lg font-semibold text-foreground lg:text-xl">
+                <h2 className="text-foreground text-lg font-semibold lg:text-xl">
                   User Management
                 </h2>
                 <div className="flex flex-col gap-2 sm:flex-row">
@@ -333,7 +321,7 @@ export function AdminDashboard() {
                         e.target.value as "all" | "active" | "recent"
                       )
                     }
-                    className="rounded border border-border bg-background text-foreground px-3 py-2 text-sm lg:text-base"
+                    className="border-border bg-background text-foreground rounded border px-3 py-2 text-sm lg:text-base"
                   >
                     <option value="active">Active Users (with bookings)</option>
                     <option value="recent">
@@ -349,7 +337,7 @@ export function AdminDashboard() {
                   </button>
                 </div>
               </div>
-              {/* Mobile Cards View */}
+              {/* mobile Cards View */}
               <div className="block lg:hidden">
                 {usersLoading ? (
                   <div className="bg-card rounded p-4 shadow">
@@ -361,14 +349,16 @@ export function AdminDashboard() {
                       <div key={u.id} className="bg-card rounded p-4 shadow">
                         <div className="mb-3 flex items-start justify-between">
                           <div>
-                            <h3 className="text-foreground font-medium">{u.full_name}</h3>
+                            <h3 className="text-foreground font-medium">
+                              {u.full_name}
+                            </h3>
                             <div className="mt-1 flex items-center gap-2">
                               <select
                                 value={u.role}
                                 onChange={(e) =>
                                   handleRoleChange(u.id, e.target.value)
                                 }
-                                className="rounded border border-border bg-background text-foreground px-2 py-1 text-sm"
+                                className="border-border bg-background text-foreground rounded border px-2 py-1 text-sm"
                                 disabled={u.id === profile?.id}
                               >
                                 <option value="admin">admin</option>
@@ -386,24 +376,30 @@ export function AdminDashboard() {
                         </div>
                         <div className="grid grid-cols-2 gap-4 text-sm">
                           <div>
-                            <span className="text-muted-foreground">Bookings:</span>
+                            <span className="text-muted-foreground">
+                              Bookings:
+                            </span>
                             <div className="mt-1">
-                              <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 rounded px-2 py-1">
+                              <span className="rounded bg-blue-100 px-2 py-1 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
                                 {u.bookingCount || 0} bookings
                               </span>
                             </div>
                           </div>
                           <div>
-                            <span className="text-muted-foreground">Last Activity:</span>
-                            <div className="mt-1 text-foreground">
+                            <span className="text-muted-foreground">
+                              Last Activity:
+                            </span>
+                            <div className="text-foreground mt-1">
                               {u.lastBooking
                                 ? new Date(u.lastBooking).toLocaleDateString()
                                 : "No activity"}
                             </div>
                           </div>
                           <div className="col-span-2">
-                            <span className="text-muted-foreground">Joined:</span>
-                            <div className="mt-1 text-foreground">
+                            <span className="text-muted-foreground">
+                              Joined:
+                            </span>
+                            <div className="text-foreground mt-1">
                               {u.created_at
                                 ? new Date(u.created_at).toLocaleDateString()
                                 : ""}
@@ -424,25 +420,42 @@ export function AdminDashboard() {
                   <table className="min-w-full table-auto">
                     <thead>
                       <tr className="bg-muted">
-                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Name</th>
-                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Role</th>
-                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Bookings</th>
-                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Last Activity</th>
-                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Joined</th>
-                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">Actions</th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">
+                          Name
+                        </th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">
+                          Role
+                        </th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">
+                          Bookings
+                        </th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">
+                          Last Activity
+                        </th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">
+                          Joined
+                        </th>
+                        <th className="text-muted-foreground px-4 py-2 text-left lg:px-6 lg:py-3">
+                          Actions
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       {users.map((u) => (
-                        <tr key={u.id} className="border-border hover:bg-muted/50 border-b">
-                          <td className="text-foreground px-4 py-2 lg:px-6 lg:py-3">{u.full_name}</td>
+                        <tr
+                          key={u.id}
+                          className="border-border hover:bg-muted/50 border-b"
+                        >
+                          <td className="text-foreground px-4 py-2 lg:px-6 lg:py-3">
+                            {u.full_name}
+                          </td>
                           <td className="px-4 py-2 lg:px-6 lg:py-3">
                             <select
                               value={u.role}
                               onChange={(e) =>
                                 handleRoleChange(u.id, e.target.value)
                               }
-                              className="rounded border border-border bg-background text-foreground px-2 py-1 text-sm"
+                              className="border-border bg-background text-foreground rounded border px-2 py-1 text-sm"
                               disabled={u.id === profile?.id}
                             >
                               <option value="admin">admin</option>
@@ -450,7 +463,7 @@ export function AdminDashboard() {
                             </select>
                           </td>
                           <td className="px-4 py-2 lg:px-6 lg:py-3">
-                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 rounded px-2 py-1 text-sm">
+                            <span className="rounded bg-blue-100 px-2 py-1 text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-100">
                               {u.bookingCount || 0} bookings
                             </span>
                           </td>
@@ -484,10 +497,10 @@ export function AdminDashboard() {
 
           {activeTab === "events" && (
             <section>
-              <h2 className="my-4 ml-4 text-lg font-semibold text-foreground lg:text-xl">
+              <h2 className="text-foreground my-4 ml-4 text-lg font-semibold lg:text-xl">
                 Event Management
               </h2>
-              <div className="bg-card rounded p-0 shadow m-0">
+              <div className="bg-card m-0 rounded p-0 shadow">
                 {profile?.id && <EventManagement profileId={profile.id} />}
               </div>
             </section>
@@ -495,11 +508,11 @@ export function AdminDashboard() {
 
           {activeTab === "settings" && (
             <section>
-              <h2 className="p-4 text-lg font-semibold text-foreground lg:text-xl">
+              <h2 className="text-foreground p-4 text-lg font-semibold lg:text-xl">
                 Settings
               </h2>
               <div className="bg-card rounded p-4 shadow lg:p-6">
-                <p className="text-sm text-muted-foreground lg:text-base">
+                <p className="text-muted-foreground text-sm lg:text-base">
                   Settings and preferences coming soon.
                 </p>
               </div>

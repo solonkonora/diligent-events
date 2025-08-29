@@ -186,9 +186,9 @@ export function EventManagement({ profileId }: EventManagementProps) {
         return;
       }
 
-      // Only insert new services if there are any selected
+      // only insert new services if there are any selected
       if (editForm.services.length > 0) {
-        // Make sure we have unique service IDs
+        // make sure we have unique service IDs
         const uniqueServiceIds = [...new Set(editForm.services)];
         console.log("Adding new services:", uniqueServiceIds);
 
@@ -572,7 +572,7 @@ export function EventManagement({ profileId }: EventManagementProps) {
 
       {/* view/edit modal */}
       {modalOpen && selectedBooking && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50 p-4">
           <div className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg bg-card shadow-xl sm:max-w-lg">
             <div className="sticky top-0 z-10 bg-card border-b border-border px-4 py-3 sm:px-6">
               <div className="flex items-center justify-between">

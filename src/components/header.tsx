@@ -11,8 +11,9 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="border-border bg-background text-foreground sticky top-0 z-50 w-full border-b px-6 backdrop-blur">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="border-border bg-background text-foreground sticky top-0 z-50 w-full border-b px-0 backdrop-blur md:px-6">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-0">
+        {/* Logo */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center">
             <img
@@ -23,8 +24,8 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* desktop navigation */}
-        <nav className="hidden items-center gap-6 md:flex">
+        {/* Desktop navigation */}
+        <nav className="hidden items-center gap-4 lg:flex lg:gap-6">
           <Link
             href="/"
             className="hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/40 rounded bg-transparent px-2 py-1 text-sm font-medium transition-colors"
@@ -55,26 +56,26 @@ export default function Header() {
           >
             Contact
           </Link>
-
           <Link
             href="/auth/signup"
             className="border-primary bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground dark:bg-primary dark:text-primary-foreground rounded border px-4 py-2 text-sm font-medium transition-colors"
           >
             SignUp
           </Link>
-
           <Link
             href="/auth/login"
             className="border-secondary bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground rounded border px-4 py-2 text-sm font-medium transition-colors"
           >
             Login
           </Link>
-
-          <ThemeSwitcher />
+          <div className="ml-2 flex items-center">
+            <ThemeSwitcher />
+          </div>
         </nav>
 
+        {/* Mobile navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
+          <SheetTrigger asChild className="lg:hidden">
             <Button variant="outline" size="icon">
               <Menu className="text-foreground h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
@@ -118,21 +119,22 @@ export default function Header() {
                 Contact
               </Link>
               <Link
-                href="/login"
+                href="/auth/login"
                 className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Login
               </Link>
               <Link
-                href="/signup"
+                href="/auth/signup"
                 className="hover:text-accent-foreground hover:bg-accent dark:hover:bg-accent/40 text-lg font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Signup
               </Link>
-
-              <ThemeSwitcher />
+              <div className="mt-4 flex items-center">
+                <ThemeSwitcher />
+              </div>
             </nav>
           </SheetContent>
         </Sheet>

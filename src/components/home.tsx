@@ -13,14 +13,14 @@ export default function LandingPage() {
         <Header />
         <HeroSection />
 
-        <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-12">
+        <div className="relative z-10 px-4 pb-8 md:px-6 md:pb-2">
           <ContactButtons />
         </div>
 
         {/* Services Overview */}
-        <section className="dark:bg-background bg-white py-16 md:py-20">
+        <section className="dark:bg-background bg-white py-16 md:py-10">
           <div className="container mx-auto px-4">
-            <div className="mb-16 text-center">
+            <div className="mb-10 text-center">
               <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 Our Premium Services
               </h2>
@@ -57,7 +57,7 @@ export default function LandingPage() {
               ))}
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-10 text-center">
               <Button
                 asChild
                 className="dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/80 bg-orange-500 text-white hover:bg-orange-600"
@@ -71,7 +71,7 @@ export default function LandingPage() {
         {/* Testimonials */}
         <section className="dark:bg-card bg-gray-50 py-20">
           <div className="container mx-auto px-4">
-            <div className="mb-16 text-center">
+            <div className="mb-8 text-center">
               <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800 md:text-4xl">
                 What Our Clients Say
               </h2>

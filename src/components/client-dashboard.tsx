@@ -33,7 +33,7 @@ export default function ClientDashboard() {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [sidebarOpen, setSidebarOpen] = useState(false); // default to closed on mobile
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [events, setEvents] = useState<Event[]>([]);
   const [eventsLoading, setEventsLoading] = useState(false);
 
@@ -98,12 +98,20 @@ export default function ClientDashboard() {
   };
 
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 2;
     const checkSessionAndProfile = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        setTimeout(checkSessionAndProfile, 500);
+        if (retryCount < maxRetries) {
+          retryCount++;
+          setTimeout(checkSessionAndProfile, 400); // short retry for race conditions
+        } else {
+          setLoading(false);
+          router.replace("/auth/login");
+        }
         return;
       }
       const { data: profile } = await supabase
@@ -114,11 +122,11 @@ export default function ClientDashboard() {
 
       if (!profile || (profile.role !== "user" && profile.role !== "client")) {
         toast.error("Unauthorized");
+        setLoading(false);
         router.replace("/auth/login");
       } else {
         setProfile(profile);
         setLoading(false);
-        // fetchEvents();
       }
     };
     checkSessionAndProfile();
@@ -181,10 +189,10 @@ export default function ClientDashboard() {
     };
   }, [profile]);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/auth/login");
-  };
+  // const handleLogout = async () => {
+  //   await supabase.auth.signOut();
+  //   router.push("/auth/login");
+  // };
 
   // Todo: Update profile function
   // This function updates the profile in the database and updates the local state
@@ -208,20 +216,20 @@ export default function ClientDashboard() {
   if (loading)
     return (
       <div className="bg-background text-foreground flex h-screen items-center justify-center">
-        Loading...
+        Redirecting to login...
       </div>
     );
 
   return (
     <div className="bg-background flex h-screen">
-      {/* Sidebar overlay for mobile */}
+      {/* sidebar overlay for mobile */}
       <div
-        className={`bg-opacity-40 fixed inset-0 z-40 bg-black transition-opacity lg:hidden ${
+        className={`bg-opacity-40 fixed inset-0 z-40 bg-black/60 transition-opacity lg:hidden ${
           sidebarOpen ? "block" : "hidden"
         }`}
         onClick={() => setSidebarOpen(false)}
       />
-      {/* Sidebar */}
+      {/* sidebar */}
       <div
         className={`fixed z-50 h-full transition-transform duration-300 lg:static ${
           sidebarOpen ? "w-64 translate-x-0" : "w-20 -translate-x-full lg:w-20"
@@ -235,13 +243,13 @@ export default function ClientDashboard() {
         />
       </div>
 
-      {/* Main content */}
+      {/* main content */}
       <div className="flex min-w-0 flex-1 flex-col transition-all duration-300">
         <header className="bg-card flex h-16 items-center justify-between px-4 shadow sm:px-6">
           <div className="flex items-center gap-2">
-            {/* Sidebar toggle for mobile and desktop */}
+            {/* sidebar toggle for mobile and desktop */}
             <button
-              className="hover:bg-muted rounded-md p-2 focus:outline-none"
+              className="rounded-md p-2 hover:bg-gray-200 focus:outline-none lg:hidden"
               onClick={() => setSidebarOpen((open) => !open)}
               aria-label="Open sidebar"
             >
@@ -263,17 +271,9 @@ export default function ClientDashboard() {
               Client Portal
             </h1>
           </div>
-          <div className="flex items-center gap-2 sm:gap-4">
-            <span className="text-muted-foreground hidden sm:inline">
-              Welcome, {profile?.full_name}
-            </span>
-            <button
-              onClick={handleLogout}
-              className="border-border text-foreground hover:bg-destructive hover:text-destructive-foreground rounded-md border px-3 py-2 text-sm sm:px-4 sm:py-2"
-            >
-              Logout
-            </button>
-          </div>
+          <span className="text-muted-foreground mr-8 hidden sm:inline">
+            Welcome, {profile?.full_name}
+          </span>
         </header>
 
         <main className="flex-1 overflow-y-auto p-2 sm:p-4 md:p-6">
@@ -291,7 +291,6 @@ export default function ClientDashboard() {
                 </div>
               </section>
 
-              {/* Quick Actions */}
               <section>
                 <h2 className="text-foreground mb-2 text-lg font-semibold sm:mb-4 sm:text-xl">
                   Quick Actions
@@ -333,7 +332,7 @@ export default function ClientDashboard() {
                 </div>
               </section>
 
-              {/* Upcoming Events */}
+              {/* upcoming Events */}
               <UpcomingEvents events={events} />
             </>
           )}

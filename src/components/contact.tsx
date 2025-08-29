@@ -11,12 +11,10 @@ export default function ContactPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="dark:bg-primary dark:text-primary-foreground relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="dark:text-primary-foreground mb-6 text-4xl font-bold md:text-5xl">
-              Contact Us
-            </h1>
-            <p className="dark:text-foreground mx-auto max-w-3xl text-xl text-blue-100">
+            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Contact Us</h1>
+            <p className="mx-auto max-w-3xl text-xl text-blue-100">
               Get in touch with our team to discuss your event needs and how we
               can help make your event exceptional.
             </p>
@@ -25,123 +23,104 @@ export default function ContactPage() {
           <ContactButtons />
         </section>
 
-        <section className="dark:bg-background bg-white py-5">
+        <section className="bg-white py-5">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-              <div className="dark:bg-card rounded-lg bg-gray-50 p-8 shadow-md">
-                <div className="flex justify-center">
-                  <Button
-                    type="submit"
-                    className="dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/80 w-64 bg-orange-500 text-2xl text-white hover:bg-orange-600"
-                  >
-                    <Link href="/auth/login?redirect=/client">Book Us Now</Link>
-                  </Button>
-                </div>
-
-                <h2 className="dark:text-primary m-3 text-center text-sm font-bold text-blue-800">
-                  click the button to book for our services
-                </h2>
-              </div>
-
-              <div className="space-y-8">
+            {/* Top center action button and text */}
+            <div className="mb-8 flex flex-col items-center">
+              <Button
+                type="submit"
+                className="w-64 bg-orange-500 text-2xl text-white hover:bg-orange-600"
+              >
+                <Link href="/auth/login?redirect=/client">Book Us Now</Link>
+              </Button>
+              <h2 className="mt-3 text-center text-sm font-bold text-blue-800">
+                click the button to book for our services
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+              {/* Left: FAQ */}
+              <div className="order-2 space-y-8 lg:order-1">
                 <div>
-                  <h2 className="dark:text-primary mb-6 text-2xl font-bold text-blue-800">
+                  <h2 className="mb-6 text-2xl font-bold text-blue-800">
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="space-y-6">
+                    {faqs.map((faq, index) => (
+                      <div key={index}>
+                        <h3 className="mb-2 font-medium text-gray-900">
+                          {faq.question}
+                        </h3>
+                        <p className="text-gray-600">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              {/* Right: Contact Info */}
+              <div className="order-1 space-y-8 lg:order-2">
+                <div>
+                  <h2 className="mb-6 text-2xl font-bold text-blue-800">
                     Contact Information
                   </h2>
-                  <p className="dark:text-muted-foreground mb-8 text-gray-600">
+                  <p className="mb-8 text-gray-600">
                     We'd love to hear from you. Contact us using the form or the
                     information below and our team will get back to you as soon
                     as possible.
                   </p>
-
                   <div className="space-y-6">
-                    <div className="flex items-start">
-                      <div className="dark:bg-card dark:text-primary mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
+                    <div className="flex items-center">
+                      <div className="mr-4 items-center justify-center rounded-full bg-blue-100 p-3 text-blue-600">
                         <Phone className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="dark:text-primary font-medium text-gray-900">
-                          Phone
-                        </h3>
-                        <p className="dark:text-muted-foreground text-gray-600">
-                          +237-676-717-626
-                        </p>
-                        <p className="dark:text-muted-foreground text-gray-600">
-                          Mon-Fri, 9am-6pm
-                        </p>
+                        <h3 className="font-medium text-gray-900">Phone</h3>
+                        <p className="text-gray-600">+237-676-717-626</p>
+                        <p className="text-gray-600">Mon-Fri, 9am-6pm</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start">
-                      <div className="dark:bg-card dark:text-primary mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
+                    <div className="flex items-center">
+                      <div className="mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
                         <Mail className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="dark:text-primary font-medium text-gray-900">
-                          Email
-                        </h3>
-                        <p className="dark:text-muted-foreground text-gray-600">
+                        <h3 className="font-medium text-gray-900">Email</h3>
+                        <p className="text-gray-600">
                           info@diligentservers.com
                         </p>
-                        <p className="dark:text-muted-foreground text-gray-600">
+                        <p className="text-gray-600">
                           We respond within 24 hours
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-start">
-                      <div className="dark:bg-card dark:text-primary mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
+                    <div className="flex items-center">
+                      <div className="mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
                         <MapPin className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="dark:text-primary font-medium text-gray-900">
+                        <h3 className="font-medium text-gray-900">
                           Office: Buea
                         </h3>
-                        <p className="dark:text-muted-foreground text-gray-600">
-                          Ndongo Carrefour
-                        </p>
-                        <p className="dark:text-muted-foreground text-gray-600">
-                          Molyko, Buea
-                        </p>
+                        <p className="text-gray-600">Ndongo Carrefour</p>
+                        <p className="text-gray-600">Molyko, Buea</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start">
-                      <div className="dark:bg-card dark:text-primary mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
+                    <div className="flex items-center">
+                      <div className="mr-4 rounded-full bg-blue-100 p-3 text-blue-600">
                         <Clock className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="dark:text-primary font-medium text-gray-900">
+                        <h3 className="font-medium text-gray-900">
                           Business Hours
                         </h3>
-                        <p className="dark:text-muted-foreground text-gray-600">
-                          Monday-Friday: 9am-6pm
-                        </p>
-                        <p className="dark:text-muted-foreground text-gray-600">
+                        <p className="text-gray-600">Monday-Friday: 9am-6pm</p>
+                        <p className="text-gray-600">
                           Saturday: 10am-2pm (by appointment)
                         </p>
-                        <p className="dark:text-muted-foreground text-gray-600">
-                          Sunday: Closed
-                        </p>
+                        <p className="text-gray-600">Sunday: Closed</p>
                       </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h2 className="dark:text-primary mb-6 text-2xl font-bold text-blue-800">
-                      Frequently Asked Questions
-                    </h2>
-                    <div className="space-y-6">
-                      {faqs.map((faq, index) => (
-                        <div key={index}>
-                          <h3 className="dark:text-primary mb-2 font-medium text-gray-900">
-                            {faq.question}
-                          </h3>
-                          <p className="dark:text-muted-foreground text-gray-600">
-                            {faq.answer}
-                          </p>
-                        </div>
-                      ))}
                     </div>
                   </div>
                 </div>
@@ -151,13 +130,13 @@ export default function ContactPage() {
         </section>
 
         {/* Map Section */}
-        <section className="dark:bg-card bg-gray-50 py-20">
+        <section className="bg-gray-50 py-20">
           <div className="container mx-auto px-4">
             <div className="mb-12 text-center">
-              <h2 className="dark:text-primary mb-4 text-3xl font-bold text-blue-800">
+              <h2 className="mb-4 text-3xl font-bold text-blue-800">
                 Visit Our Office
               </h2>
-              <p className="dark:text-muted-foreground mx-auto max-w-3xl text-lg text-gray-600">
+              <p className="mx-auto max-w-3xl text-lg text-gray-600">
                 We're conveniently located in the heart of the city. Feel free
                 to visit us during business hours.
               </p>
