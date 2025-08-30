@@ -79,24 +79,6 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
     }
   };
 
-  const handleDelete = async () => {
-    if (!selectedEvent) return;
-    if (!window.confirm("Are you sure you want to delete this event?")) return;
-    setDeleting(true);
-    const { error } = await supabase
-      .from("bookings")
-      .delete()
-      .eq("id", selectedEvent.id);
-    setDeleting(false);
-    if (error) {
-      toast.error("Failed to delete event");
-    } else {
-      toast.success("Event deleted!");
-      closeModal();
-      window.location.reload();
-    }
-  };
-
   return (
     <section className="mb-8">
       <h2 className="text-foreground mb-4 text-xl font-semibold">
@@ -239,13 +221,6 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                     onClick={handleEdit}
                   >
                     Edit
-                  </button>
-                  <button
-                    className="bg-destructive text-destructive-foreground hover:bg-destructive/80 rounded px-4 py-2"
-                    onClick={handleDelete}
-                    disabled={deleting}
-                  >
-                    {deleting ? "Deleting..." : "Delete"}
                   </button>
                 </div>
               </>
