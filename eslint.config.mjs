@@ -18,7 +18,7 @@ export default [
       "babel.config.js",
       "postcss.config.js",
       "coverage/**",
-      "supabase/functions/send-email/index.ts",
+      "supabase/functions/**", // Exclude all Supabase Edge Functions (Deno)
     ],
   },
 

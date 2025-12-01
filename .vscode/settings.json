@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["Traiteur"]
+  "cSpell.words": ["Traiteur"],
+  "deno.enable": false,
+  "deno.enablePaths": [
+    "./supabase/functions"
+  ]
 }
