@@ -1,3 +1,5 @@
+// @ts-nocheck
+// Deno Edge Function - TypeScript checking disabled
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 
 const corsHeaders = {
@@ -6,63 +8,50 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-// SendGrid API approach
-async function sendEmailViaSendGrid(
+// Resend API approach
+async function sendEmailViaResend(
   to: string,
   subject: string,
   html?: string,
   text?: string
 ) {
-  const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-  const FROM_EMAIL = process.env.EMAIL_FROM || "nkwadanora@gmail.com";
+  const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+  const FROM_EMAIL = Deno.env.get("EMAIL_FROM") || "bookings@diligentservices.works";
 
-  if (!SENDGRID_API_KEY) {
-    throw new Error("SendGrid API key not found");
+  if (!RESEND_API_KEY) {
+    throw new Error("Resend API key not found");
   }
 
-  const fromEmail = FROM_EMAIL.includes("<")
-    ? FROM_EMAIL.match(/<(.+)>/)?.[1] || FROM_EMAIL
-    : FROM_EMAIL;
-
-  const content: { type: string; value: string }[] = [];
-
-  if (text && text.trim().length > 0) {
-    content.push({
-      type: "text/plain",
-      value: text,
-    });
-  }
-
-  if (html && html.trim().length > 0) {
-    content.push({
-      type: "text/html",
-      value: html,
-    });
-  }
-
-  // If no content provided, use a default text
-  if (content.length === 0) {
-    content.push({
-      type: "text/plain",
-      value: subject,
-    });
-  }
-
-  const payload = {
-    personalizations: [{ to: [{ email: to }] }],
-    from: {
-      email: fromEmail,
-      name: "Diligent Events",
-    },
+  const payload: {
+    from: string;
+    to: string[];
+    subject: string;
+    html?: string;
+    text?: string;
+  } = {
+    from: `Diligent Events <${FROM_EMAIL}>`,
+    to: [to],
     subject,
-    content,
   };
 
-  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+  if (html && html.trim().length > 0) {
+    payload.html = html;
+  }
+
+  if (text && text.trim().length > 0) {
+    payload.text = text;
+  }
+
+  // If no content provided, use subject as text
+  if (!payload.html && !payload.text) {
+    payload.text = subject;
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${SENDGRID_API_KEY}`,
+      Authorization: `Bearer ${RESEND_API_KEY}`,
     },
     body: JSON.stringify(payload),
   });
@@ -70,14 +59,14 @@ async function sendEmailViaSendGrid(
   if (!response.ok) {
     const errorData = await response.json().catch(() => null);
     throw new Error(
-      `SendGrid API error: ${response.status} - ${JSON.stringify(errorData) || response.statusText}`
+      `Resend API error: ${response.status} - ${JSON.stringify(errorData) || response.statusText}`
     );
   }
 
   return true;
 }
 
-serve(async (req) => {
+serve(async (req: { method: string; json: () => any; }) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -106,8 +95,8 @@ serve(async (req) => {
       );
     }
 
-    // Use SendGrid to send email
-    await sendEmailViaSendGrid(to, subject, html, text);
+    // Use Resend to send email
+    await sendEmailViaResend(to, subject, html, text);
 
     return new Response(
       JSON.stringify({ success: true, message: "Email sent successfully" }),
@@ -125,3 +114,4 @@ serve(async (req) => {
     });
   }
 });
+                                                                                                                      

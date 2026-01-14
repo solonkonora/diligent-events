@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {
+  "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
     "module": "ESNext",
@@ -13,7 +13,6 @@
     "isolatedModules": true,
     "types": []
   },
-  "include": ["src", "supabase/functions/send-email"],
+  "include": ["./**/*"],
   "exclude": ["node_modules"]
 }
-// This configuration is for a Supabase function written in TypeScript.

@@ -38,19 +38,35 @@ export default function ClientDashboard() {
   const [eventsLoading, setEventsLoading] = useState(false);
 
   useEffect(() => {
-    // clean URL if it contains auth tokens
-    if (window.location.hash && window.location.hash.includes("access_token")) {
-      // remove the hash fragment without reloading the page
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
+    // give Supabase time to process auth tokens before cleaning URL
+    const timer = setTimeout(() => {
+      // clean URL if it contains auth tokens
+      if (
+        window.location.hash &&
+        window.location.hash.includes("access_token")
+      ) {
+        // remove the hash fragment without reloading the page
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+      }
 
-    // also checking for query parameters
-    if (
-      window.location.search &&
-      window.location.search.includes("access_token")
-    ) {
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
+      // also checking for query parameters
+      if (
+        window.location.search &&
+        window.location.search.includes("access_token")
+      ) {
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+      }
+    }, 1000); // Wait 1 second for Supabase to process the auth
+
+    return () => clearTimeout(timer);
   }, []);
 
   // fetch bookings with joined services
